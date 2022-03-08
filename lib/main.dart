@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/Route/routehandler.dart';
+import 'package:login_page/pages/home_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
-      statusBarBrightness: Brightness.light,
+    statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.deepPurpleAccent,
-    systemNavigationBarIconBrightness: Brightness.light
   ));
-      runApp(const MyApp());
-
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
+      title: "drs",
+      initialRoute: HomePage.routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
-
-
