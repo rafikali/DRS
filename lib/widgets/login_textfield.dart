@@ -11,6 +11,7 @@ class LoginTextForm extends StatefulWidget {
   final Border? outlineBorder;
   // ignore: use_key_in_widget_constructors
   const LoginTextForm(
+
       {required this.hintText, required this.labelText, this.accountIcon,  this.iconColor,  this.passView, this.outlineBorder})
       : super();
 
@@ -38,7 +39,8 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
             borderSide: BorderSide(
               style: BorderStyle.solid,
-              color: Colors.blue,
+              color: Colors.black,
+
             ),
           ),
           labelText: widget.labelText,
@@ -67,7 +69,6 @@ class SignInButtons extends StatelessWidget {
               backgroundColor: Colors.indigo,
               radius: 15,
               child: CircleAvatar(
-
                 radius: 12,
                 backgroundColor: Colors.white,
                 child: ClipRRect(
@@ -79,25 +80,5 @@ class SignInButtons extends StatelessWidget {
   }
 }
 
-class SimpleTextField extends StatelessWidget {
-  const SimpleTextField({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.grey[300],
-        hintText: 'Enter your username',
-        labelText: 'Username',
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            style: BorderStyle.solid
-          )
-        )
-      ),
-
-    );
-  }
-}
 

@@ -4,10 +4,10 @@ import 'package:login_page/Route/routehandler.dart';
 import 'package:login_page/pages/home_page.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.white,
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+    statusBarColor: Colors.indigo[600],
     statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
   ));
   runApp(const MyApp());
 }
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),

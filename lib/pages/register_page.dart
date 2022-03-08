@@ -15,7 +15,13 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+    appBar: AppBar(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(10)
+        )
+      ),
+    ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
