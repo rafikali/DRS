@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/Route/routehandler.dart';
-import 'package:login_page/pages/home_page.dart';
+import 'package:login_page/pages/login_page.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-    statusBarColor: Colors.indigo[600],
+  SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+    statusBarColor: Color(0xFF16165E),
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,
   ));
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       title: "drs",
-      initialRoute: HomePage.routeName,
+      initialRoute: LoginPage.routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
