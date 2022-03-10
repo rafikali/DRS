@@ -4,19 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login_page/Constants/Images.dart';
+import 'package:login_page/pages/home_page.dart';
 import 'package:login_page/pages/register_page.dart';
 import 'package:login_page/utils/input_validators.dart';
-import 'package:login_page/widgets/buttons.dart';
+import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
 import '../widgets/create_account.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
+  final Padding? padding;
   final TextEditingController? userController;
-  final TextEditingController? passController;
+  final
+   TextEditingController? passController;
 
-  const LoginPage({this.passController, this.userController}) : super();
+  const LoginPage({this.passController, this.userController, this.padding}) : super();
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -30,14 +33,14 @@ class _HomePageState extends State<LoginPage> {
 
   moveToHome() async {
     if(_formKey.currentState!.validate()) {
-      await Navigator.pushNamed(context, RegisterPage.routeName);
+      await Navigator.pushNamed(context, HomePage.routeName);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF16165E),
+      backgroundColor: Color(0x7C7A9FE8),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -54,31 +57,38 @@ class _HomePageState extends State<LoginPage> {
                   height: 10,
                 ),
 
-                 LoginTextForm(
-                  dataController: widget.userController,
-                  hintText: 'Enter your username',
-                  labelText: 'Username',
-                  validator: InputValidator.validateName,
-                  accountIcon: const Icon(CupertinoIcons.profile_circled,
-                  color: Colors.black,),
+                 Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                   child: LoginTextForm(
+                    dataController: widget.userController,
+                    hintText: 'Enter your username',
+                    labelText: 'Username',
+                    validator: InputValidator.validateName,
+                    accountIcon: const Icon(CupertinoIcons.profile_circled,
+                    color: Colors.black,),
 
                 ),
+                 ),
 
-                 LoginTextForm(
-                  dataController: widget.passController,
-                  hintText: 'Enter your password',
-                  labelText: 'Password',
-                  validator: InputValidator.validatePassword,
-                  requiredMsg: 'Password required*',
-                  accountIcon: const Icon(CupertinoIcons.lock_circle_fill,
-                      color: Colors.black ),
-                  passView: true,
+                 Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
+                   child: LoginTextForm(
+                    dataController: widget.passController,
+                    hintText: 'Enter your password',
+                    labelText: 'Password',
+                    validator: InputValidator.validatePassword,
+                    requiredMsg: 'Password required*',
+                    accountIcon: const Icon(CupertinoIcons.lock_circle_fill,
+                        color: Colors.black ),
+                    passView: true,
 
                 ),
+                 ),
 
                 const SizedBox(
                   height: 20,
                 ),
+
 
                  LoginButton(
                    buttonTitle: 'Login',
@@ -105,7 +115,7 @@ class _HomePageState extends State<LoginPage> {
                     SignInButtons(signLogo: SvgPicture.asset(ImageConstants.linkedinLogo,))
 
                   ],
-                )
+                ),
               ],
             ),
           ),

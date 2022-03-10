@@ -5,9 +5,10 @@ import 'package:login_page/pages/login_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
-    statusBarColor: Color(0xFF16165E),
+    statusBarColor: Colors.white,
     statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+
   ));
   runApp(const MyApp());
 }
