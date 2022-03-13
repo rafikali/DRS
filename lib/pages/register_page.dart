@@ -2,8 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/widgets/login_textfield.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../widgets/listtile.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -18,39 +16,26 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.black87, Color(0x7C7A9FE8), ]
-        )
+    return  Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF6C63FF)
+
       ),
 
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: const Color(0x7C7A9FE8),
 
+
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.white, Colors.white]
+        )
         ),
-
-          // PreferredSize(
-        //   preferredSize: const Size.fromHeight(200.0),
-        //   child: AppBar(
-        //     backgroundColor: Colors.indigo[600],
-        //     shape: const RoundedRectangleBorder(
-        //       borderRadius: BorderRadius.vertical(
-        //         bottom: Radius.elliptical(150, 35),
-        //       )
-        //     ),
-        //
-        //   ),
-        //
-        // ),
-        body: Padding(
+        child: Padding(
           padding:  const EdgeInsets.all(10.0),
           child: ListView(
-
             shrinkWrap: true,
             children:   [
                const ListTileRegister(
@@ -78,7 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
                  leadingIcon: CupertinoIcons.home,
                  hint: 'Enter Address',
                   label: 'Address'),
-               SizedBox(
+
+               const SizedBox(
                  height: 6,
                ),
 
@@ -98,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                            child: LoginTextForm(
                              hintText: 'Enter name',
                              labelText: 'Province',
-                           trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill),
+                           trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill, color: Color(0xFF6C63FF),),
                            width: 20,
                              height: 10,)),
 
@@ -111,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                            child: LoginTextForm(
                              hintText: 'enter ',
                              labelText: 'City',
-                             trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill),
+                             trailingIcon:  Icon(CupertinoIcons.chevron_down_circle_fill, color: const Color(0xFF6C63FF),),
                            )),
 
                      ],
@@ -122,11 +108,13 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
                 ),
               ),
+      ),
 
-          ),
-
-    );
+        );
   }
 }
+
+
+
 
 

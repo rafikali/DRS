@@ -8,27 +8,20 @@ class LoginButton extends StatefulWidget {
   final buttonHeight;
   final Function() validFunc;
   final buttonWidth;
-  const LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, required this.validFunc}) : super();
+  final buttonColor;
+    LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, required this.validFunc, this.buttonColor}) : super();
 
   @override
-
-
   State<LoginButton> createState() => _LoginButtonState();
 
 }
 
-
-
-
 class _LoginButtonState extends State<LoginButton> {
-  // Bool changeButton;
 
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    //   changeButton = !changeButton;
-    // });
+
     return InkWell(
       onTap: widget.validFunc,
         child: Container(
@@ -42,7 +35,8 @@ class _LoginButtonState extends State<LoginButton> {
             ),
           ),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.white),
+            border: Border.all(color: widget.buttonColor),
+
             // boxShadow:  const [
             //   BoxShadow(
             //     color: Color(0xFFCFCFCF),
@@ -53,8 +47,7 @@ class _LoginButtonState extends State<LoginButton> {
             // ],
 
               gradient: const LinearGradient(
-                  colors: <Color>[Colors.deepPurpleAccent, Colors.black]),
-              color: Colors.indigoAccent,
+                  colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),
               borderRadius: BorderRadius.circular(8)),
           width: widget.buttonWidth,
           height: widget.buttonHeight,

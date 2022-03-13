@@ -10,7 +10,7 @@ class ListTileRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(leadingIcon, size: 30, color: Colors.white,),
+      leading: Icon(leadingIcon, size: 30, color: Color(0xFF6C63FF),),
       title: Container(
           width: MediaQuery.of(context).size.width*1/3,
           child: LoginTextForm(hintText: hint, labelText: label)),

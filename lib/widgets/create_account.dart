@@ -12,7 +12,7 @@ class CreateAcc extends StatelessWidget {
         const Text(
           'Forgot password?',
           style: TextStyle(
-              color: Colors.white,
+              color: Color(0xFF6C63FF),
               decoration: TextDecoration.underline,
                fontSize: 16),
 
@@ -38,7 +38,7 @@ class CreateAcc extends StatelessWidget {
           child: const Text(
             'Create new account',
             style: TextStyle(
-              color: Colors.white,
+              color: Color(0xFF6C63FF),
                 decoration: TextDecoration.underline, fontSize: 16),
           ),
         )

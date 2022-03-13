@@ -10,9 +10,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
+    return  Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(200.0),
+        child: AppBar(
+          backgroundColor: Color(0xFF6C63FF),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.elliptical(150, 35),
+              )
+          ),
+
+        ),
+
+      ),
+      body: Center(child: Text('Welcome to your profile')),
     );
   }
 }
+
+

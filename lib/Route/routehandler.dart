@@ -12,7 +12,7 @@ class RouteGenerator {
     final args = settings.arguments;
     switch(settings.name) {
       case LoginPage.routeName:
-      return MaterialPageRoute(builder: (context) => const LoginPage());
+      return MaterialPageRoute(builder: (context) =>  LoginPage());
       case RegisterPage.routeName:
         return MaterialPageRoute(builder: (context) => const RegisterPage());
 
@@ -20,7 +20,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const HomePage());
 
     default:
-    return MaterialPageRoute(builder: (context) => const LoginPage());
+    return MaterialPageRoute(builder: (context) =>  LoginPage());
     }
 
   }
