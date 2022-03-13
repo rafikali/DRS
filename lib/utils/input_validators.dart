@@ -6,7 +6,7 @@ class InputValidator{
     if (val!.isEmpty){
       return '*Username required';
     }else if (val.isNotEmpty && val.length < 10){
-      return "Username must contain more than 10 character";
+      return "Username must be more than 10 character";
     } else {
       return null;
     }
@@ -16,7 +16,7 @@ class InputValidator{
     if (val!.isEmpty ){
       return '*Password required';
     }else if (val.isNotEmpty && val.length <6){
-      return "Password must contain more than 6 characters";
+      return "Password must be more than 6 characters";
     } else {
       return null;
     }

@@ -54,11 +54,10 @@ class _LoginTextFormState extends State<LoginTextForm> {
       validator: widget.validator,
 
       decoration: InputDecoration(
-        focusColor: Colors.red,
         iconColor: Color(0xFF6C63FF),
         errorStyle:   const TextStyle(
-            color: Color(0xFFFF3131),
-          letterSpacing: 0.5,
+            color: Color(0xFFB00020),
+          letterSpacing: 0.2,
             fontWeight: FontWeight.w500,
         ),
         filled: true,
@@ -78,7 +77,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             style: BorderStyle.solid,
-            color: Color(0xFF6C63FF)
+            color: Color(0xFFB00020)
           )
         ),
 

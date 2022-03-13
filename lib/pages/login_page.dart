@@ -135,8 +135,9 @@ class _HomePageState extends State<LoginPage> {
                     trailingIcon: InkWell(onTap: () {
                       toogle();
                      },
-                        child: toogleView? const Icon(CupertinoIcons.eye_slash): const Icon(CupertinoIcons.eye)),
+                        child: toogleView? const Icon(CupertinoIcons.eye_slash, color: Colors.black,): const Icon(CupertinoIcons.eye, color: Colors.black,), ),
                     passView: toogleView,
+
                     hintText: 'Enter your password',
                     labelText: 'Password',
                     validator: InputValidator.validatePassword,

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'login_textfield.dart';
 
 class DropdownList extends StatelessWidget {
+  final Icon? dropDownIcon;
 
-  const DropdownList({Key? key}) : super(key: key);
+  const DropdownList({Key? key, this.dropDownIcon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class DropdownList extends StatelessWidget {
                 child: LoginTextForm(
                   hintText: 'Enter name',
                   labelText: 'Province',
-                  trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill, color: Color(0xFF6C63FF),),
+                  trailingIcon: dropdo, color: Color(0xFF6C63FF),
                   width: 20,
                   height: 10,)),
 
