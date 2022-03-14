@@ -25,7 +25,7 @@ class DropdownList extends StatelessWidget {
                 child: LoginTextForm(
                   hintText: 'Enter name',
                   labelText: 'Province',
-                  trailingIcon: dropdo, color: Color(0xFF6C63FF),
+                  trailingIcon: Icons.add,
                   width: 20,
                   height: 10,)),
 

@@ -6,10 +6,10 @@ import 'package:login_page/widgets/login_textfield.dart';
 class LoginButton extends StatefulWidget {
   final String buttonTitle;
   final buttonHeight;
-  final Function() validFunc;
+  Function()? validFunc;
   final buttonWidth;
   final buttonColor;
-    LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, required this.validFunc, this.buttonColor}) : super();
+    LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, this.validFunc, this.buttonColor}) : super();
 
   @override
   State<LoginButton> createState() => _LoginButtonState();
@@ -25,6 +25,7 @@ class _LoginButtonState extends State<LoginButton> {
     return InkWell(
       onTap: widget.validFunc,
         child: Container(
+
           child:  Text(
             widget.buttonTitle,
             style: const TextStyle(
@@ -37,14 +38,14 @@ class _LoginButtonState extends State<LoginButton> {
           decoration: BoxDecoration(
             border: Border.all(color: widget.buttonColor),
 
-            // boxShadow:  const [
-            //   BoxShadow(
-            //     color: Color(0xFFCFCFCF),
-            //     spreadRadius: 5,
-            //     blurRadius: 7,
-            //     offset: Offset(1,2)
-            //   )
-            // ],
+            boxShadow:  const [
+              BoxShadow(
+                color: Color(0xFFCFCFCF),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(1,2)
+              )
+            ],
 
               gradient: const LinearGradient(
                   colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),

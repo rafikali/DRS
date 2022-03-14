@@ -65,6 +65,7 @@ Future fetchLogin(String username, String password, BuildContext context) async 
 
 class _HomePageState extends State<LoginPage> {
   String loginIllustrate = 'assets/Images/login_image.svg';
+  String loginIllustrate2 = 'assets/Images/login_image2.svg';
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -75,7 +76,7 @@ class _HomePageState extends State<LoginPage> {
 
     if (_formKey.currentState!.validate()) {
       setState(() {
-        changeButton = true;
+  changeButton = true;
       });
 
       fetchLogin(_usernameController.text, _passwordController.text, context);
@@ -116,6 +117,7 @@ class _HomePageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
+
                     dataController: _usernameController,
                     hintText: 'Enter your username',
                     labelText: 'Username',
@@ -154,7 +156,7 @@ class _HomePageState extends State<LoginPage> {
                 ),
 
                 LoginButton(
-                  buttonColor: changeButton? Color(0x7C7A9FE8):  Colors.white,
+                  buttonColor: Colors.white,
                   buttonTitle: 'Login',
                   buttonHeight: 45.0,
                   buttonWidth: 330.0,

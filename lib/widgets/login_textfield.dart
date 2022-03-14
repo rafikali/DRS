@@ -25,7 +25,7 @@ class LoginTextForm extends StatefulWidget {
   final TextEditingController? dataController;
 
   // ignore: use_key_in_widget_constructors
-   LoginTextForm(
+    LoginTextForm(
       {required this.hintText,
         required this.labelText,
         this.validator,
@@ -52,17 +52,19 @@ class _LoginTextFormState extends State<LoginTextForm> {
       obscureText: widget.passView == true,
       controller: widget.dataController,
       validator: widget.validator,
-
       decoration: InputDecoration(
+
         iconColor: Color(0xFF6C63FF),
         errorStyle:   const TextStyle(
             color: Color(0xFFB00020),
           letterSpacing: 0.2,
             fontWeight: FontWeight.w500,
         ),
+
         filled: true,
         fillColor: Colors.grey[200],
         border: const UnderlineInputBorder(
+
           borderRadius: BorderRadius.only(topRight: Radius.circular(8),
               topLeft: Radius.circular(8),
               bottomLeft: Radius.circular(4),
@@ -74,6 +76,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
           ),
         ),
+        hoverColor: Colors.black,
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             style: BorderStyle.solid,

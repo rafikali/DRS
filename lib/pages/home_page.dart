@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color(0xFF6C63FF),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                bottom: Radius.elliptical(150, 35),
+                bottom: Radius.elliptical(200, 40),
               )
           ),
 

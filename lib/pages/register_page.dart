@@ -1,7 +1,9 @@
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/widgets/login_textfield.dart';
+import 'package:login_page/widgets/dropView.dart';
+import 'package:login_page/widgets/login_button.dart';
 import '../widgets/listtile.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,8 +15,14 @@ class RegisterPage extends StatefulWidget {
   _RegisterPageState createState() => _RegisterPageState();
 }
 
+
+
+
+
 class _RegisterPageState extends State<RegisterPage> {
   @override
+
+
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
@@ -55,13 +63,17 @@ class _RegisterPageState extends State<RegisterPage> {
                  label: 'Phone'),
 
 
-
-
+              const ListTileRegister(
+                 leadingIcon: CupertinoIcons.home,
+                 hint: 'Enter Current Address',
+                  label: 'Current Address'),
 
               const ListTileRegister(
                  leadingIcon: CupertinoIcons.home,
-                 hint: 'Enter Address',
-                  label: 'Address'),
+                 hint: 'Enter Permanent Address',
+                  label: 'Permanent Address'),
+
+
 
                const SizedBox(
                  height: 6,
@@ -71,79 +83,79 @@ class _RegisterPageState extends State<RegisterPage> {
                  child: Padding(
                    padding: const EdgeInsets.only(left: 2.0,right: 16),
                    child: Row(
-                     children: [
-                       Container(
-                         height: 50,
-                         width: 70,
-                       ),
-
-                       Flexible(
-                         flex: 1,
-                           child: LoginTextForm(
-                             hintText: 'Enter name',
-                             labelText: 'Province',
-                           trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill, color: Color(0xFF6C63FF),),
-                           width: 20,
-                             height: 10,)),
+                      mainAxisAlignment: MainAxisAlignment.end,
+                     children:  [
+                        DropView(hintText: 'here', labelText: 'here',
+                        dropTrailing: CupertinoIcons.chevron_down_circle_fill,
+                          height: 60.0,
+                          width: 135.0,
+                        ),
 
                        const SizedBox(
-                         width: 10,
+                         width: 14,
                        ),
 
-                       Flexible(
-                         flex: 1,
-                           child: LoginTextForm(
-                             hintText: 'enter ',
-                             labelText: 'City',
-                             trailingIcon:  Icon(CupertinoIcons.chevron_down_circle_fill, color: const Color(0xFF6C63FF),),
-                           )),
+                       DropView(hintText: 'here', labelText: 'here',
+                        dropTrailing: CupertinoIcons.chevron_down_circle_fill,
+                         height: 60.0,
+                         width: 135.0,
+                       ),
+
 
                      ],
                    ),
                  ),
                ),
-              Container(
-                 child: Padding(
-                   padding: const EdgeInsets.only(left: 2.0,right: 16),
-                   child: Row(
-                     children: [
-                       Container(
-                         height: 50,
-                         width: 70,
-                       ),
+              const SizedBox(
+                height: 4,
+              ),
 
-                       Flexible(
-                         flex: 1,
-                           child: LoginTextForm(
-                             hintText: 'Enter name',
-                             labelText: 'Province',
-                           trailingIcon: const Icon(CupertinoIcons.chevron_down_circle_fill, color: Color(0xFF6C63FF),),
-                           width: 20,
-                             height: 10,)),
 
-                       const SizedBox(
-                         width: 10,
-                       ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children:   [
+                    DropView(hintText: 'Month',
+                      labelText: 'Month',
+                      dropTrailing: CupertinoIcons.chevron_down_circle_fill,
+                      height: 50.0,
+                      width: 94.0,
+                      ),
 
-                       Flexible(
-                         flex: 1,
-                           child: LoginTextForm(
-                             hintText: 'Date ',
-                             labelText: 'Date',
-                             trailingIcon:  Icon(CupertinoIcons.chevron_down_circle_fill, color: const Color(0xFF6C63FF),),
-                           )),
+                    const SizedBox(
+                      width: 4,
+                    ),
 
-                     ],
-                   ),
-                 ),
-               )
+                     DropView(hintText: '', labelText: 'Month', dropTrailing: CupertinoIcons.chevron_down_circle_fill,
+                       height: 50.0,
+                       width: 94.0,),
+                     const SizedBox(
+                       width: 5,
+                     ),
+
+                     DropView(hintText: 'Month', labelText: 'Month', dropTrailing: CupertinoIcons.chevron_down_circle_fill,
+                       height: 50.0,
+                       width: 80.0,),
+                  ],
+                ),
+              ),
+
+              LoginButton(buttonTitle: 'Submit' )
+
+
 
             ],
                 ),
               ),
       ),
 
+
+
         );
+
+
+
   }
 }
 
