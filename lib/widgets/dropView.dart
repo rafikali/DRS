@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/dropdownfield.dart';
 
 import 'login_textfield.dart';
@@ -12,34 +13,38 @@ class DropView extends StatelessWidget {
   final String labelText;
   final IconData? dropTrailing;
   final height;
+  final dropdownValidator;
   final width;
-   DropView({Key? key,  required this.hintText, required this.labelText, this.dropTrailing, this.height, this.width}) : super(key: key);
+  final String? date;
+  final List<dynamic>? dropdownItems;
 
-   List<String> list = [
-    'text 1',
-    'text 2',
-    'text 3'
+   DropView({Key? key,  required this.hintText, required this.labelText, this.dropTrailing, this.height, this.width, this.date, this.dropdownItems, this.dropdownValidator}) : super(key: key);
 
-  ];
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
 
+    return Container(
          height:height,
          width: width,
-         child: Flexible(
-           child: DropdownButton(items:  list.map((String e) {
-             return DropdownMenuItem(value: e,
-               child: Text(e),
-             );
-           }).toList(),
+         child: DropdownButtonFormField<dynamic>(
 
-             onChanged: (e) {
-               print(e.toString());
-             },),
-         ),
+           menuMaxHeight: 100,
+           autovalidateMode: AutovalidateMode.always,
+           validator: dropdownValidator,
+           hint: Text(date!),
+           items:  dropdownItems!.map((dynamic e) {
+           return DropdownMenuItem(value: e,
+             child: Text(e.toString()),
+           );
+         }).toList(),
+
+           onChanged: (e) {
+             print(e.toString());
+           },),
        );
+
 
             // Flexible(
             //   child: DropdownButton(items:  list.map((String e) {

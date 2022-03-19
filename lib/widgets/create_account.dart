@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/pages/reset_password.dart';
+import 'package:login_page/pages/newregister.dart';
 import 'package:login_page/pages/register_page.dart';
 
 class CreateAcc extends StatelessWidget {
@@ -9,13 +11,18 @@ class CreateAcc extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Forgot password?',
-          style: TextStyle(
-              color: Color(0xFF6C63FF),
-              decoration: TextDecoration.underline,
-               fontSize: 16),
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, ForgotPassword.routeName);
+          },
+          child: const Text(
+            'Forgot password?',
+            style: TextStyle(
+                color: Color(0xFF6C63FF),
+                decoration: TextDecoration.underline,
+                 fontSize: 16),
 
+          ),
         ),
         const SizedBox(
           width: 10,
@@ -32,7 +39,7 @@ class CreateAcc extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, RegisterPage.routeName);
+            Navigator.pushNamed(context, Register.routeName);
           },
 
           child: const Text(

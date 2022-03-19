@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(200.0),
         child: AppBar(
-          backgroundColor: Color(0xFF6C63FF),
+          backgroundColor: Theme.of(context).primaryColor,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.elliptical(200, 40),

@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:login_page/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InputValidator{
-  static String? validateName(String? val){
+   final String namedValidate;
+   static final formKey = GlobalKey<FormState>();
+
+  InputValidator(this.namedValidate);
+
+  static String? validateUsername(String? val){
     if (val!.isEmpty){
       return '*Username required';
     }else if (val.isNotEmpty && val.length < 10){
@@ -21,6 +27,49 @@ class InputValidator{
       return null;
     }
   }
+  static String? validateFullname(String? val){
+    if (val!.isEmpty ){
+      return '*Name required';
+    }else if (val.isNotEmpty && val.length <6){
+      return null;
+    } else {
+      return null;
+    }
+  }static String? validateMobile(String? val){
+    if (val!.isEmpty ){
+      return '*Number required';
+    }else if (val.isNotEmpty && val.length <6){
+      return "Invalid Mobile Number";
+    } else {
+      return null;
+    }
+  }
+   static String? validateEmail(String? val){
+     if (val!.isEmpty ){
+       return '*Email required';
+     }else if (val.isNotEmpty && val.length <6){
+       return "Invalid Email";
+     } else {
+       return null;
+     }
+   }
+   static String? validateAddress(String? val){
+     if (val!.isEmpty ){
+       return '*Address required';
+     } else {
+       return null;
+     }
+   }
+   static String? validateDate(String? val){
+     if (val!.isEmpty ){
+       return '*required';
+     } else {
+       return null;
+     }
+   }
+
+
+
 
 }
 

@@ -1,6 +1,5 @@
 
 import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,10 +10,10 @@ import 'package:login_page/widgets/login_button.dart';
 
 class LoginTextForm extends StatefulWidget {
   dynamic trailingIcon;
-  final String labelText;
+  final String? labelText;
   final String hintText;
   bool? passView;
-  final validator;
+final validator;
   final height;
   final width;
   final Color? iconColor;
@@ -27,7 +26,7 @@ class LoginTextForm extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
     LoginTextForm(
       {required this.hintText,
-        required this.labelText,
+       this.labelText,
         this.validator,
         this.passView,
         this.trailingIcon,
@@ -48,13 +47,13 @@ class LoginTextForm extends StatefulWidget {
 class _LoginTextFormState extends State<LoginTextForm> {
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(
       obscureText: widget.passView == true,
       controller: widget.dataController,
       validator: widget.validator,
       decoration: InputDecoration(
-
-        iconColor: Color(0xFF6C63FF),
+        iconColor: const Color(0xFF6C63FF),
         errorStyle:   const TextStyle(
             color: Color(0xFFB00020),
           letterSpacing: 0.2,
@@ -80,8 +79,11 @@ class _LoginTextFormState extends State<LoginTextForm> {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             style: BorderStyle.solid,
-            color: Color(0xFFB00020)
+            color: Color(0xFF6C63FF)
           )
+        ),
+        labelStyle: const TextStyle(
+          color: Color(0xFF6C63FF)
         ),
 
         suffixIcon: widget.trailingIcon,

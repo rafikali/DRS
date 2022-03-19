@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +8,6 @@ import 'package:login_page/Constants/Images.dart';
 import 'package:login_page/Constants/api_endpoints.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/pages/home_page.dart';
-import 'package:login_page/pages/register_page.dart';
 import 'package:login_page/utils/header.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/utils/pref_services.dart';
@@ -64,16 +61,13 @@ Future fetchLogin(String username, String password, BuildContext context) async 
 }
 
 class _HomePageState extends State<LoginPage> {
-  String loginIllustrate = 'assets/Images/login_image.svg';
-  String loginIllustrate2 = 'assets/Images/login_image2.svg';
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool changeButton = false;
   bool toogleView = true;
 
-  moveToHome() async {
-
+    moveToHome() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
   changeButton = true;
@@ -104,11 +98,13 @@ class _HomePageState extends State<LoginPage> {
                 const SizedBox(
                   height: 50,
                 ),
+
                 SvgPicture.asset(
-                  loginIllustrate,
+                  ImageConstants.loginIllustrate,
                   height: 330,
                   fit: BoxFit.cover,
                 ),
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -121,7 +117,7 @@ class _HomePageState extends State<LoginPage> {
                     dataController: _usernameController,
                     hintText: 'Enter your username',
                     labelText: 'Username',
-                    validator: InputValidator.validateName,
+                    validator: InputValidator.validateUsername,
                     accountIcon: const Icon(
                       CupertinoIcons.profile_circled,
                       color: Color(0xFF6C63FF),
@@ -156,7 +152,7 @@ class _HomePageState extends State<LoginPage> {
                 ),
 
                 LoginButton(
-                  buttonColor: Colors.white,
+                  // buttonColor: Color(0xFF000000),
                   buttonTitle: 'Login',
                   buttonHeight: 45.0,
                   buttonWidth: 330.0,

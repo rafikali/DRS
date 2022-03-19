@@ -7,8 +7,8 @@ class LoginButton extends StatefulWidget {
   final String buttonTitle;
   final buttonHeight;
   Function()? validFunc;
+  Color? buttonColor;
   final buttonWidth;
-  final buttonColor;
     LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, this.validFunc, this.buttonColor}) : super();
 
   @override
@@ -25,7 +25,6 @@ class _LoginButtonState extends State<LoginButton> {
     return InkWell(
       onTap: widget.validFunc,
         child: Container(
-
           child:  Text(
             widget.buttonTitle,
             style: const TextStyle(
@@ -36,7 +35,7 @@ class _LoginButtonState extends State<LoginButton> {
             ),
           ),
           decoration: BoxDecoration(
-            border: Border.all(color: widget.buttonColor),
+            // border: Border.all(color: Colors(widget)widget.buttonColor),
 
             boxShadow:  const [
               BoxShadow(
@@ -48,7 +47,10 @@ class _LoginButtonState extends State<LoginButton> {
             ],
 
               gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),
+
               borderRadius: BorderRadius.circular(8)),
           width: widget.buttonWidth,
           height: widget.buttonHeight,
