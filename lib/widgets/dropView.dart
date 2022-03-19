@@ -9,8 +9,8 @@ import 'package:login_page/widgets/dropdownfield.dart';
 import 'login_textfield.dart';
 
 class DropView extends StatelessWidget {
-  final String hintText;
-  final String labelText;
+  final String? hintText;
+  final String? labelText;
   final IconData? dropTrailing;
   final height;
   final dropdownValidator;
@@ -18,7 +18,7 @@ class DropView extends StatelessWidget {
   final String? date;
   final List<dynamic>? dropdownItems;
 
-   DropView({Key? key,  required this.hintText, required this.labelText, this.dropTrailing, this.height, this.width, this.date, this.dropdownItems, this.dropdownValidator}) : super(key: key);
+   DropView({Key? key, this.hintText, this.labelText, this.dropTrailing, this.height, this.width, this.date, this.dropdownItems, this.dropdownValidator}) : super(key: key);
 
 
 

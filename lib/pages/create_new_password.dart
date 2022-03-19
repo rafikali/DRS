@@ -1,77 +1,64 @@
-import 'package:flutter/cupertino.dart';
+// TODO Implement this library.
+
 import 'package:flutter/material.dart';
+import 'package:login_page/widgets/appbar.dart';
+import 'package:login_page/widgets/login_button.dart';
+import 'package:login_page/widgets/login_textfield.dart';
 
-import '../widgets/login_button.dart';
-import '../widgets/login_textfield.dart';
-
-class CreatenewPass extends StatelessWidget {
+class CreateNewPass extends StatelessWidget {
   static const String routeName = '/newpass';
-  const CreatenewPass({Key? key}) : super(key: key);
+  const CreateNewPass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: const Color(0xFFF3F3F3),
-          elevation: 0,
-
-
-          title: Container(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Back',
-                    style: TextStyle(
-                        fontSize: 20
-                    ),),
-                  Icon(CupertinoIcons.question_circle),
-                ]
-            ),
-          ),
-      ),
+      appBar: NewPassAppbar(),
       body: Padding(
-
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20.0),
         child: Container(
+          height: MediaQuery.of(context).size.height,
           child: Wrap(
-            spacing: 15,
-            runSpacing: 30,
-            children:   [
-              const Text('Reset password',
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold
-                ),),
+            runSpacing: 25,
+            spacing: 10,
+            children: [
+              const Text('Create new password',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold
+              ),),
 
-              const Text('Enter the mobile number associated with your account and we ll send an email with instructions to reset your password.',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xF2727272),
-                ),),
               Wrap(
-                runSpacing: 10,
-                children: [const Text('Mobile Phone'),
+                runSpacing: 12,
+                children: [
+                  const Text('Your new password must be different from previous used passwords.',
+                  style: TextStyle(
+                    fontSize: 18,
+
+                  ),),
+
+
+
+                  const Text('Password'),
                   LoginTextForm(
-                      hintText: 'Enter Mobile no.'),],
+                      hintText: 'New Password'
+                  ),
+                  const Text('Confirm Password'),
+                  LoginTextForm(
+                      hintText: 'Confirm Password'),
+                ],
               ),
-
-
-
-
               LoginButton(
-                buttonTitle: 'Send OTP',
+                buttonTitle: 'Reset Password',
                 buttonHeight: 50.0,
-                validFunc: () {
-                },
-              ),
+
+               )
+
 
 
             ],
           ),
-
         ),
       ),
     );
-
   }
 }

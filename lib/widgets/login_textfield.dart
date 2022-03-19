@@ -1,6 +1,7 @@
 
 import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,9 +14,11 @@ class LoginTextForm extends StatefulWidget {
   final String? labelText;
   final String hintText;
   bool? passView;
-final validator;
-  final height;
-  final width;
+  final typeKeyboard;
+  final validator;
+  Alignment? textalign;
+  final int? height;
+  final int? width;
   final Color? iconColor;
   final Icon? accountIcon;
   final Border? outlineBorder;
@@ -24,7 +27,7 @@ final validator;
   final TextEditingController? dataController;
 
   // ignore: use_key_in_widget_constructors
-    LoginTextForm(
+      LoginTextForm(
       {required this.hintText,
        this.labelText,
         this.validator,
@@ -36,19 +39,21 @@ final validator;
         this.iconColor,
         this.height,
         this.width,
-        this.outlineBorder,})
+        this.outlineBorder,
+        this.textalign, this.typeKeyboard,})
       : super();
 
   @override
   State<LoginTextForm> createState() => _LoginTextFormState();
+
 }
 
 
 class _LoginTextFormState extends State<LoginTextForm> {
   @override
   Widget build(BuildContext context) {
-
     return TextFormField(
+      keyboardType: widget.typeKeyboard,
       obscureText: widget.passView == true,
       controller: widget.dataController,
       validator: widget.validator,

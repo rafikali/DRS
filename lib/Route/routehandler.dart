@@ -1,9 +1,7 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/reset_password.dart';
+import 'package:login_page/pages/verify_otp.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
 import '../pages/newregister.dart';
@@ -21,10 +19,13 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const HomePage());
 
       case ForgotPassword.routeName:
-        return MaterialPageRoute(builder: (context) => const ForgotPassword());
+        return MaterialPageRoute(builder: (context) =>  ForgotPassword());
 
-        case CreatenewPass.routeName:
-        return MaterialPageRoute(builder: (context) => const CreatenewPass());
+      case CreateNewPass.routeName:
+        return MaterialPageRoute(builder: (context) =>  const CreateNewPass());
+
+      case VerifyOtp.routeName:
+        return MaterialPageRoute(builder: (context) => const VerifyOtp());
 
 
     default:

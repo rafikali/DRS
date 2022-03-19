@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewPassAppbar extends StatelessWidget {
+class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   const NewPassAppbar({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,4 +26,8 @@ class NewPassAppbar extends StatelessWidget {
         )
     );
   }
+
+
+
 }
+
