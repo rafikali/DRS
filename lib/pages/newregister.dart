@@ -67,8 +67,10 @@ class _RegisterState extends State<Register> {
                         validator: InputValidator.validateFullname,
                       ),
 
+
                       const Text('Mobile Number'),
                       LoginTextForm(
+                        typeKeyboard: TextInputType.number,
                            hintText: 'Enter Mobile Number',
                         validator: InputValidator.validateMobile,
 

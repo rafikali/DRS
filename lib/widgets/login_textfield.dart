@@ -1,18 +1,12 @@
 
-import 'dart:ffi';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:login_page/pages/login_page.dart';
-import 'package:login_page/pages/register_page.dart';
-import 'package:login_page/widgets/login_button.dart';
 
 class LoginTextForm extends StatefulWidget {
   dynamic trailingIcon;
   final String? labelText;
   final String hintText;
+  final maxLength;
   bool? passView;
   final typeKeyboard;
   final validator;
@@ -40,7 +34,7 @@ class LoginTextForm extends StatefulWidget {
         this.height,
         this.width,
         this.outlineBorder,
-        this.textalign, this.typeKeyboard,})
+        this.textalign, this.typeKeyboard, this.maxLength})
       : super();
 
   @override
@@ -53,6 +47,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: widget.maxLength,
       keyboardType: widget.typeKeyboard,
       obscureText: widget.passView == true,
       controller: widget.dataController,
@@ -68,7 +63,6 @@ class _LoginTextFormState extends State<LoginTextForm> {
         filled: true,
         fillColor: Colors.grey[200],
         border: const UnderlineInputBorder(
-
           borderRadius: BorderRadius.only(topRight: Radius.circular(8),
               topLeft: Radius.circular(8),
               bottomLeft: Radius.circular(4),

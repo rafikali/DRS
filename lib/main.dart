@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme
         ),
-        primaryColor: Color(0xFF343434),
+        primaryColor: const Color(0xFF343434),
 
         scaffoldBackgroundColor: Color(0xFFF3F3F3),
         appBarTheme: const AppBarTheme(

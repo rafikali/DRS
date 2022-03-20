@@ -45,7 +45,6 @@ Future fetchLogin(String username, String password, BuildContext context) async 
 
   var jsonResponse = jsonDecode(response.body);
   var loginResponse = LoginResponse.fromJson(jsonResponse);
-
   if (response.statusCode == 200 ||
       response.statusCode == 201 ||
       response.statusCode == 202) {

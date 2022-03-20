@@ -25,7 +25,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) =>  const CreateNewPass());
 
       case VerifyOtp.routeName:
-        return MaterialPageRoute(builder: (context) => const VerifyOtp());
+        return MaterialPageRoute(builder: (context) =>  VerifyOtp());
 
 
     default:

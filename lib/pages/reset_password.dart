@@ -1,15 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/verify_otp.dart';
 import 'package:login_page/utils/input_validators.dart';
+import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
 class ForgotPassword extends StatefulWidget {
   static const String routeName = '/forgotpass';
-   ForgotPassword({Key? key}) : super(key: key);
+  final controller;
+   ForgotPassword({Key? key, this.controller}) : super(key: key);
 
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
@@ -17,6 +20,7 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                    children: [
                      Text('Mobile Phone'),
                      LoginTextForm(
+                       dataController: controller,
                        typeKeyboard: TextInputType.number,
                        validator: InputValidator.validateMobile,
                          hintText: 'Enter Mobile no.'),],
@@ -54,12 +59,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 
 
+
+
                 LoginButton(
                   buttonTitle: 'GET OTP',
                   buttonHeight: 50.0,
-                  validFunc: () {
+                  validFunc: () async {
                     if(_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, VerifyOtp.routeName);
+                      AppConstants.mobileNumber = controller.text;
+                       // PrefsServices().setString('Mobile Num', controller.text);
+                      print(controller.text);
+                       Navigator.pushNamed(context, VerifyOtp.routeName, arguments: controller.text);
                     } else {
                       return null;
                     }

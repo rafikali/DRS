@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
+
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   const NewPassAppbar({Key? key}) : super(key: key);
 
@@ -15,12 +16,16 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
         title: Container(
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Back',
+              children:  [
+                const Text('Back',
                   style: TextStyle(
                       fontSize: 20
                   ),),
-                Icon(CupertinoIcons.question_circle)
+
+
+                InkWell(onTap: () {
+                  Tooltip(message: ('hi'),);
+                },child: Icon(CupertinoIcons.question_circle))
               ]
           ),
         )
