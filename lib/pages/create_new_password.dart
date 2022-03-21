@@ -43,30 +43,33 @@ class CreateNewPass extends StatelessWidget {
 
                   ),),
 
-                Wrap(
-                  runSpacing: 12,
-                  children: [
-                    const Text('Password'),
-                    LoginTextForm(
-                      validator: InputValidator.validatePassword,
-                        hintText: 'New Password',
-                      trailingIcon:  const Icon(CupertinoIcons.eye, color: Colors.black,)
-                    ),
-                    const Text('Confirm Password'),
-                    LoginTextForm(
-                      validator: InputValidator.validatePassword,
-                      hintText: 'Confirm Password',
-                      trailingIcon:  Icon(CupertinoIcons.eye_slash),
-                    ),
-                  ],
+                SingleChildScrollView(
+                  child: Wrap(
+                    runSpacing: 12,
+                    children: [
+                      const Text('Password'),
+                      LoginTextForm(
+                        validator: InputValidator.validatePassword,
+                          hintText: 'New Password',
+                        trailingIcon:  const Icon(CupertinoIcons.eye, color: Colors.black,)
+                      ),
+                      const Text('Confirm Password'),
+                      LoginTextForm(
+                        validator: InputValidator.validatePassword,
+                        hintText: 'Confirm Password',
+                        trailingIcon:  const Icon(CupertinoIcons.eye_slash),
+                      ),
+
+                    ],
+                  ),
                 ),
-                LoginButton(
+
+                Button(
                   buttonTitle: 'Reset Password',
                   buttonHeight: 50.0,
                   validFunc: () {
                     if(_formKey.currentState!.validate()) {
                       Navigator.pushNamed(context, HomePage.routeName);
-
                     }
 
                   },

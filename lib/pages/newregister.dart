@@ -134,7 +134,7 @@ class _RegisterState extends State<Register> {
 
 
 
-                      LoginButton(
+                      Button(
                         validFunc: () {
                           if(_formKey.currentState!.validate()) {
                             Navigator.pushNamed(context, HomePage.routeName);
@@ -147,6 +147,7 @@ class _RegisterState extends State<Register> {
                           buttonColor: Colors.white,
                           buttonWidth: 370.0,
                       ),
+
 
 
 

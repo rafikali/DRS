@@ -13,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class VerifyOtp extends StatefulWidget {
   static const String routeName = '/verifyOtp';
-
   dynamic data;
 
    VerifyOtp({Key? key, this.data}) : super(key: key);
@@ -68,37 +67,39 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     height: 10,
                   ),
 
-                  const Text('OTP Verification', style: TextStyle(
+                  const Text('OTP Verification',
+                    style: TextStyle(
                     fontSize: 25,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
+
                   ),),
                   const SizedBox(
                     height: 10,
                   ),
 
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children:  [
-                     const Text("Enter the OTP sent to",
+                     const Text("Enter the OTP sent to   +977",
                       style:  TextStyle(
-                          fontSize: 15
+                          fontSize: 15,
                       ),),
                       // Text(getKey.toString())
-                      Text(AppConstants.mobileNumber),
+                      Text(AppConstants.mobileNumber, style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),),
                   ]
-                  ),
-
-                  const SizedBox(
-                    height: 20,
                   ),
 
 
 
                   Padding(
-                    padding: const EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        OtpInput(autoFocus: true,),
+                        OtpInput(),
                         OtpInput(),
                         OtpInput(),
                         OtpInput(),
@@ -107,24 +108,12 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   ),
 
 
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     Flexible(child: LoginTextForm(hintText: '0', typeKeyboard: TextInputType.number ), ),
-                  //     Flexible(child: LoginTextForm(hintText: '0', typeKeyboard: TextInputType.number )),
-                  //     Flexible(child: LoginTextForm(hintText: '0', typeKeyboard: TextInputType.number)),
-                  //     Flexible(child: LoginTextForm(hintText: '0', typeKeyboard: TextInputType.number)),
-                  //
-                  //   ],
-                  //
-                  // ),
 
 
 
                   const Text('Didnt receive the OTP?' ),
 
-                  LoginButton(
+                  Button(
                       buttonTitle: 'VERIFY & PROCEED',
                       buttonHeight: 50.0,
                     validFunc: () {

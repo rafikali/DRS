@@ -150,7 +150,7 @@ class _HomePageState extends State<LoginPage> {
                   height: 20,
                 ),
 
-                LoginButton(
+                Button(
                   // buttonColor: Color(0xFF000000),
                   buttonTitle: 'Login',
                   buttonHeight: 45.0,

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/pages/home_page.dart';
 import 'package:login_page/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InputValidator{
    final String namedValidate;
+   void moveToHome(BuildContext context) {
+     if(namedValidate == 'rafik') {
+       Navigator.pushNamed(context, HomePage.routeName);
+     }
+   }
    static final formKey = GlobalKey<FormState>();
 
   InputValidator(this.namedValidate);
@@ -73,6 +79,17 @@ class InputValidator{
 
 }
 
+
+// class FormKey {
+//   final formKey = GlobalKey<FormState>();
+//   final lock = GlobalKey<FormState>();
+//   final key = GlobalKey<FormState>();
+//
+//
+//
+//
+//
+// }
 
 
 

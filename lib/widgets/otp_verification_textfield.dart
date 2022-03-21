@@ -6,7 +6,7 @@ class OtpInput extends StatefulWidget {
   final bool? autoFocus;
   bool? changeButton;
 
-   OtpInput({this.controller, this.autoFocus, this.changeButton}) : super();
+   OtpInput({Key? key, this.controller, this.autoFocus, this.changeButton}) : super(key: key);
 
   @override
   State<OtpInput> createState() => _OtpInputState();
@@ -20,21 +20,13 @@ class _OtpInputState extends State<OtpInput> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       width: 50,
       child: TextFormField(
-
-        onTap: () {
-        },
-
         maxLength: 1,
-
         controller: widget.controller,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
@@ -43,11 +35,23 @@ class _OtpInputState extends State<OtpInput> {
             FocusScope.of(context).nextFocus();
           } else if (value.isEmpty) {
             FocusScope.of(context).previousFocus();
+          } else if (value.isEmpty) {
+            FocusScope.of(context).previousFocus();
           }
         },
-        decoration:  const InputDecoration(
-          border: OutlineInputBorder(
 
+        decoration:  const InputDecoration(
+
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Color(0xFF6C63FF)
+            ),
           ),
           counterText: '',
             hintText: '0',

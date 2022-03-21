@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         ),
         primaryColor: const Color(0xFF343434),
 
+
         scaffoldBackgroundColor: Color(0xFFF3F3F3),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
@@ -45,9 +46,9 @@ class MyApp extends StatelessWidget {
           ),
           iconTheme: IconThemeData(
             color: Colors.black
-          )
+          ),
 
-        )
+        ),
 
       ),
       title: "drs",

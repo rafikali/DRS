@@ -3,60 +3,94 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
-class LoginButton extends StatefulWidget {
+class Button extends StatefulWidget {
   final String buttonTitle;
   final buttonHeight;
   Function()? validFunc;
+  dynamic bottonRadius;
   Color? buttonColor;
   final buttonWidth;
-    LoginButton({required this.buttonTitle, this.buttonHeight, this.buttonWidth, this.validFunc, this.buttonColor}) : super();
+    Button({Key? key,
+      required this.buttonTitle,
+      this.buttonHeight,
+      this.buttonWidth,
+      this.validFunc,
+      this.buttonColor,
+      this.bottonRadius}) : super(key: key);
 
   @override
-  State<LoginButton> createState() => _LoginButtonState();
+  State<Button> createState() => _ButtonState();
 
 }
 
-class _LoginButtonState extends State<LoginButton> {
+class _ButtonState extends State<Button> {
 
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: widget.validFunc,
-        child: Container(
-          child:  Text(
-            widget.buttonTitle,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
-            ),
-          ),
-          decoration: BoxDecoration(
-            // border: Border.all(color: Colors(widget)widget.buttonColor),
+      child: Container(
+        child: Text(
+          widget.buttonTitle,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
 
-            boxShadow:  const [
+          ),
+        ),
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors(widget)widget.buttonColor),
+
+            boxShadow: const [
               BoxShadow(
-                color: Color(0xFFCFCFCF),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(1,2)
+                  color: Color(0xFFCFCFCF),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(1, 2)
               )
             ],
 
-              gradient: const LinearGradient(
+            gradient: const LinearGradient(
                 begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),
+                end: Alignment.bottomRight,
+                colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),
+            borderRadius: BorderRadius.circular(8)),
+        width: widget.buttonWidth,
+        height: widget.buttonHeight,
+        alignment: Alignment.center,
 
-              borderRadius: BorderRadius.circular(8)),
-          width: widget.buttonWidth,
-          height: widget.buttonHeight,
-          alignment: Alignment.center,
-        ),
+      ),
 
     );
   }
 }
+
+
+class SimpleButton extends StatelessWidget {
+  final String title;
+
+   const SimpleButton({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+    height: 40,
+    width: 120,
+    child: Text(title, style: TextStyle(
+      fontWeight: FontWeight.bold
+    ),),
+
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+        color: Colors.white
+      ),
+      
+
+    );
+  }
+}
+
