@@ -53,16 +53,14 @@ class _VerifyOtpState extends State<VerifyOtp> {
               child: Wrap(
                 alignment: WrapAlignment.center,
                 runSpacing: 20,
-                spacing: 20,
+                spacing: 3,
                 children:  [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0),
-                    child: SvgPicture.asset(
-                      ImageConstants.verified,
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,),
-                  ),
+                  SvgPicture.asset(
+                    ImageConstants.verified,
+                    height: 150,
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,),
                   const SizedBox(
                     height: 10,
                   ),
@@ -95,7 +93,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
 
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -108,10 +106,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   ),
 
 
-
-
-
-                  const Text('Didnt receive the OTP?' ),
+                  const Text('Didn\'t receive the OTP?'),
 
                   Button(
                       buttonTitle: 'VERIFY & PROCEED',
