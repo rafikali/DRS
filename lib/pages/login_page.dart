@@ -112,7 +112,6 @@ class _HomePageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
-
                     dataController: _usernameController,
                     hintText: 'Enter your username',
                     labelText: 'Username',

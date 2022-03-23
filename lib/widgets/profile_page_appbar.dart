@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/widgets/simple_button.dart';
 
 import 'login_button.dart';
 
@@ -25,27 +26,13 @@ class ProfilePageAppBar extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 25,
+                fontSize: 15,
+
               ),),
           ),
 
 
-          actions:  [
-            SizedBox(
-                height: 120,
-                width: 120,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Icon(CupertinoIcons.moon, color: Colors.white, ),
-                    Icon(CupertinoIcons.profile_circled, color: Colors.white),
-                    Icon(CupertinoIcons.settings_solid, color: Colors.white),
-                  ],
-                )
 
-            )
-
-          ],
 
           flexibleSpace: Center(
             child: Container(
@@ -57,12 +44,11 @@ class ProfilePageAppBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network('https://scontent.fktm10-1.fna.fbcdn.net/v/t39.30808-6/251866722_1471513583220352_7206582625725183106_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ULttbaBi5QUAX-ZNNfj&tn=pwi-Uq17f60A-ioL&_nc_ht=scontent.fktm10-1.fna&oh=00_AT-_K63asaBXDkYu5M2LiFWOBRCTCLGEN8_zPGIuRsdnGA&oe=623D573A'),
-                      ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network('https://scontent.fktm10-1.fna.fbcdn.net/v/t39.30808-6/251866722_1471513583220352_7206582625725183106_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ULttbaBi5QUAX-ZNNfj&tn=pwi-Uq17f60A-ioL&_nc_ht=scontent.fktm10-1.fna&oh=00_AT-_K63asaBXDkYu5M2LiFWOBRCTCLGEN8_zPGIuRsdnGA&oe=623D573A'),
                     ),
+
                     Wrap(
                       runSpacing: 10.0,
                       spacing: 1,
@@ -70,7 +56,7 @@ class ProfilePageAppBar extends StatelessWidget {
                       direction: Axis.vertical,
 
                       children: const  [
-                        SimpleButton(title: 'Checked In :',
+                        SimpleButton(title: 'Checked Ub:',
 
                         ),
 
@@ -87,6 +73,22 @@ class ProfilePageAppBar extends StatelessWidget {
               ),
             ),
           ),
+          actions:  [
+            SizedBox(
+                height: 120,
+                width: 120,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [
+                    Icon(CupertinoIcons.moon, color: Colors.white, ),
+                    Icon(CupertinoIcons.profile_circled, color: Colors.white),
+                    Icon(CupertinoIcons.settings_solid, color: Colors.white),
+                  ],
+                )
+
+            )
+
+          ],
         ));
   }
 }

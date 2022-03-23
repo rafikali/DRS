@@ -91,7 +91,6 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   ),
 
 
-
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30.0),
                     child: Row(
