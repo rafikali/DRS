@@ -1,21 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/widgets/alertbox..dart';
 
-class TableData extends StatefulWidget {
+//ignore: must_be_immutable
+class TableData extends StatefulWidget  {
   final String? leadingTitle;
   final String? projectTitle;
   final String? trailingTitle;
   dynamic updateDate;
-  final addAtendence;
-  final fourthTitle;
-  final List<DataColumn> columns;
+  dynamic addAtendence;
+  dynamic fourthTitle;
+  // final List<DataColumn> columns;
 
-  final attendence;
+  dynamic attendence;
   final String? projectName;
-  final todayWork;
-  IconData? addIcon;
-  TableData({Key? key, this.addIcon,this.leadingTitle, this.projectName, this.trailingTitle, this.projectTitle, this.updateDate, this.todayWork, this.attendence, this.addAtendence, this.fourthTitle, this.columns}) : super(key: key);
+  dynamic todayWork;
+  final IconData? addIcon;
+  TableData({Key? key, this.addIcon,this.leadingTitle, this.projectName, this.trailingTitle, this.projectTitle, this.updateDate, this.todayWork, this.attendence, this.addAtendence, this.fourthTitle, }) : super(key: key);
 
   @override
   State<TableData> createState() => _TableDataState();
@@ -23,54 +22,55 @@ class TableData extends StatefulWidget {
 
 class _TableDataState extends State<TableData> {
   IconData? addIcon;
-
   @override
   Widget build(BuildContext context) {
     return DataTable(
-      columns:  <DataColumn>[
-        DataColumn(
-          label: Text(widget.updateDate)
-        ),
-        DataColumn(
-          label: Text(
-            widget.projectTitle ?? 'Project'
-          ),
-        ),
-        DataColumn(
-          label: widget.addAtendence ?? 'project',
-        ),
-        // DataColumn(
-        //   label: widget.fourthTitle ?? 'attendances',
-        // ),
+          columns:  <DataColumn>[
+            DataColumn(
+                label: Text(widget.projectName ?? 'project'),
+            ),
+            DataColumn(
+              label: Text(
+                  widget.projectTitle ?? 'Project'
+              ),
+            ),
+            DataColumn(
+              label: widget.addAtendence ?? 'project',
+            ),
+            // DataColumn(
+            //   label: widget.fourthTitle ?? 'attendances',
+            // ),
 
-      ],
-
-      rows:  <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text(widget.updateDate)),
-            DataCell(Text(widget.projectName ?? 'N/A')),
-            DataCell(Text(widget.todayWork)),
-            // DataCell(Text(widget.fourthTitle))
           ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(
-                Text(widget.updateDate)),
-            DataCell(Text(widget.projectName ?? 'N/A')),
-            DataCell(Text(widget.todayWork)),
-            // DataCell(Text(widget.fourthTitle))
-          ],
-        ),
 
-      ],
-    );
-  }
+          rows:  <DataRow>[
+            DataRow(
+              cells: <DataCell>[
+                DataCell(Text(widget.updateDate)),
+                DataCell(Text(widget.projectName ?? 'N/A')),
+                DataCell(Text(widget.todayWork)),
+                // DataCell(Text(widget.fourthTitle))
+              ],
+            ),
+            DataRow(
+              cells: <DataCell>[
+                DataCell(
+                    Text(widget.updateDate)),
+                DataCell(Text(widget.projectName ?? 'N/A')),
+                DataCell(Text(widget.todayWork)),
+                // DataCell(Text(widget.fourthTitle))
+              ],
+            ),
+
+          ],
+        );
+      }
+
+
 }
 
 
 class DataLabels {
-  final label;
+  dynamic label;
   DataLabels({this.label});
 }
