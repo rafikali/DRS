@@ -22,7 +22,6 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
                       fontSize: 20
                   ),),
 
-
                 InkWell(onTap: () {
                   Tooltip(message: ('hi'),);
                 },child: Icon(CupertinoIcons.question_circle))

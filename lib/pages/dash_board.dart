@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/widgets/Card.dart';
-import 'package:login_page/widgets/login_textfield.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class DashBoard extends StatelessWidget {
               CardView(
                 dashboardIcon: CupertinoIcons.clock,
                 title: 'My Missing Checkout',
-                color: Color(0xFFff3333),
+                color: const Color(0xFFff3333),
 
                 count: '1',
               ),
@@ -57,29 +56,29 @@ class DashBoard extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.02,
           ),
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height,
               width: double.infinity,
 
               child: Card(
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Text('Recent Daily Update:',
-                        textAlign: TextAlign.start,
+                      const Text('Recent Daily Update:',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                         fontSize: 20,
                       ),),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
 
                       Padding(
-                        padding: EdgeInsets.only(left: 4, right: 48),
+                        padding: const EdgeInsets.only(left: 4, right: 48),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: const [
                             Text('Update For',
                             style: TextStyle(
                               fontSize: 16
@@ -92,13 +91,12 @@ class DashBoard extends StatelessWidget {
                         ),
 
                       ),
-                      Divider(),
+                      const Divider(),
                        Expanded(
                          child: ListTile(
-                          leading: Text('2022-03-21 (Mon)'),
+                          leading: const Text('2022-03-21 (Mon)'),
                           title: Column(
-
-                              children: [
+                              children: const [
                           Text('Daily Update [ 2022-03-21 (Mon ) ]'),
                                 Text('1. worked on homepageappbar'),
                                 Text('2.  forgot password completed'),

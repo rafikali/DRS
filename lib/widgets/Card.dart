@@ -19,7 +19,6 @@ class CardView extends StatelessWidget {
         
       },
       child: Card(
-
         child: Padding(
           padding: EdgeInsets.all(6),
           child: Container(

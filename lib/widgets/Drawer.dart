@@ -8,7 +8,6 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-
       child: Padding(
 
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 10),
@@ -26,7 +25,9 @@ class MyDrawer extends StatelessWidget {
                         title: Text(data![index].title),
                       );
 
+
                     }),
+
               )
             ],
           ),

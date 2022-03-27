@@ -9,4 +9,5 @@ class ImageConstants {
   static const String placeHolder = 'assets/Images/placeholder-image.png';
   static const String branding = 'assets/Images/fb_branding.png';
   static const String biometric = 'assets/Images/biometric.webp';
+  static const String profile = 'assets/Images/profile.jpg';
 }

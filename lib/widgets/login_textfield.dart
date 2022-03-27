@@ -11,8 +11,10 @@ class LoginTextForm extends StatefulWidget {
   final typeKeyboard;
   final validator;
   Alignment? textalign;
-  final int? height;
-  final int? width;
+  dynamic contentPadding;
+  final fillcolor;
+  dynamic height;
+  dynamic width;
   final Color? iconColor;
   final Icon? accountIcon;
   final Border? outlineBorder;
@@ -23,6 +25,7 @@ class LoginTextForm extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
       LoginTextForm(
       {required this.hintText,
+        this.contentPadding,
        this.labelText,
         this.validator,
         this.passView,
@@ -30,9 +33,10 @@ class LoginTextForm extends StatefulWidget {
         this.dataController,
         this.requiredMsg,
         this.accountIcon,
+        this.fillcolor,
         this.iconColor,
-        this.height,
-        this.width,
+         this.height,
+         this.width,
         this.outlineBorder,
         this.textalign, this.typeKeyboard, this.maxLength})
       : super();
@@ -53,7 +57,8 @@ class _LoginTextFormState extends State<LoginTextForm> {
       controller: widget.dataController,
       validator: widget.validator,
       decoration: InputDecoration(
-        iconColor: const Color(0xFF6C63FF),
+        contentPadding: widget.contentPadding,
+        iconColor: const Color(0xFF6C63FF) ,
         errorStyle:   const TextStyle(
             color: Color(0xFFB00020),
           letterSpacing: 0.2,
@@ -61,8 +66,8 @@ class _LoginTextFormState extends State<LoginTextForm> {
         ),
 
         filled: true,
-        fillColor: Colors.grey[200],
-        border: const UnderlineInputBorder(
+        fillColor: widget.fillcolor ?? Colors.grey[200],
+        border:  UnderlineInputBorder(
           borderRadius: BorderRadius.only(topRight: Radius.circular(8),
               topLeft: Radius.circular(8),
               bottomLeft: Radius.circular(4),
@@ -74,16 +79,18 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
           ),
         ),
+
         hoverColor: Colors.black,
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             style: BorderStyle.solid,
-            color: Color(0xFF6C63FF)
+            color:  Color(0xFF6C63FF)
           )
         ),
         labelStyle: const TextStyle(
           color: Color(0xFF6C63FF)
         ),
+
 
         suffixIcon: widget.trailingIcon,
         labelText: widget.labelText,

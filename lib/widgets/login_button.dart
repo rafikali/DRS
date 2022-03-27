@@ -1,7 +1,5 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:login_page/widgets/login_textfield.dart';
 
 class Button extends StatefulWidget {
   final String buttonTitle;
@@ -38,7 +36,6 @@ class _ButtonState extends State<Button> {
             fontSize: 18,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
-
           ),
         ),
         decoration: BoxDecoration(
@@ -50,7 +47,7 @@ class _ButtonState extends State<Button> {
                   spreadRadius: 5,
                   blurRadius: 7,
                   offset: Offset(1, 2)
-              )
+              ),
             ],
 
             gradient: const LinearGradient(

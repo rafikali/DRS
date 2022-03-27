@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/Route/routehandler.dart';
@@ -33,12 +34,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         // primaryColor: Colors.black,
+
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme
         ),
         primaryColor: const Color(0xFF343434),
-
-
         scaffoldBackgroundColor: Color(0xFFF3F3F3),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(

@@ -1,12 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
 import 'package:login_page/Constants/Images.dart';
 import 'package:login_page/pages/home_page.dart';
-import 'package:login_page/pages/models.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
@@ -112,7 +109,6 @@ class _RegisterState extends State<Register> {
                           ),
 
                           DropView(hintText: 'here', labelText: 'here',
-
                             dropTrailing: CupertinoIcons.chevron_down_circle_fill,
                             height: 60.0,
                             width: 100.0,
