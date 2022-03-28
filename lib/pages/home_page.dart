@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/Constants/Images.dart';
+import 'package:login_page/Constants/api_endpoints.dart';
 import 'package:login_page/pages/attendance.dart';
+import 'package:http/http.dart' as http;
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
+import 'package:login_page/pages/models.dart';
 import 'package:login_page/widgets/Drawer.dart';
 import 'package:login_page/widgets/alertbox..dart';
 import '../widgets/simple_button.dart';
@@ -16,15 +21,29 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+
+Future fetchSchedule() async {
+   final response = await http.get(Uri.parse(ApiEndpoints.checkTime));
+   var bodyData = jsonDecode(response.body);
+   var Response = Schedule.fromJson(bodyData);
+   if(response.statusCode == 200) {
+    var responseData = Response.checkIn;
+    print(responseData);
+    return responseData;
+   } else {
+     throw Error();
+   }
+}
+
 class _HomePageState extends State<HomePage> {
   @override
-
   Widget build(BuildContext context) {
     return  DefaultTabController(
       length: 3,
       child: Scaffold(
         drawer: MyDrawer(
          data: [
+
             Contents(iconName: CupertinoIcons.home, title: 'My Dashboard'),
             Contents(iconName: CupertinoIcons.bars, title: 'My Daily Updates'),
             Contents(iconName: CupertinoIcons.up_arrow, title: 'My Attendances'),
@@ -34,7 +53,6 @@ class _HomePageState extends State<HomePage> {
             Contents(iconName: CupertinoIcons.speedometer, title: 'My Late Arrival'),
             Contents(iconName: CupertinoIcons.control, title: 'Hr Policy'),
             Contents(iconName: CupertinoIcons.calendar, title: 'Holiday'),
-
 
           ],
         ),
@@ -92,6 +110,7 @@ class _HomePageState extends State<HomePage> {
 
             ],
 
+
             flexibleSpace: Center(
               child: Container(
                 height: 100,
@@ -110,8 +129,8 @@ class _HomePageState extends State<HomePage> {
                         spacing: 1,
                         alignment: WrapAlignment.center,
                         direction: Axis.vertical,
-                        children: const  [
-                          SimpleButton(title: 'Checked In :',
+                        children:   const [
+                          SimpleButton(title: 'Checked In :' ,
                           ),
 
                           SizedBox(
@@ -160,10 +179,12 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 13
                   ),),),
 
-                  Tab(child: Text('Daily Update',  style: TextStyle(
+                  Tab(child: Text('Daily Update',
+                    style: TextStyle(
                       fontSize: 13),),),
 
-                  Tab(child: Text('Attendance',  style: TextStyle(
+                  Tab(child: Text('Attendance',
+                    style: TextStyle(
                       fontSize: 13),),
                   ),
                 ]),
@@ -174,13 +195,12 @@ class _HomePageState extends State<HomePage> {
 
 
 
-        body:  const Padding(
+        body:  Padding(
           padding: EdgeInsets.all(8.0),
           child: TabBarView(
             children: [
               DashBoard(),
               DailyUpdate(),
-
               MyAttendances(),
 
             ],

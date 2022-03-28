@@ -24,9 +24,9 @@ class DashBoard extends StatelessWidget {
               children: [
               CardView(
                 dashboardIcon: CupertinoIcons.clock,
+
                 title: 'My Missing Checkout',
                 color: const Color(0xFFff3333),
-
                 count: '1',
               ),
               CardView(
@@ -35,13 +35,15 @@ class DashBoard extends StatelessWidget {
                 color: Colors.black,
                 count: '0',
               ),
-              CardView(
 
+
+              CardView(
                 dashboardIcon: CupertinoIcons.creditcard ,
                 title: 'My Leave Balance',
                 color: Colors.black,
                 count: '0',
               ),
+
               CardView(
                 dashboardIcon: CupertinoIcons.tv,
                 title: 'My NODailyUpdates',

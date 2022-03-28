@@ -8,13 +8,29 @@ class TableData extends StatefulWidget  {
   dynamic updateDate;
   dynamic addAtendence;
   dynamic fourthTitle;
-  // final List<DataColumn> columns;
+  final List<DataLabels> columns;
+  final List<DataCell>? shells;
+  final List<DataLabels> rows;
 
   dynamic attendence;
   final String? projectName;
   dynamic todayWork;
   final IconData? addIcon;
-  TableData({Key? key, this.addIcon,this.leadingTitle, this.projectName, this.trailingTitle, this.projectTitle, this.updateDate, this.todayWork, this.attendence, this.addAtendence, this.fourthTitle, }) : super(key: key);
+  TableData({Key? key,
+    this.addIcon,
+    this.leadingTitle,
+    this.projectName,
+    this.trailingTitle,
+    required this.columns,
+    this.projectTitle,
+    this.updateDate,
+    this.todayWork,
+    this.attendence,
+    this.addAtendence,
+    this.fourthTitle,
+    required this.rows,
+    this.shells,
+  }) : super(key: key);
 
   @override
   State<TableData> createState() => _TableDataState();
@@ -25,44 +41,24 @@ class _TableDataState extends State<TableData> {
   @override
   Widget build(BuildContext context) {
     return DataTable(
-          columns:  <DataColumn>[
-            DataColumn(
-                label: Text(widget.projectName ?? 'project'),
-            ),
-            DataColumn(
-              label: Text(
-                  widget.projectTitle ?? 'Project'
-              ),
-            ),
-            DataColumn(
-              label: widget.addAtendence ?? 'project',
-            ),
+      columns: widget.columns.map<DataColumn>((e) => DataColumn(label: e.label)).toList(),
+          // columns:  <DataColumn>[
+            // DataColumn(
+            //     label: Text(widget.projectName ?? 'project'),
+            // ),
+
             // DataColumn(
             //   label: widget.fourthTitle ?? 'attendances',
             // ),
 
-          ],
+          // ],
 
-          rows:  <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text(widget.updateDate)),
-                DataCell(Text(widget.projectName ?? 'N/A')),
-                DataCell(Text(widget.todayWork)),
-                // DataCell(Text(widget.fourthTitle))
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(
-                    Text(widget.updateDate)),
-                DataCell(Text(widget.projectName ?? 'N/A')),
-                DataCell(Text(widget.todayWork)),
-                // DataCell(Text(widget.fourthTitle))
-              ],
-            ),
+      rows : widget.rows.map<DataRow>((e) => DataRow(cells:
+      <DataCell>[
+        DataCell(Text(e.dataCell)),
+        DataCell(Text(e.dataCell)),
+        DataCell(Text(e.dataCell)),])).toList(),
 
-          ],
         );
       }
 
@@ -72,5 +68,6 @@ class _TableDataState extends State<TableData> {
 
 class DataLabels {
   dynamic label;
-  DataLabels({this.label});
+  final dataCell;
+  DataLabels({this.label, this.dataCell});
 }

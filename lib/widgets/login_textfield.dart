@@ -17,7 +17,7 @@ class LoginTextForm extends StatefulWidget {
   dynamic width;
   final Color? iconColor;
   final Icon? accountIcon;
-  final Border? outlineBorder;
+  final OutlineInputBorder? outlineBorder;
   dynamic requiredMsg;
 
   final TextEditingController? dataController;
@@ -55,6 +55,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
       keyboardType: widget.typeKeyboard,
       obscureText: widget.passView == true,
       controller: widget.dataController,
+
       validator: widget.validator,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
@@ -67,11 +68,11 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
         filled: true,
         fillColor: widget.fillcolor ?? Colors.grey[200],
-        border:  UnderlineInputBorder(
-          borderRadius: BorderRadius.only(topRight: Radius.circular(8),
-              topLeft: Radius.circular(8),
+        border: widget.outlineBorder ?? const UnderlineInputBorder(
+          borderRadius:  BorderRadius.only(topRight: Radius.circular(8),
+              topLeft:  Radius.circular(8),
               bottomLeft: Radius.circular(4),
-              bottomRight: Radius.circular(4)),
+              bottomRight: const Radius.circular(4)),
 
           borderSide: BorderSide(
             style: BorderStyle.solid,
@@ -81,7 +82,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
         ),
 
         hoverColor: Colors.black,
-        focusedBorder: const UnderlineInputBorder(
+        focusedBorder: widget.outlineBorder ?? UnderlineInputBorder(
           borderSide: BorderSide(
             style: BorderStyle.solid,
             color:  Color(0xFF6C63FF)

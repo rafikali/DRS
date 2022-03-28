@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_page/Constants/app_constants.dart';
-import 'package:login_page/Route/routehandler.dart';
+import 'package:login_page/Route/route_handler.dart';
 import 'package:login_page/pages/home_page.dart';
 import 'package:login_page/pages/login_page.dart';
+import 'package:nepali_utils/nepali_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs= await SharedPreferences.getInstance();
+  NepaliUtils(Language.nepali);
   String? accessToken = prefs.getString(AppConstants.accessToken);
 // SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
   //   // statusBarColor: Color(0xFFF3F3F3),
@@ -18,13 +18,14 @@ void main() async{
   //   // statusBarIconBrightness: Brightness.light,
   //
   // ));
-  runApp(MyApp(accessToken: accessToken,));
+  runApp(MyApp(accessToken: accessToken));
 }
 
 class MyApp extends StatelessWidget {
+  final mode;
  final String? accessToken;
 
-  const MyApp({Key? key, this.accessToken}) : super(key: key);
+  const MyApp({Key? key,this.mode,  this.accessToken}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -32,22 +33,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.light,
+        brightness: mode,
         // primaryColor: Colors.black,
 
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme
         ),
         primaryColor: const Color(0xFF343434),
-        scaffoldBackgroundColor: Color(0xFFF3F3F3),
+        scaffoldBackgroundColor: const Color(0xFFF3F3F3),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             color: Colors.black,
 
           ),
           iconTheme: IconThemeData(
-            color: Colors.black
+            color: Colors.white
           ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.white
+          )
 
         ),
 

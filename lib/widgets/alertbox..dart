@@ -14,6 +14,7 @@ class DialogBox {
   dynamic width;
   dynamic firsticon;
   dynamic secondicon;
+  final barrierDismissile;
   final logout;
   final contentPadding;
 
@@ -21,6 +22,7 @@ class DialogBox {
     this.width,
     this.insetPadding,
     this.height,
+    this.barrierDismissile,
     this.firsticon,
     this.secondicon,
     this.padding,
@@ -30,6 +32,7 @@ class DialogBox {
     this.logout});
   getAlertDialogBox(BuildContext context) {
     showDialog(context: context,
+        barrierDismissible: barrierDismissile,
         builder: (context) {
      return  AlertDialog(
        alignment: alignment ?? Alignment.center,
@@ -41,13 +44,16 @@ class DialogBox {
           padding: padding ?? EdgeInsets.zero,
           child: Column(
             children: [
+
               const Text('Add Daily Update',
-                style: TextStyle(
-                    fontSize: 25
-                ),),
+              style: const TextStyle(
+                  fontSize: 25
+              ),),
               const Divider(color: Colors.black,),
               LoginTextForm(hintText: '2022-03-26',
                 labelText: 'Update for',
+                trailingIcon: const Icon(CupertinoIcons.calendar,
+                ),
                 fillcolor: Colors.white,
               ),
 
@@ -60,25 +66,61 @@ class DialogBox {
               ),
 
               const SizedBox(
-                  height: 10
+                  height: 12
               ),
               const Text('Mention your Productivity (Work done) of the Day *'),
               const SizedBox(
                   height: 30
               ),
-              LoginTextForm(hintText: 'enter something',
+              LoginTextForm(hintText: 'Enter something',
                 fillcolor: Colors.white,
 
-                contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 100)
+                outlineBorder:  OutlineInputBorder(
+                  borderSide: BorderSide(
+                    style: BorderStyle.solid,
+                    color: Colors.red,
+
+                  ),
+
+                ),
+
+                contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 80)
                 ,),
 
 
 
 
 
+
+
             ],
-          )
+
+          ),
+
         ),
+       actions: [
+         TextButton(
+           child: Text('Cancel',
+           style: TextStyle(
+             color: Colors.red
+           ),),
+           onPressed: () {
+           Navigator.pop(context);
+
+         },
+
+        ),
+
+         TextButton(onPressed: () {
+           Navigator.pop(context);
+         },
+           child: Text('Submit',
+          style: TextStyle(
+          color: Colors.blue
+          ),),
+           ),
+
+       ],
       );
     });
   }

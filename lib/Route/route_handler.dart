@@ -19,7 +19,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const HomePage());
 
       case ForgotPassword.routeName:
-        return MaterialPageRoute(builder: (context) =>  ForgotPassword());
+        return MaterialPageRoute(builder: (context) =>  const ForgotPassword());
 
       case CreateNewPass.routeName:
         return MaterialPageRoute(builder: (context) =>  const CreateNewPass());

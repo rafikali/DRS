@@ -60,30 +60,63 @@ class DailyUpdate extends StatelessWidget {
        Expanded(
         child: Card(
           child: TableData(
-            updateDate: '2022-03-21',
-            addIcon: CupertinoIcons.add_circled_solid,
-            todayWork: 'Homepage worked , login page worked',
-            addAtendence:  Container(
-              width: 90,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                      'Title'
-                  ),
-                  InkWell(
-                      onTap: () {
-                        DialogBox(
-                            width: MediaQuery.of(context).size.width * 1,
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            padding: EdgeInsets.all(14)
-                        ).getAlertDialogBox(context);
-                      },
-                      child: Icon(CupertinoIcons.add_circled_solid, color: Colors.green,)),
-                ],
-              ),
-            ),
+            columns:  [
+              DataLabels(label: Text('Update')),
+              DataLabels(label: Text("Project")),
+              DataLabels(label: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                        'Title'
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          DialogBox(
+                            barrierDismissile: false,
+                              width: MediaQuery.of(context).size.width * 1,
+                              height: MediaQuery.of(context).size.height * 0.6,
+                              padding: EdgeInsets.all(14)
+                          ).getAlertDialogBox(context);
+                        },
+                        child: Icon(CupertinoIcons.add_circled_solid, color: Colors.green,)),
+                  ],
+                ),
+              ),)
+            ],
+
+             rows: [
+               DataLabels(dataCell: 'list'),
+               DataLabels(dataCell: 'N/A'),
+               DataLabels(dataCell: 'Homepage worked , login page worked'),
+
+
+          ],
+
+            // addAtendence:  Container(
+            //   width: 90,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     mainAxisSize: MainAxisSize.max,
+            //     children: [
+            //       Text(
+            //           'Title'
+            //       ),
+            //       InkWell(
+            //           onTap: () {
+            //             DialogBox(
+            //                 width: MediaQuery.of(context).size.width * 1,
+            //                 height: MediaQuery.of(context).size.height * 0.8,
+            //                 padding: EdgeInsets.all(14)
+            //             ).getAlertDialogBox(context);
+            //           },
+            //           child: Icon(CupertinoIcons.add_circled_solid, color: Colors.green,)),
+            //     ],
+            //   ),
+            // ),
 
 
 
