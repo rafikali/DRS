@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/widgets/table.dart';
 
-class MyAttendances extends StatelessWidget {
-  const MyAttendances({Key? key}) : super(key: key);
+class Attendances extends StatelessWidget {
+  const Attendances({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-       scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.horizontal,
+      child: Card(
+        child: TableData(
+          columns: [
+            DataLabels(label: Text('Date')),
+            DataLabels(label: Text('Check In')),
+            DataLabels(label: Text('Check out')),
+            DataLabels(label: Text('Worked Duration')),
+            // DataLabels(label2: Text('Check out')),
+          ],
 
-      child: TableData(
-        columns: [
-          DataLabels(label: Text('Date')),
-          DataLabels(label: Text('Check In')),
-          DataLabels(label: Text('Check out')),
-        ],
+          rows: [
+            DataLabels(
+              dataCell: ['2022-03-28 (Mon)', '09:52:21', '19:29:10', '10 hrs 14 min (1.14 day) '],
+            ),
+            DataLabels(
+              dataCell: ['2022-03-28 (Mon)', '09:52:21', '19:29:10', '10 hrs 14 min (1.14 day) '],
+            ),
+            DataLabels(
+                dataCell: ['2022-03-28 (Mon)', '09:52:21', '19:29:10', '10 hrs 14 min (1.14 day) ']),
+            DataLabels(
+                dataCell: ['2022-03-28 (Mon)', '09:52:21', '19:29:10', '10 hrs 14 min (1.14 day) ']),
+            // DataLabels(
+            //     dataCell: ['2022-03-28 (jaj)', '09:52:21', '19:29:11', 'slf']),
+            // DataLabels(dataCell2: ['2022-03-28 (Mon)', '09:52:21','19:29:10']),
+          ],
 
-        rows: [
-          DataLabels(dataCell: 'children',),
-          DataLabels(dataCell: 'children',),
-          DataLabels(dataCell: 'chil'),
-        ],
-
-
-
-
-
-
-       // rows: [
-       //   DataRow(
-       //       cells: [
-       //         DataCell(child)
-       //       ])
-       // ]
-
-
-
+          // rows: [
+          //   DataRow(
+          //       cells: [
+          //         DataCell(child)
+          //       ])
+          // ]
+        ),
       ),
       // child: DataTable(
       //   showBottomBorder: true,

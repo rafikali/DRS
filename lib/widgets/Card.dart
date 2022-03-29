@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class CardView extends StatelessWidget {
   Color? color;
   final String title;
@@ -10,14 +9,20 @@ class CardView extends StatelessWidget {
   final dashboardIcon;
   Border? border;
 
-   CardView({Key? key, required this.title, this.count,this.border, this.color, this.backgroundColor, this.dashboardIcon}) : super(key: key);
+  CardView(
+      {Key? key,
+      required this.title,
+      this.count,
+      this.border,
+      this.color,
+      this.backgroundColor,
+      this.dashboardIcon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        
-      },
+      onTap: () {},
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(6),
@@ -25,22 +30,31 @@ class CardView extends StatelessWidget {
             decoration: BoxDecoration(
               border: border,
             ),
-            child: Column(
-              children:  [
-                Icon(dashboardIcon, color: color,),
-                SizedBox(height: 4,),
-                Text(title,
-                  style:  TextStyle(
+            child: FittedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    dashboardIcon,
                     color: color,
-                    fontSize: 15
-                ), ),
-                const SizedBox(height: 2,),
-                Text(count!,
-                  style:  TextStyle(
-                    color: color,
-                    fontSize: 19
-                ),),
-              ],
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(color: color, fontSize: 13),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    count!,
+                    style: TextStyle(color: color, fontSize: 17),
+                  ),
+
+                ],
+              ),
             ),
           ),
         ),

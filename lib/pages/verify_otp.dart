@@ -53,7 +53,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
               child: Wrap(
                 alignment: WrapAlignment.center,
                 runSpacing: 20,
-                spacing: 3,
+                spacing: 10,
                 children:  [
                   SvgPicture.asset(
                     ImageConstants.verified,

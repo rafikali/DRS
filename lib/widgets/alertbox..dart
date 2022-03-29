@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:login_page/widgets/login_textfield.dart';
-import 'package:login_page/widgets/table.dart';
 
 
 class DialogBox {
@@ -46,7 +44,7 @@ class DialogBox {
             children: [
 
               const Text('Add Daily Update',
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 25
               ),),
               const Divider(color: Colors.black,),
@@ -100,7 +98,7 @@ class DialogBox {
         ),
        actions: [
          TextButton(
-           child: Text('Cancel',
+           child: const Text('Cancel',
            style: TextStyle(
              color: Colors.red
            ),),

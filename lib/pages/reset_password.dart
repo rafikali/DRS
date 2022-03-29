@@ -37,6 +37,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),),
 
               const Text('Enter the mobile number associated with your account and we ll send an email with instructions to reset your password.',
+                  softWrap: true,
               style: TextStyle(
                 fontSize: 18,
                 color: Color(0xF2727272),
