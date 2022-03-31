@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Button extends StatefulWidget {
@@ -8,35 +7,34 @@ class Button extends StatefulWidget {
   dynamic bottonRadius;
   Color? buttonColor;
   final buttonWidth;
-    Button({Key? key,
+
+  Button(
+      {Key? key,
       required this.buttonTitle,
       this.buttonHeight,
       this.buttonWidth,
       this.validFunc,
       this.buttonColor,
-      this.bottonRadius}) : super(key: key);
+      this.bottonRadius})
+      : super(key: key);
 
   @override
   State<Button> createState() => _ButtonState();
-
 }
 
 class _ButtonState extends State<Button> {
-
-
   @override
   Widget build(BuildContext context) {
     return Ink(
       decoration: BoxDecoration(
-        // border: Border.all(color: Colors(widget)widget.buttonColor),
+          // border: Border.all(color: Colors(widget)widget.buttonColor),
 
           boxShadow: const [
             BoxShadow(
                 color: Color(0xFFCFCFCF),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(1, 2)
-            ),
+                offset: Offset(1, 2)),
           ],
           gradient: const LinearGradient(
               begin: Alignment.topLeft,
@@ -82,15 +80,9 @@ class _ButtonState extends State<Button> {
             width: widget.buttonWidth,
             height: widget.buttonHeight,
             alignment: Alignment.center,
-
           ),
         ),
-
       ),
     );
   }
 }
-
-
-
-

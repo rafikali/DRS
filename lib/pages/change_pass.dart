@@ -35,19 +35,17 @@ class _ChangePasswordState extends State<ChangePassword> {
               runSpacing: 25,
               spacing: 10,
               children: [
-                const Text('Create new password',
-                  style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold
-                  ),),
-
-                const Text('Your new password must be different from previous used passwords.',
+                const Text(
+                  'Create new password',
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Your new password must be different from previous used passwords.',
                   style: TextStyle(
                     fontSize: 18,
                     color: Color(0xF2727272),
-
-                  ),),
-
+                  ),
+                ),
                 SingleChildScrollView(
                   child: Wrap(
                     runSpacing: 12,
@@ -56,47 +54,39 @@ class _ChangePasswordState extends State<ChangePassword> {
                       LoginTextForm(
                           validator: InputValidator.validatePassword,
                           hintText: 'New Password',
-                          trailingIcon:  const Icon(CupertinoIcons.eye, color: Colors.black,)
-                      ),
+                          trailingIcon: const Icon(
+                            CupertinoIcons.eye,
+                            color: Colors.black,
+                          )),
                       const Text('Password'),
                       LoginTextForm(
-                          validator: InputValidator.validatePassword,
-                          hintText: 'New Password',
-                          // trailingIcon:  const Icon(CupertinoIcons.eye, color: Colors.black,)
+                        validator: InputValidator.validatePassword,
+                        hintText: 'New Password',
+                        // trailingIcon:  const Icon(CupertinoIcons.eye, color: Colors.black,)
                       ),
                       const Text('Confirm Password'),
                       LoginTextForm(
                         validator: InputValidator.validatePassword,
                         hintText: 'Confirm Password',
-                        trailingIcon:  const Icon(CupertinoIcons.eye_slash),
+                        trailingIcon: const Icon(CupertinoIcons.eye_slash),
                       ),
-
                     ],
                   ),
                 ),
-
                 Button(
                   buttonTitle: 'Reset Password',
                   buttonHeight: 50.0,
                   validFunc: () {
-                    if(_formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       Navigator.pushNamed(context, HomePage.routeName);
                     }
-
                   },
-
                 )
-
-
-
               ],
             ),
           ),
         ),
       ),
-
-
     );
-
   }
 }

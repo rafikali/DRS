@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardView extends StatelessWidget {
@@ -25,7 +24,7 @@ class CardView extends StatelessWidget {
       onTap: () {},
       child: Card(
         child: Padding(
-          padding: EdgeInsets.all(6),
+          padding: const EdgeInsets.all(6),
           child: Container(
             decoration: BoxDecoration(
               border: border,
@@ -38,7 +37,7 @@ class CardView extends StatelessWidget {
                     dashboardIcon,
                     color: color,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Text(
@@ -52,7 +51,6 @@ class CardView extends StatelessWidget {
                     count!,
                     style: TextStyle(color: color, fontSize: 17),
                   ),
-
                 ],
               ),
             ),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class LoginResponse {
   String? status;
   String? message;
@@ -14,9 +12,9 @@ class LoginResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
     data['data'] = this.data;
     return data;
   }
@@ -38,16 +36,14 @@ class Schedule {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['checkIn'] = this.checkIn;
-    data['checkOut'] = this.checkOut;
-    data['late_early_by'] = this.lateEarlyBy;
-    data['office_end_time'] = this.officeEndTime;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['checkIn'] = checkIn;
+    data['checkOut'] = checkOut;
+    data['late_early_by'] = lateEarlyBy;
+    data['office_end_time'] = officeEndTime;
     return data;
   }
 }
-
-
 
 // class Models {
 //   List<Results>? results;

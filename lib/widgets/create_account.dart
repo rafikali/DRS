@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/pages/reset_password.dart';
 import 'package:login_page/pages/newregister.dart';
-import 'package:login_page/pages/register_page.dart';
 
 class CreateAcc extends StatelessWidget {
   const CreateAcc({Key? key}) : super(key: key);
@@ -20,20 +19,17 @@ class CreateAcc extends StatelessWidget {
             style: TextStyle(
                 color: Color(0xFF6C63FF),
                 decoration: TextDecoration.underline,
-                 fontSize: 16),
-
+                fontSize: 16),
           ),
         ),
         const SizedBox(
           width: 10,
         ),
-
         Container(
           height: 15,
           width: 1,
           color: Colors.black,
         ),
-
         const SizedBox(
           width: 10,
         ),
@@ -41,12 +37,12 @@ class CreateAcc extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, Register.routeName);
           },
-
           child: const Text(
             'Create new account',
             style: TextStyle(
-              color: Color(0xFF6C63FF),
-                decoration: TextDecoration.underline, fontSize: 16),
+                color: Color(0xFF6C63FF),
+                decoration: TextDecoration.underline,
+                fontSize: 16),
           ),
         )
       ],

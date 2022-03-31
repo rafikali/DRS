@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/Constants/Images.dart';
+
 import 'package:login_page/Constants/api_endpoints.dart';
+import 'package:login_page/main.dart';
 import 'package:login_page/pages/attendance.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_page/pages/daily_update.dart';
@@ -11,11 +13,8 @@ import 'package:login_page/pages/dash_board.dart';
 import 'package:login_page/pages/models.dart';
 import 'package:login_page/pages/my_daily_updates.dart';
 import 'package:login_page/pages/my_dashboard.dart';
-import 'package:login_page/pages/my_late_arrival.dart';
-import 'package:login_page/pages/my_leaves.dart';
-import 'package:login_page/pages/my_missing_checkout.dart';
+import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/Drawer.dart';
-import 'package:login_page/widgets/alertbox..dart';
 import '../widgets/simple_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,9 +31,8 @@ Future<Schedule> fetchSchedule() async {
   var bodyData = jsonDecode(response.body);
 
   if (response.statusCode == 200) {
-    var Response = Schedule.fromJson(bodyData);
-    print(Response.checkIn);
-    return Response;
+    var response = Schedule.fromJson(bodyData);
+    return response;
   } else {
     throw Exception('Failed to load');
   }
@@ -42,11 +40,34 @@ Future<Schedule> fetchSchedule() async {
 
 class _HomePageState extends State<HomePage> {
   bool mode = true;
+  var value = MyApp(
+    changeMode: true,
+  );
 
-  void DarkMode() {
+  void darkMode() {
     setState(() {
       mode = !mode;
     });
+    PrefsServices().setBool('modeValue', mode);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() {
+    if (mode == true) {
+      return MyApp(
+        changeMode: true,
+      );
+    } else {
+      return MyApp(
+        changeMode: false,
+      );
+    }
   }
 
   @override
@@ -57,37 +78,61 @@ class _HomePageState extends State<HomePage> {
           drawer: MyDrawer(
             data: [
               Contents(
-                iconName: InkWell(
-                  child: Icon(CupertinoIcons.home),
-                  onTap: () {
-                    Navigator.pushNamed(context, MyDashBoard.routeName);
-                  },
-                ),
+                routeName: MyDashBoard.routeName,
+                iconName: CupertinoIcons.home,
                 title: 'My Dashboard',
               ),
               Contents(
-                iconName: Icon(CupertinoIcons.bars),
-                title: 'My Dashboard',
+                routeName: MyDailyUpdates.routeName,
+                iconName: CupertinoIcons.bars,
+                title: 'My DailyUpdate',
               ),
               Contents(
-                  iconName: Icon(CupertinoIcons.up_arrow),
-                  title: 'My Attendances'),
+                routeName: MyDashBoard.routeName,
+                iconName: CupertinoIcons.up_arrow,
+                title: 'My Attendances',
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.leaf_arrow_circlepath),
-                  title: 'My Leaves'),
+                routeName: MyDashBoard.routeName,
+
+                iconName: CupertinoIcons.leaf_arrow_circlepath,
+                title: 'My Leaves',
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.creditcard),
-                  title: 'My Leave Transaction'),
+                routeName: MyDashBoard.routeName,
+
+                iconName: CupertinoIcons.creditcard,
+                title: 'My Leave Transaction',
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.hourglass_bottomhalf_fill),
-                  title: 'My Missing Checkout'),
+                routeName: MyDashBoard.routeName,
+
+                iconName: CupertinoIcons.hourglass_bottomhalf_fill,
+                title: 'My Missing Checkout',
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.speedometer),
-                  title: 'My Late Arrival'),
+                iconName: CupertinoIcons.speedometer,
+                title: 'My Late Arrival',
+                routeName: MyDashBoard.routeName,
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.control), title: 'Hr Policy'),
+                iconName: CupertinoIcons.control,
+                title: 'Hr Policy',
+                routeName: MyDashBoard.routeName,
+
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
               Contents(
-                  iconName: Icon(CupertinoIcons.calendar), title: 'Holiday'),
+                routeName: MyDashBoard.routeName,
+
+                iconName: CupertinoIcons.calendar,
+                title: 'Holiday',
+                // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
+              ),
             ],
           ),
           appBar: PreferredSize(
@@ -105,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                     'Grow-Teamly',
                     style: TextStyle(
                       letterSpacing: 1,
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
@@ -118,12 +163,12 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       IconButton(
                         icon: mode
-                            ? Icon(
+                            ? const Icon(
                                 CupertinoIcons.moon,
                               )
-                            : Icon(CupertinoIcons.sun_dust),
+                            : const Icon(CupertinoIcons.sun_dust),
                         onPressed: () {
-                          DarkMode();
+                          darkMode();
                         },
                         color: Colors.white,
                       ),
@@ -134,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                         icon: const Icon(CupertinoIcons.profile_circled,
                             color: Colors.white),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       InkWell(
@@ -147,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                 child: const Icon(CupertinoIcons.gear_solid,
                                     color: Colors.white));
                           })),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                     ],
@@ -239,7 +284,7 @@ class _HomePageState extends State<HomePage> {
               )),
           body: const Padding(
             padding: EdgeInsets.all(8.0),
-            child:  TabBarView(
+            child: TabBarView(
               physics: BouncingScrollPhysics(),
               children: [
                 DashBoard(),

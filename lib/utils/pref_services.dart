@@ -1,3 +1,4 @@
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsServices{
@@ -11,6 +12,18 @@ class PrefsServices{
      var sharedkey = _prefs.getString(key);
      return sharedkey ?? "";
   }
+
+   setBool( key, value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key, value);
+
+  }
+  Future<dynamic> getBool(dynamic key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var changedKey = prefs.getBool(key);
+    return changedKey ?? false;
+  }
+
 
 }
 

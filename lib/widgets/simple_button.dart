@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SimpleButton extends StatelessWidget {
   final String title;
 
@@ -11,17 +10,13 @@ class SimpleButton extends StatelessWidget {
     return Container(
       height: 35,
       width: 110,
-      child: Text(title, style: const TextStyle(
-          fontWeight: FontWeight.bold
-      ),),
-
+      child: Text(
+        title,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50.0),
-          color: Colors.white
-      ),
-
-
+          borderRadius: BorderRadius.circular(50.0), color: Colors.white),
     );
   }
 }

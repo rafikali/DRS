@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //ignore: must_be_immutable
@@ -43,74 +44,37 @@ class _TableDataState extends State<TableData> {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: widget.columns
-          .map<DataColumn>((e) => DataColumn(label: e.label))
-          .toList(),
-      // columns:  <DataColumn>[
-      // DataColumn(
-      //     label: Text(widget.projectName ?? 'project'),
-      // ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: widget.columns
+            .map<DataColumn>((e) => DataColumn(label: e.label))
+            .toList(),
+        // columns:  <DataColumn>[
+        // DataColumn(
+        //     label: Text(widget.projectName ?? 'project'),
+        // ),
 
-      // DataColumn(
-      //   label: widget.fourthTitle ?? 'attendances',
-      // ),
+        // DataColumn(
+        //   label: widget.fourthTitle ?? 'attendances',
+        // ),
 
-      // ],
+        // ],
 
-      rows: widget.rows
-          .map<DataRow>((e) => DataRow(
-                  cells: e.dataCell.map<DataCell>((f) {
-                return DataCell(Text(f));
-              }).toList()))
-          .toList(),
-    );
-  }
-}
-
-class AttendanceTable extends StatefulWidget {
-
-  final List<DataLabels> columns;
-  final List<DataLabels> rows;
-
-
-  AttendanceTable({
-    Key? key,
-    required this.columns,
-    required this.rows
-  }) : super(key: key);
-
-  @override
-  State<AttendanceTable> createState() => _AttendanceTableState();
-}
-
-class _AttendanceTableState extends State<AttendanceTable> {
-  IconData? addIcon;
-
-  @override
-  Widget build(BuildContext context) {
-    return DataTable(
-      columns: widget.columns
-        .map<DataColumn>((e) => DataColumn(label: e.label2))
-          .toList(),
-
-      rows: widget.rows
-          .map<DataRow>((e) => DataRow(
-          cells: e.dataCell2.map<DataCell>((f) {
-            return DataCell(Text(f));
-          }).toList()))
-          .toList(),
-
+        rows: widget.rows
+            .map<DataRow>((e) => DataRow(
+                    cells: e.dataCell.map<DataCell>((f) {
+                  return DataCell(Text(f));
+                }).toList()))
+            .toList(),
+      ),
     );
   }
 }
 
 class DataLabels {
-  dynamic label;
+  final label;
   final dataCell;
-  dynamic label2;
-  dynamic dataCell2;
 
-
-  DataLabels({this.label,this. dataCell2, this.label2, this.dataCell});
+  DataLabels({this.label, this.dataCell});
 }

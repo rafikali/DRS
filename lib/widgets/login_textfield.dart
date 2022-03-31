@@ -13,6 +13,7 @@ class LoginTextForm extends StatefulWidget {
   dynamic contentPadding;
   final fillcolor;
   dynamic height;
+  final int? maxLine;
   dynamic width;
   final Color? iconColor;
   final Icon? accountIcon;
@@ -41,6 +42,7 @@ class LoginTextForm extends StatefulWidget {
       this.outlineBorder,
       this.textalign,
       this.typeKeyboard,
+      this.maxLine,
       this.readonly = false,
       this.onTap,
       this.maxLength})
@@ -58,6 +60,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
       keyboardType: widget.typeKeyboard,
       obscureText: widget.passView == true,
       controller: widget.dataController,
+      maxLines: widget.maxLine ?? 1,
       // enabled: widget.enabled,
       readOnly: widget.readonly,
       validator: widget.validator,
@@ -88,7 +91,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
         hoverColor: Colors.black,
         focusedBorder: widget.outlineBorder ??
-            UnderlineInputBorder(
+            const UnderlineInputBorder(
                 borderSide: BorderSide(
                     style: BorderStyle.solid, color: Color(0xFF6C63FF))),
         labelStyle: const TextStyle(color: Color(0xFF6C63FF)),

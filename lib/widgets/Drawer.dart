@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/pages/change_pass.dart';
-import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/login_page.dart';
 
 class MyDrawer extends StatefulWidget {
   List<Contents>? data;
 
-  MyDrawer({this.data}) : super();
+  MyDrawer({Key? key, this.data}) : super(key: key);
 
   @override
   State<MyDrawer> createState() => _MyDrawerState();
@@ -29,44 +28,48 @@ class _MyDrawerState extends State<MyDrawer> {
                     itemCount: widget.data!.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: widget.data![index].iconName,
-                        title: Text(widget.data![index].title),
+                        onTap: () async {
+                          Navigator.pushNamed(context,
+                              widget.data![index].routeName.toString());
+                        },
+                        leading: Icon(widget.data![index].iconName),
+                        title: Text(widget.data![index].title.toString()),
                       );
                     }),
               ),
-              Container(
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, ChangePassword.routeName);
-                      },
-                      child: const ListTile(
-                        leading: const Icon(Icons.fingerprint,
-                        color: Colors.red,),
-                        title: const Text('Change Password',
-                        style: TextStyle(
-                          color: Colors.red
-                        ),),
+              Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, ChangePassword.routeName);
+                    },
+                    child: const ListTile(
+                      leading: Icon(
+                        Icons.fingerprint,
+                        color: Colors.red,
+                      ),
+                      title: Text(
+                        'Change Password',
+                        style: TextStyle(color: Colors.red),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, LoginPage.routeName);
-                      },
-                      child: const ListTile(
-                        leading:  Icon(CupertinoIcons.profile_circled,
-                        color: Color(0xFF6C63FF),),
-                        title:  Text(
-                          'Log Out',
-                          style: TextStyle(
-                            color: Color(0xFF6C63FF)
-                          ),
-                        ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, LoginPage.routeName);
+                    },
+                    child: const ListTile(
+                      leading: Icon(
+                        CupertinoIcons.profile_circled,
+                        color: Color(0xFF6C63FF),
                       ),
-                    )
-                  ],
-                ),
+                      title: Text(
+                        'Log Out',
+                        style: TextStyle(color: Color(0xFF6C63FF)),
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
           ),
@@ -77,8 +80,9 @@ class _MyDrawerState extends State<MyDrawer> {
 }
 
 class Contents {
-  dynamic iconName;
-  final String title;
+  final IconData? iconName;
+  final String? title;
+  final String? routeName;
 
-  Contents({required this.iconName, required this.title});
+  Contents({this.iconName, this.routeName, this.title});
 }

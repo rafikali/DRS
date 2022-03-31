@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-
 class OtpInput extends StatefulWidget {
   TextEditingController? controller;
   final bool? autoFocus;
   bool? changeButton;
 
-   OtpInput({Key? key, this.controller, this.autoFocus, this.changeButton}) : super(key: key);
+  OtpInput({Key? key, this.controller, this.autoFocus, this.changeButton})
+      : super(key: key);
 
   @override
   State<OtpInput> createState() => _OtpInputState();
@@ -14,6 +14,7 @@ class OtpInput extends StatefulWidget {
 
 class _OtpInputState extends State<OtpInput> {
   bool changeButton = false;
+
   void changeHint() {
     setState(() {
       changeButton = !changeButton;
@@ -31,7 +32,7 @@ class _OtpInputState extends State<OtpInput> {
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         onChanged: (value) {
-          if (value.length == 1 ) {
+          if (value.length == 1) {
             FocusScope.of(context).nextFocus();
           } else if (value.isEmpty) {
             FocusScope.of(context).previousFocus();
@@ -39,27 +40,17 @@ class _OtpInputState extends State<OtpInput> {
             FocusScope.of(context).previousFocus();
           }
         },
-
-        decoration:  const InputDecoration(
-
+        decoration: const InputDecoration(
           border: OutlineInputBorder(
-            borderSide: BorderSide(
-
-            ),
+            borderSide: BorderSide(),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              width: 2,
-              color: Color(0xFF6C63FF)
-            ),
+            borderSide: BorderSide(width: 2, color: Color(0xFF6C63FF)),
           ),
           counterText: '',
-            hintText: '0',
-         ),
+          hintText: '0',
+        ),
       ),
-
     );
-
   }
-
 }

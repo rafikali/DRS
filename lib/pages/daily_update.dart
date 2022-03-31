@@ -22,7 +22,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(6),
+      padding: const EdgeInsets.all(6),
       child: Column(
         children: [
           SizedBox(
@@ -61,9 +61,9 @@ class _DailyUpdateState extends State<DailyUpdate> {
                               context: context,
                               builder: (context) {
                                 return DatePickerDialog(
-                                  firstDate: DateTime.now(),
+                                  firstDate: DateTime(2000),
                                   initialDate: DateTime.now(),
-                                  lastDate: DateTime.now()
+                                  lastDate: DateTime(2030)
                                       .add(const Duration(days: 365)),
                                 );
                               });
@@ -112,36 +112,33 @@ class _DailyUpdateState extends State<DailyUpdate> {
             child: Card(
               child: TableData(
                 columns: [
-                  DataLabels(label: Text('Update')),
-                  DataLabels(label: Text("Project")),
+                  DataLabels(label: const Text('Update')),
+                  DataLabels(label: const Text("Project")),
                   DataLabels(
-                    label: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Title'),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          InkWell(
-                              onTap: () {
-                                DialogBox(
-                                        barrierDismissile: false,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.6,
-                                        padding: EdgeInsets.all(14))
-                                    .getAlertDialogBox(context);
-                              },
-                              child: Icon(
-                                CupertinoIcons.add_circled_solid,
-                                color: Colors.green,
-                              )),
-                        ],
-                      ),
+                    label: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Title'),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              DialogBox(
+                                      barrierDismissile: false,
+                                      width:
+                                          MediaQuery.of(context).size.width * 1,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.6,
+                                      padding: const EdgeInsets.all(14))
+                                  .getAlertDialogBox(context);
+                            },
+                            child: const Icon(
+                              CupertinoIcons.add_circled_solid,
+                              color: Colors.green,
+                            )),
+                      ],
                     ),
                   )
                 ],

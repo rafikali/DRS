@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/widgets/Card.dart';
+import 'package:login_page/widgets/GridView.dart';
+
+import '../widgets/Card.dart';
 
 class DashBoard extends StatelessWidget {
-  const DashBoard({Key? key}) : super(key: key);
+   const DashBoard(
+      {Key? key,
+      })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +17,7 @@ class DashBoard extends StatelessWidget {
       child: ListView(
         // mainAxisSize: MainAxisSize.min,
         children: [
-          GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            primary: false,
-            childAspectRatio: 1.8,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            shrinkWrap: true,
+          Grid(
             children: [
               CardView(
                 dashboardIcon: CupertinoIcons.clock,
@@ -27,26 +25,28 @@ class DashBoard extends StatelessWidget {
                 color: const Color(0xFFff3333),
                 count: '1',
               ),
+
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
                 title: 'My Ghost Count',
                 color: Colors.black,
                 count: '0',
               ),
+
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
                 title: 'My Leave Balance',
                 color: Colors.black,
                 count: '0',
               ),
+
               CardView(
                 dashboardIcon: CupertinoIcons.tv,
                 title: 'My NODailyUpdates',
                 color: Colors.black,
                 count: '0',
               ),
-            ],
-          ),
+          ],),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
@@ -163,14 +163,3 @@ class DashBoard extends StatelessWidget {
   }
 }
 
-class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      color: Colors.black,
-    );
-  }
-}
