@@ -33,15 +33,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp>  {
-  bool? changeMode = false;
+  bool changeMode = true;
   var changingValue =  PrefsServices().getBool('modeValue');
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      darkTheme: ThemeData.light(),
-      // darkTheme: changingValue == true ? ThemeData.light(): ThemeData.dark(
+      theme: changeMode? ThemeData.light(): ThemeData.dark(),
 
 
       debugShowCheckedModeBanner: false,

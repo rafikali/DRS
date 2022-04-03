@@ -2,6 +2,8 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:login_page/utils/daily_update_alertbox.dart';
 import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/table.dart';
 
@@ -16,8 +18,23 @@ class DailyUpdate extends StatefulWidget {
 }
 
 class _DailyUpdateState extends State<DailyUpdate> {
-  DateTime? pickedDate;
-  TextEditingController datePicker = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  final DateTime? pickedDate = DateTime(2000);
+  TextEditingController dateInput = TextEditingController();
+
+
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dateInput.text = '';
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,45 +49,38 @@ class _DailyUpdateState extends State<DailyUpdate> {
                 children: [
                   Flexible(
                     child: GestureDetector(
-                      // onTap: () async {
-                      //   var time = await showDatePicker(
-                      //       context: context,
-                      //       initialDate: DateTime.now(),
-                      //       firstDate: DateTime(1990),
-                      //       lastDate: DateTime(2022));
-                      //   // var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                      //   if (time != null) {
-                      //     datePicker.text = time.toString();
-                      //   }
-                      // },
-                      // child: Text("data"),
 
                       child: LoginTextForm(
-                        readonly: true,
                         onTap: () async {
-                          // // var time = await showDatePicker(
-                          // //     context: context,
-                          // //     initialDate: DateTime.now(),
-                          // //     firstDate: DateTime(1990),
-                          // //     lastDate: DateTime(2022));
-                          // var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                          // if (time != null) {
-                          //   datePicker.text = time.format(context);
-                          // }
-                          showDialog(
+
+                         DateTime pickedDate = await showDialog(
                               context: context,
                               builder: (context) {
                                 return DatePickerDialog(
                                   firstDate: DateTime(2000),
-                                  initialDate: DateTime.now(),
+                                  initialDate: selectedDate,
                                   lastDate: DateTime(2030)
                                       .add(const Duration(days: 365)),
+                                  initialEntryMode: DatePickerEntryMode.input,
+
                                 );
                               });
+
+                          if(pickedDate != null && pickedDate != selectedDate ) {
+                            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                            setState(() {
+                              dateInput.text = formattedDate.toString();
+                              selectedDate = pickedDate;
+                            });
+                          }
+
+
                         },
-                        dataController: datePicker,
+                        dataController: dateInput,
                         hintText: 'Date',
+                        readonly: true,
                         width: 100,
+
                         fillcolor: Colors.white,
                         height: 50,
                         trailingIcon: const Icon(CupertinoIcons.calendar),
@@ -125,13 +135,12 @@ class _DailyUpdateState extends State<DailyUpdate> {
                         InkWell(
                             onTap: () {
                               DialogBox(
-                                      barrierDismissile: false,
-                                      width:
-                                          MediaQuery.of(context).size.width * 1,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.6,
-                                      padding: const EdgeInsets.all(14))
+                                dialogBoxPadding: const EdgeInsets.all(15),
+                                barrierDismissile: false, content: DailyUpdateAlertBox(
+                                padding: const EdgeInsets.all(10),
+
+                                
+                              ),)
                                   .getAlertDialogBox(context);
                             },
                             child: const Icon(

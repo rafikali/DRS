@@ -8,6 +8,13 @@ class ImageConstants {
   static const String verified = 'assets/Images/verified_image.svg';
   static const String placeHolder = 'assets/Images/placeholder-image.png';
   static const String branding = 'assets/Images/fb_branding.png';
+  static const String dashboardLogo = 'assets/Images/dashboard_icon.png';
+  static const String dailyUpdateLogo = 'assets/Images/daily_update_logo.png';
+  static const String hourGlassLogo = 'assets/Images/hourglass_logo.png';
+  static const String leaveLogo = 'assets/Images/leave_logo.png';
+  static const String leaveTransactionLogo = 'assets/Images/project_update.png';
   static const String biometric = 'assets/Images/biometric.webp';
   static const String profile = 'assets/Images/profile.jpg';
+
 }
+

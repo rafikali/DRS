@@ -14,6 +14,7 @@ class MyDailyUpdates extends StatefulWidget {
 }
 
 class _MyDailyUpdatesState extends State<MyDailyUpdates> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,7 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
                   children: [
                     const Text(
                       'My Daily Update',
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: 20),
                     ),
                     Expanded(
                         child: LoginTextForm(
@@ -72,7 +73,8 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
                 ),
                 InteractiveViewer(
                   panEnabled: false,
-                  child: TableData(columns: [
+                  child: TableData(
+                      columns: [
                     DataLabels(label: const Text('SN')),
                     DataLabels(label: const Text('Update for')),
                     DataLabels(label: const Text('Project')),

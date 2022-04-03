@@ -52,10 +52,10 @@ Future fetchLogin(String username, String password, BuildContext context) async 
     if (loginResponse.data != null) {
       await PrefsServices().setString(AppConstants.accessToken, loginResponse.data!);
     }
-    Snacks.getSnackBar(context, loginResponse.message??"Successfully logged in.");
+    Snacks.getSnackBar(context, loginResponse.message?? "Successfully logged in.");
     Navigator.pushNamedAndRemoveUntil(context, HomePage.routeName , (route) => true);
   } else {
-    Snacks.getSnackBar(context, loginResponse.message ??"Invalid credentials.");
+    Snacks.getSnackBar(context, loginResponse.message ?? "Invalid credentials.");
   }
 }
 

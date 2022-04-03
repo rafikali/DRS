@@ -22,6 +22,7 @@ class DashBoard extends StatelessWidget {
               CardView(
                 dashboardIcon: CupertinoIcons.clock,
                 title: 'My Missing Checkout',
+
                 color: const Color(0xFFff3333),
                 count: '1',
               ),
