@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:login_page/Constants/Images.dart';
 import 'package:login_page/Constants/api_endpoints.dart';
 import 'package:login_page/Constants/app_constants.dart';
@@ -14,9 +16,9 @@ import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
+
+import '../models/models.dart';
 import '../widgets/create_account.dart';
-import 'package:http/http.dart' as http;
-import 'models.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -26,36 +28,42 @@ class LoginPage extends StatefulWidget {
   bool? toogleView;
   bool? changeButton;
 
-
-   LoginPage({this.passController, this.userController, this.padding, this.changeButton, this.toogleView})
+  LoginPage(
+      {this.passController,
+      this.userController,
+      this.padding,
+      this.changeButton,
+      this.toogleView})
       : super();
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-Future fetchLogin(String username, String password, BuildContext context) async {
-
+Future fetchLogin(
+    String username, String password, BuildContext context) async {
   Response? response = await http.post(
     Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.login),
     body: jsonEncode({"username": username, "password": password}),
     headers: getHeader(),
   );
 
-
   var jsonResponse = jsonDecode(response.body);
   var loginResponse = LoginResponse.fromJson(jsonResponse);
   if (response.statusCode == 200 ||
       response.statusCode == 201 ||
       response.statusCode == 202) {
-
     if (loginResponse.data != null) {
-      await PrefsServices().setString(AppConstants.accessToken, loginResponse.data!);
+      await PrefsServices()
+          .setString(AppConstants.accessToken, loginResponse.data!);
     }
-    Snacks.getSnackBar(context, loginResponse.message?? "Successfully logged in.");
-    Navigator.pushNamedAndRemoveUntil(context, HomePage.routeName , (route) => true);
+    Snacks.getSnackBar(
+        context, loginResponse.message ?? "Successfully logged in.");
+    Navigator.pushNamedAndRemoveUntil(
+        context, HomePage.routeName, (route) => true);
   } else {
-    Snacks.getSnackBar(context, loginResponse.message ?? "Invalid credentials.");
+    Snacks.getSnackBar(
+        context, loginResponse.message ?? "Invalid credentials.");
   }
 }
 
@@ -66,10 +74,10 @@ class _HomePageState extends State<LoginPage> {
   bool changeButton = false;
   bool toogleView = true;
 
-    moveToHome() async {
+  moveToHome() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
-  changeButton = true;
+        changeButton = true;
       });
 
       fetchLogin(_usernameController.text, _passwordController.text, context);
@@ -81,8 +89,6 @@ class _HomePageState extends State<LoginPage> {
       toogleView = !toogleView;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +103,6 @@ class _HomePageState extends State<LoginPage> {
                 const SizedBox(
                   height: 50,
                 ),
-
                 SvgPicture.asset(
                   ImageConstants.loginIllustrate,
                   height: 330,
@@ -113,8 +118,8 @@ class _HomePageState extends State<LoginPage> {
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
                     dataController: _usernameController,
-                    hintText: 'Enter your username',
-                    labelText: 'Username',
+                    hintText: 'Enter your Mobile Number',
+                    labelText: 'Mobile Number',
                     validator: InputValidator.validateUsername,
                     accountIcon: const Icon(
                       CupertinoIcons.profile_circled,
@@ -128,19 +133,28 @@ class _HomePageState extends State<LoginPage> {
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
                     dataController: _passwordController,
-                    trailingIcon: InkWell(onTap: () {
-                      toogle();
-                     },
-                        child: toogleView? const Icon(CupertinoIcons.eye_slash, color: Colors.black,): const Icon(CupertinoIcons.eye, color: Colors.black,), ),
+                    trailingIcon: InkWell(
+                      onTap: () {
+                        toogle();
+                      },
+                      child: toogleView
+                          ? const Icon(
+                              CupertinoIcons.eye_slash,
+                              color: Colors.black,
+                            )
+                          : const Icon(
+                              CupertinoIcons.eye,
+                              color: Colors.black,
+                            ),
+                    ),
                     passView: toogleView,
-
                     hintText: 'Enter your password',
                     labelText: 'Password',
                     validator: InputValidator.validatePassword,
                     requiredMsg: 'Password required*',
-                    accountIcon: const Icon(CupertinoIcons.lock_circle_fill,
+                    accountIcon: const Icon(
+                      CupertinoIcons.lock_circle_fill,
                       color: Color(0xFF6C63FF),
-
                     ),
                   ),
                 ),

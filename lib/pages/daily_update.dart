@@ -7,6 +7,7 @@ import 'package:login_page/utils/daily_update_alertbox.dart';
 import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/table.dart';
 
+import '../models/models.dart';
 import '../widgets/alertbox..dart';
 import '../widgets/login_textfield.dart';
 
@@ -21,20 +22,25 @@ class _DailyUpdateState extends State<DailyUpdate> {
   DateTime selectedDate = DateTime.now();
   final DateTime? pickedDate = DateTime(2000);
   TextEditingController dateInput = TextEditingController();
+  DailyUpdates? recentUpdates;
 
-
-
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    dateInput.text = '';
-  }
-
-
-
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   fetchDailyUpdate();
+  //   dateInput.text = '';
+  // }
+  //
+  // fetchDailyUpdate() async {
+  //   final DailyUpdates? updates =
+  //       await DailyUpdateServices().fetchDailyUpdate();
+  //   if (updates != null) {
+  //     setState(() {
+  //       recentUpdates = updates;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
       padding: const EdgeInsets.all(6),
       child: Column(
         children: [
+          Text("Thehe"),
           SizedBox(
             width: double.infinity,
             child: Card(
@@ -49,11 +56,9 @@ class _DailyUpdateState extends State<DailyUpdate> {
                 children: [
                   Flexible(
                     child: GestureDetector(
-
                       child: LoginTextForm(
                         onTap: () async {
-
-                         DateTime pickedDate = await showDialog(
+                          DateTime pickedDate = await showDialog(
                               context: context,
                               builder: (context) {
                                 return DatePickerDialog(
@@ -62,25 +67,22 @@ class _DailyUpdateState extends State<DailyUpdate> {
                                   lastDate: DateTime(2030)
                                       .add(const Duration(days: 365)),
                                   initialEntryMode: DatePickerEntryMode.input,
-
                                 );
                               });
 
-                          if(pickedDate != null && pickedDate != selectedDate ) {
-                            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          if (pickedDate != selectedDate) {
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
                             setState(() {
                               dateInput.text = formattedDate.toString();
                               selectedDate = pickedDate;
                             });
                           }
-
-
                         },
                         dataController: dateInput,
                         hintText: 'Date',
                         readonly: true,
                         width: 100,
-
                         fillcolor: Colors.white,
                         height: 50,
                         trailingIcon: const Icon(CupertinoIcons.calendar),
@@ -136,12 +138,11 @@ class _DailyUpdateState extends State<DailyUpdate> {
                             onTap: () {
                               DialogBox(
                                 dialogBoxPadding: const EdgeInsets.all(15),
-                                barrierDismissile: false, content: DailyUpdateAlertBox(
-                                padding: const EdgeInsets.all(10),
-
-                                
-                              ),)
-                                  .getAlertDialogBox(context);
+                                barrierDismissile: false,
+                                content: DailyUpdateAlertBox(
+                                  padding: const EdgeInsets.all(10),
+                                ),
+                              ).getAlertDialogBox(context);
                             },
                             child: const Icon(
                               CupertinoIcons.add_circled_solid,
@@ -154,7 +155,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
 
                 rows: [
                   DataLabels(dataCell: [
-                    '2022-03-30[Tuesday]',
+                    '${recentUpdates?.data![0].dailyupdateFor}',
                     'N/A',
                     'Homepage worked, loginpage '
                   ]),

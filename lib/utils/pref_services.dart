@@ -7,10 +7,10 @@ class PrefsServices{
     _prefs.setString(key, value);
   }
 
-  Future<String> getString(String key) async {
+  Future<String?> getString(String key) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
      var sharedkey = _prefs.getString(key);
-     return sharedkey ?? "";
+     return sharedkey;
   }
 
    setBool( key, value) async {
@@ -18,9 +18,9 @@ class PrefsServices{
     prefs.setBool(key, value);
 
   }
-  Future<dynamic> getBool(dynamic key) async {
+  Future<bool> getBool(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var changedKey = prefs.getBool(key);
+    bool? changedKey = prefs.getBool(key);
     return changedKey ?? false;
   }
 

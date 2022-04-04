@@ -64,7 +64,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
       // enabled: widget.enabled,
       readOnly: widget.readonly,
       validator: widget.validator,
-      onTap: widget.onTap,
+      // onTap: widget.onTap,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
         iconColor: const Color(0xFF6C63FF),

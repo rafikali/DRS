@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/Route/route_handler.dart';
 import 'package:login_page/pages/home_page.dart';
@@ -7,41 +8,45 @@ import 'package:login_page/utils/pref_services.dart';
 import 'package:nepali_utils/nepali_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs= await SharedPreferences.getInstance();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   NepaliUtils(Language.nepali);
   String? accessToken = prefs.getString(AppConstants.accessToken);
-// SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
-  //   // statusBarColor: Color(0xFFF3F3F3),
-  //   // statusBarBrightness: Brightness.light,
-  //   // statusBarIconBrightness: Brightness.light,
-  //
-  // ));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFF6C63FF),
+    // statusBarBrightness: Brightness.light,
+    // statusBarIconBrightness: Brightness.light,
+  ));
   runApp(MyApp(accessToken: accessToken));
 }
+
 class MyApp extends StatefulWidget {
- final String? accessToken;
- bool? changeMode = true;
- ThemeData? theme;
+  final String? accessToken;
+  bool? changeMode = true;
+  ThemeData? theme;
 
-
-   MyApp({Key? key, this.theme, this.changeMode,  this.accessToken}) : super(key: key);
+  MyApp({Key? key, this.theme, this.changeMode, this.accessToken})
+      : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp>  {
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   bool changeMode = true;
-  var changingValue =  PrefsServices().getBool('modeValue');
+  var changingValue = PrefsServices().getBool('modeValue');
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: changeMode? ThemeData.light(): ThemeData.dark(),
-
+      theme: changeMode ? ThemeData.light() : ThemeData.dark(),
 
       debugShowCheckedModeBanner: false,
 
@@ -72,9 +77,9 @@ class _MyAppState extends State<MyApp>  {
 
       // ),
       title: "drs",
-      initialRoute: widget.accessToken != null ? HomePage.routeName:  LoginPage.routeName,
+      initialRoute:
+          widget.accessToken != null ? HomePage.routeName : LoginPage.routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
-
     );
   }
 }

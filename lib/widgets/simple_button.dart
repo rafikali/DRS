@@ -9,9 +9,10 @@ class SimpleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 35,
-      width: 110,
+      width: 130,
       child: Text(
         title,
+        softWrap: true,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       alignment: Alignment.center,

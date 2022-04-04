@@ -1,5 +1,7 @@
 // TODO Implement this library.
 
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/pages/home_page.dart';
@@ -8,11 +10,19 @@ import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
-class CreateNewPass extends StatelessWidget {
+class CreateNewPass extends StatefulWidget {
   static const String routeName = '/newPass';
   final TextEditingController? controller;
 
   const CreateNewPass({Key? key, this.controller}) : super(key: key);
+
+  @override
+  State<CreateNewPass> createState() => _CreateNewPassState();
+}
+
+class _CreateNewPassState extends State<CreateNewPass> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +33,17 @@ class CreateNewPass extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Wrap(
-              runSpacing: 25,
-              spacing: 10,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
                 const Text(
                   'Create new password',
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 const Text(
                   'Your new password must be different from previous used passwords.',
@@ -40,27 +52,34 @@ class CreateNewPass extends StatelessWidget {
                     color: Color(0xF2727272),
                   ),
                 ),
-                SingleChildScrollView(
-                  child: Wrap(
-                    runSpacing: 12,
-                    children: [
+                SizedBox(
+                  height: 14,
+                ),
+
+
                       const Text('Password'),
                       LoginTextForm(
                           validator: InputValidator.validatePassword,
                           hintText: 'New Password',
+                          dataController: _passwordController,
                           trailingIcon: const Icon(
                             CupertinoIcons.eye,
                             color: Colors.black,
                           )),
+                SizedBox(
+                  height: 12,
+                ),
                       const Text('Confirm Password'),
                       LoginTextForm(
                         validator: InputValidator.validatePassword,
                         hintText: 'Confirm Password',
+                        dataController: _confirmPasswordController,
                         trailingIcon: const Icon(CupertinoIcons.eye_slash),
                       ),
-                    ],
-                  ),
+                SizedBox(
+                  height: 16,
                 ),
+
                 Button(
                   buttonTitle: 'Reset Password',
                   buttonHeight: 50.0,

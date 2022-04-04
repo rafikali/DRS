@@ -15,6 +15,9 @@ class ImageConstants {
   static const String leaveTransactionLogo = 'assets/Images/project_update.png';
   static const String biometric = 'assets/Images/biometric.webp';
   static const String profile = 'assets/Images/profile.jpg';
+  static const String attendance = 'assets/Images/attendance_logo.png';
+  static const String projectUpdate = 'assets/Images/project_update.png';
+
 
 }
 

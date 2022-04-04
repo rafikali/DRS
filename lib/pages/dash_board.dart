@@ -1,14 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/models/carddata.dart';
+import 'package:login_page/services/dashboard_services.dart';
 import 'package:login_page/widgets/GridView.dart';
 
 import '../widgets/Card.dart';
 
-class DashBoard extends StatelessWidget {
-   const DashBoard(
-      {Key? key,
-      })
-      : super(key: key);
+class DashBoard extends StatefulWidget {
+  const DashBoard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+  CardData? dashboardCardData;
+  // var nullCheck = NullCheck.NullChecker();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchCardData();
+  }
+
+  fetchCardData() async {
+    final CardData? cardData = await DashBoardServices().fetchCardData();
+    if (cardData != null) {
+      setState(() {
+        dashboardCardData = cardData;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +47,37 @@ class DashBoard extends StatelessWidget {
               CardView(
                 dashboardIcon: CupertinoIcons.clock,
                 title: 'My Missing Checkout',
-
-                color: const Color(0xFFff3333),
-                count: '1',
+                color: Colors.lightGreen,
+                count: dashboardCardData?.myMissingCheckoutCount != null
+                    ? dashboardCardData?.myMissingCheckoutCount.toString()
+                    : 'Updating..',
               ),
-
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
                 title: 'My Ghost Count',
                 color: Colors.black,
-                count: '0',
+                count: dashboardCardData?.myGhostCount != null
+                    ? dashboardCardData?.myGhostCount.toString()
+                    : 'Updating..',
               ),
-
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
                 title: 'My Leave Balance',
                 color: Colors.black,
-                count: '0',
+                count: dashboardCardData?.myLeaveBalanceCount != null
+                    ? dashboardCardData?.myLeaveBalanceCount.toString()
+                    : 'Updating..',
               ),
-
               CardView(
                 dashboardIcon: CupertinoIcons.tv,
                 title: 'My NODailyUpdates',
                 color: Colors.black,
-                count: '0',
+                count: dashboardCardData?.myNoDailyUpdatesCount != null
+                    ? dashboardCardData?.myNoDailyUpdatesCount.toString()
+                    : 'Updating..',
               ),
-          ],),
+            ],
+          ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
@@ -163,4 +193,3 @@ class DashBoard extends StatelessWidget {
     );
   }
 }
-
