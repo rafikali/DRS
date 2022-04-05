@@ -1,4 +1,3 @@
-
 class ImageConstants {
   static const String regis = 'assets/Images/register.svg';
   static const String loginIllustrate = 'assets/Images/login_image.svg';
@@ -15,9 +14,11 @@ class ImageConstants {
   static const String leaveTransactionLogo = 'assets/Images/project_update.png';
   static const String biometric = 'assets/Images/biometric.webp';
   static const String profile = 'assets/Images/profile.jpg';
+  static const String manageGoal = 'assets/Images/manage_goals.svg';
   static const String attendance = 'assets/Images/attendance_logo.png';
   static const String projectUpdate = 'assets/Images/project_update.png';
-
-
+  static const String collaboration = 'assets/Images/collaborating_onboard.svg';
+  static const String joyfulEnvironment =
+      'assets/Images/joyful_environment_onboard.svg';
+  static const String mutualWork = 'assets/Images/mutual_working_onboard.svg';
 }
-

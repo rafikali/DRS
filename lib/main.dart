@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/Route/route_handler.dart';
+import 'package:login_page/onboardingpages/onboarding_page.dart';
 import 'package:login_page/pages/home_page.dart';
-import 'package:login_page/pages/login_page.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -58,8 +58,9 @@ class _MyAppState extends State<MyApp> {
             actionsIconTheme: IconThemeData(color: Colors.white)),
       ),
       title: "drs",
-      initialRoute:
-          widget.accessToken != null ? HomePage.routeName : LoginPage.routeName,
+      initialRoute: widget.accessToken != null
+          ? OnBoardPage.routeName
+          : HomePage.routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

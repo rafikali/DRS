@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/onboardingpages/onboarding_one.dart';
+import 'package:login_page/onboardingpages/onboarding_page.dart';
 import 'package:login_page/pages/change_pass.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/my_attendances.dart';
@@ -45,6 +47,8 @@ class RouteGenerator {
 
       case MyAttendances.routeName:
         return MaterialPageRoute(builder: (context) => const MyAttendances());
+      case OnBoardOne.routeName:
+        return MaterialPageRoute(builder: (context) => const OnBoardOne());
 
       case MyLateArrival.routeName:
         return MaterialPageRoute(builder: (context) => const MyLateArrival());
@@ -67,7 +71,8 @@ class RouteGenerator {
       case Profile.routeName:
         return PageTransition(
             child: const Profile(), type: PageTransitionType.leftToRight);
-
+      case OnBoardPage.routeName:
+        return MaterialPageRoute(builder: (context) => const OnBoardPage());
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());
     }
