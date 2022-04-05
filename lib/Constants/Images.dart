@@ -18,7 +18,7 @@ class ImageConstants {
   static const String attendance = 'assets/Images/attendance_logo.png';
   static const String projectUpdate = 'assets/Images/project_update.png';
   static const String collaboration = 'assets/Images/collaborating_onboard.svg';
-  static const String joyfulEnvironment =
-      'assets/Images/joyful_environment_onboard.svg';
+  static const String joyfulEnvironment = 'assets/Images/augmented_reality.svg';
+
   static const String mutualWork = 'assets/Images/mutual_working_onboard.svg';
 }

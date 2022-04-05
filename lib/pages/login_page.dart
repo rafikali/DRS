@@ -119,6 +119,7 @@ class _HomePageState extends State<LoginPage> {
                   child: LoginTextForm(
                     dataController: _usernameController,
                     hintText: 'Enter your Mobile Number',
+                    maxLength: 10,
                     labelText: 'Mobile Number',
                     validator: InputValidator.validateUsername,
                     accountIcon: const Icon(

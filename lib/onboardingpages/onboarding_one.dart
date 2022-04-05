@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_page/Constants/Images.dart';
-import 'package:login_page/Constants/app_colors.dart';
 
 class OnBoardOne extends StatefulWidget {
   static const String routeName = 'onBoardOne';
@@ -17,52 +15,66 @@ class _OnBoardOneState extends State<OnBoardOne> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            SvgPicture.asset(ImageConstants.joyfulEnvironment),
-            const Text('Enhance Collaboration'),
-            const SizedBox(
-              height: 15,
-            ),
-            const Text(
-                'Levels up  your inner capabilities with collaborating environment'),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  color: Colors.blue,
-                  height: 5,
-                  width: 5,
+        body: Container(
+          height: MediaQuery.of(context).size.height * 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                ImageConstants.collaboration,
+                height: 220,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Column(
+                  children: const [
+                    Text(
+                      'Enhance Collaboration',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Levels up  your inner capabilities with collaborating environment',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                Container(
-                  color: Colors.black,
-                  height: 5,
-                  width: 5,
-                ),
-                Container(
-                  height: 5,
-                  color: Colors.green,
-                  width: 5,
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text('Skip'),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(AppColors.primaryColor),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircleAvatar(
+                    minRadius: 4,
+                    maxRadius: 6,
+                    backgroundColor: Colors.green,
                   ),
-                  onPressed: () {},
-                  child: Text('Next'),
-                )
-              ],
-            )
-          ],
+                  CircleAvatar(
+                    minRadius: 4,
+                    maxRadius: 6,
+                    backgroundColor: Colors.black,
+                  ),
+                  CircleAvatar(
+                    minRadius: 4,
+                    maxRadius: 6,
+                    backgroundColor: Colors.red,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
         ),
       ),
     );

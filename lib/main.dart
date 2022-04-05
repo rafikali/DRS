@@ -4,8 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/Route/route_handler.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
-import 'package:login_page/pages/home_page.dart';
-import 'package:login_page/utils/pref_services.dart';
+import 'package:login_page/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -36,9 +35,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  bool changeMode = true;
-  var changingValue = PrefsServices().getBool('modeValue');
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -60,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       title: "drs",
       initialRoute: widget.accessToken != null
           ? OnBoardPage.routeName
-          : HomePage.routeName,
+          : LoginPage.routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
