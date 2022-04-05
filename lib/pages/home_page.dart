@@ -8,10 +8,12 @@ import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
 import 'package:login_page/pages/my_daily_updates.dart';
+import 'package:login_page/widgets/setting_page.dart';
 
 import '../Constants/Images.dart';
 import '../services/schedule_services.dart';
 import '../widgets/alertbox..dart';
+import '../widgets/profile_page_appbar.dart';
 import '../widgets/simple_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,6 +63,8 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        extendBody: true,
+
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(250.0),
             child: AppBar(
@@ -98,33 +102,27 @@ class _HomePageState extends State<HomePage> {
                       },
                       color: Colors.white,
                     ),
-                    Builder(builder: (context) {
-                      return IconButton(
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        icon: const Icon(CupertinoIcons.profile_circled,
-                            color: Colors.white),
-                      );
-                    }),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, Profile.routeName);
+                      },
+                      icon: const Icon(CupertinoIcons.profile_circled,
+                          color: Colors.white),
+                    ),
+
                     // const SizedBox(
                     //   width: 4,ont
                     // ),
-                    InkWell(
-                        onTap: () {},
-                        child: Builder(builder: (context) {
-                          return IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.gear_solid,
-                              ),
-                              onPressed: () {
-                                Scaffold.of(context).openDrawer();
-                              },
-                              color: Colors.white);
-                        })),
-                    // const SizedBox(
-                    //   width: 15,
-                    // ),
+                    Builder(builder: (context) {
+                      return IconButton(
+                          icon: const Icon(
+                            CupertinoIcons.gear_solid,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, MySettings.routeName);
+                          },
+                          color: Colors.white);
+                    })
                   ],
                 ))
               ],

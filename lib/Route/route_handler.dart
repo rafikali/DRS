@@ -9,9 +9,13 @@ import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/my_missing_checkout.dart';
 import 'package:login_page/pages/reset_password.dart';
 import 'package:login_page/pages/verify_otp.dart';
+import 'package:login_page/widgets/setting_page.dart';
+import 'package:page_transition/page_transition.dart';
+
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
 import '../pages/newregister.dart';
+import '../widgets/profile_page_appbar.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -51,9 +55,18 @@ class RouteGenerator {
             builder: (context) => const MyMissingCheckout());
       case ChangePassword.routeName:
         return MaterialPageRoute(builder: (context) => const ChangePassword());
-
+      case MySettings.routeName:
+        return PageTransition(
+            child: const MySettings(), type: PageTransitionType.bottomToTop);
+      // case MyDailyUpdates.routeName:
+      //   return MaterialPageRoute(builder: (context) => const MyDailyUpdates());
       case MyDailyUpdates.routeName:
-        return MaterialPageRoute(builder: (context) => const MyDailyUpdates());
+        return PageTransition(
+            child: const MyDailyUpdates(),
+            type: PageTransitionType.bottomToTop);
+      case Profile.routeName:
+        return PageTransition(
+            child: const Profile(), type: PageTransitionType.leftToRight);
 
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());

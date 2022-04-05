@@ -41,189 +41,191 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: const Color(0xFF6C63FF),
-        //   title: const Text(
-        //     'STT NEPAL' + SuperVisior.watcher + SuperVisior.watcherName,
-        //     style: TextStyle(fontSize: 20),
-        //   ),
-        // ),
-        body: SingleChildScrollView(
-      child: Card(
-        child: Column(
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const Text(''),
-                Expanded(
-                    child: LoginTextForm(
-                  dataController: dateInput,
-                  readonly: true,
-                  onTap: () async {
-                    DateTime? pickedDate = await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return DatePickerDialog(
-                            firstDate: DateTime(2000),
-                            initialDate: DateTime.now(),
-                            lastDate:
-                                DateTime(2030).add(const Duration(days: 365)),
-                          );
+    return SafeArea(
+      child: Scaffold(
+          // appBar: AppBar(
+          //   backgroundColor: const Color(0xFF6C63FF),
+          //   title: const Text(
+          //     'STT NEPAL' + SuperVisior.watcher + SuperVisior.watcherName,
+          //     style: TextStyle(fontSize: 20),
+          //   ),
+          // ),
+          body: SingleChildScrollView(
+        child: Card(
+          child: Column(
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const Text(''),
+                  Expanded(
+                      child: LoginTextForm(
+                    dataController: dateInput,
+                    readonly: true,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return DatePickerDialog(
+                              firstDate: DateTime(2000),
+                              initialDate: DateTime.now(),
+                              lastDate:
+                                  DateTime(2030).add(const Duration(days: 365)),
+                            );
+                          });
+                      if (pickedDate != null && pickedDate != selectedDate) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          dateInput.text = formattedDate.toString();
+                          selectedDate = pickedDate;
                         });
-                    if (pickedDate != null && pickedDate != selectedDate) {
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
-                      setState(() {
-                        dateInput.text = formattedDate.toString();
-                        selectedDate = pickedDate;
-                      });
-                    }
-                  },
-                  hintText: 'Date',
-                  fillcolor: Colors.white,
-                )),
-                Expanded(
-                  child: DropView(
-                    date: 'Filter by project',
-                    dropdownItems: const [
-                      'Newskark',
-                      'Bagmati VRS',
-                      'CPN UML',
-                      'NOC',
-                      'Nepal ',
-                      'Aayojak',
-                      'hamrosms247',
-                      'Ambition Guru'
-                    ],
+                      }
+                    },
+                    hintText: 'Date',
+                    fillcolor: Colors.white,
+                  )),
+                  Expanded(
+                    child: DropView(
+                      date: 'Filter by project',
+                      dropdownItems: const [
+                        'Newskark',
+                        'Bagmati VRS',
+                        'CPN UML',
+                        'NOC',
+                        'Nepal ',
+                        'Aayojak',
+                        'hamrosms247',
+                        'Ambition Guru'
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              InteractiveViewer(
+                panEnabled: false,
+                child: TableData(columns: [
+                  DataLabels(label: const Text('SN')),
+                  DataLabels(label: const Text('Update for')),
+                  DataLabels(label: const Text('Project')),
+                  DataLabels(
+                    label: const Text('Title'),
                   ),
-                )
-              ],
-            ),
-            InteractiveViewer(
-              panEnabled: false,
-              child: TableData(columns: [
-                DataLabels(label: const Text('SN')),
-                DataLabels(label: const Text('Update for')),
-                DataLabels(label: const Text('Project')),
-                DataLabels(
-                  label: const Text('Title'),
-                ),
-                DataLabels(
-                  label: const Text('Acknowledge At'),
-                ),
-                DataLabels(
-                  label: const Text('Created At'),
-                ),
-              ], rows: [
-                DataLabels(dataCell: [
-                  '#',
-                  recentUpdates?.data?[0].dailyupdateFor != null
-                      ? recentUpdates!.data![0].dailyupdateFor
-                      : 'updating...',
-                  'N/A',
-                  recentUpdates?.data?[0].description != null
-                      ? recentUpdates!.data![0].description
-                      : 'updating...',
-                  recentUpdates?.data?[0].acknowledgeAt != null
-                      ? recentUpdates!.data![0].acknowledgeAt
-                      : 'updating...',
-                  '2022-03-30 19:46:34'
+                  DataLabels(
+                    label: const Text('Acknowledge At'),
+                  ),
+                  DataLabels(
+                    label: const Text('Created At'),
+                  ),
+                ], rows: [
+                  DataLabels(dataCell: [
+                    '#',
+                    recentUpdates?.data?[0].dailyupdateFor != null
+                        ? recentUpdates!.data![0].dailyupdateFor
+                        : 'updating...',
+                    'N/A',
+                    recentUpdates?.data?[0].description != null
+                        ? recentUpdates!.data![0].description
+                        : 'updating...',
+                    recentUpdates?.data?[0].acknowledgeAt != null
+                        ? recentUpdates!.data![0].acknowledgeAt
+                        : 'updating...',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
+                  DataLabels(dataCell: [
+                    '#',
+                    '	2022-03-30 (Wed)',
+                    'N/A',
+                    'Daily Update [ 2022-03-30 (Wed) ]',
+                    '2022-03-31 09:16:52',
+                    '2022-03-30 19:46:34'
+                  ]),
                 ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-                DataLabels(dataCell: [
-                  '#',
-                  '	2022-03-30 (Wed)',
-                  'N/A',
-                  'Daily Update [ 2022-03-30 (Wed) ]',
-                  '2022-03-31 09:16:52',
-                  '2022-03-30 19:46:34'
-                ]),
-              ]),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
