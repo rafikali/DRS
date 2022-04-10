@@ -27,14 +27,14 @@ class _OnBoardTwoState extends State<OnBoardTwo> {
               height: 20,
             ),
             const Text(
-              'Enhance Collaboration',
+              'Manage Goals',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 15,
             ),
             const Text(
-              'Levels up  your inner capabilities with collaborating environment',
+              'Sets your business strategy and achieve the goals you are aiming for',
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),

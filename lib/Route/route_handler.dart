@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
 import 'package:login_page/pages/change_pass.dart';
 import 'package:login_page/pages/create_new_password.dart';
+import 'package:login_page/pages/hr_policy.dart';
 import 'package:login_page/pages/my_attendances.dart';
 import 'package:login_page/pages/my_daily_updates.dart';
 import 'package:login_page/pages/my_dashboard.dart';
@@ -10,6 +11,7 @@ import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/my_missing_checkout.dart';
 import 'package:login_page/pages/reset_password.dart';
 import 'package:login_page/pages/verify_otp.dart';
+import 'package:login_page/utils/random_transition.dart';
 import 'package:login_page/widgets/setting_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -58,28 +60,26 @@ class RouteGenerator {
             builder: (context) => const MyMissingCheckout());
       case ChangePassword.routeName:
         return MaterialPageRoute(builder: (context) => const ChangePassword());
+      case HRPolicy.routeName:
+        return MaterialPageRoute(builder: (context) => const HRPolicy());
+
       case MySettings.routeName:
         return PageTransition(
-            child: const MySettings(), type: PageTransitionType.bottomToTop);
-      // case MyDailyUpdates.routeName:
-      //   return MaterialPageRoute(builder: (context) => const MyDailyUpdates());
+          child: const MySettings(),
+          type: getRandomTransition(),
+        );
+
       case MyDailyUpdates.routeName:
         return PageTransition(
             child: const MyDailyUpdates(),
             type: PageTransitionType.bottomToTop);
+
       case Profile.routeName:
         return PageTransition(
-            child: const Profile(), type: PageTransitionType.leftToRight);
-      case OnBoardPage.routeName:
-        return MaterialPageRoute(builder: (context) => const OnBoardPage());
-      // case OnBoardOne.routeName:
-      //   return MaterialPageRoute(builder: (context) => const OnBoardOne());
-      // case OnBoardTwo.routeName:
-      //   return MaterialPageRoute(builder: (context) => const OnBoardTwo());
-      // case OnBoardThree.routeName:
-      //   return MaterialPageRoute(builder: (context) => const OnBoardThree());
+            child: const Profile(), type: PageTransitionType.fade);
+
       default:
-        return MaterialPageRoute(builder: (context) => LoginPage());
+        return MaterialPageRoute(builder: (context) => const OnBoardPage());
     }
   }
 }

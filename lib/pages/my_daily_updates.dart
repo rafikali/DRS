@@ -17,11 +17,12 @@ class MyDailyUpdates extends StatefulWidget {
 }
 
 class _MyDailyUpdatesState extends State<MyDailyUpdates> {
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate = DateTime.now();
   TextEditingController dateInput = TextEditingController();
   DailyUpdates? recentUpdates = DailyUpdates();
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     fetchDailyUpdate();
@@ -34,7 +35,7 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
     if (updates != null) {
       setState(() {
         recentUpdates = updates;
-        print(recentUpdates);
+        // print(recentUpdates);
       });
     }
   }
@@ -43,13 +44,6 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          // appBar: AppBar(
-          //   backgroundColor: const Color(0xFF6C63FF),
-          //   title: const Text(
-          //     'STT NEPAL' + SuperVisior.watcher + SuperVisior.watcherName,
-          //     style: TextStyle(fontSize: 20),
-          //   ),
-          // ),
           body: SingleChildScrollView(
         child: Card(
           child: Column(
@@ -57,34 +51,32 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const Text(''),
                   Expanded(
-                      child: LoginTextForm(
-                    dataController: dateInput,
-                    readonly: true,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDialog(
+                    child: LoginTextForm(
+                      dataController: dateInput,
+                      readonly: true,
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
                           context: context,
-                          builder: (context) {
-                            return DatePickerDialog(
-                              firstDate: DateTime(2000),
-                              initialDate: DateTime.now(),
-                              lastDate:
-                                  DateTime(2030).add(const Duration(days: 365)),
-                            );
+                          firstDate: DateTime(2000),
+                          initialDate: DateTime.now(),
+                          lastDate:
+                              DateTime(2030).add(const Duration(days: 365)),
+                        );
+                        print(pickedDate);
+                        if (pickedDate != null && pickedDate != selectedDate) {
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          setState(() {
+                            dateInput.text = formattedDate.toString();
+                            selectedDate = pickedDate;
                           });
-                      if (pickedDate != null && pickedDate != selectedDate) {
-                        String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
-                        setState(() {
-                          dateInput.text = formattedDate.toString();
-                          selectedDate = pickedDate;
-                        });
-                      }
-                    },
-                    hintText: 'Date',
-                    fillcolor: Colors.white,
-                  )),
+                        }
+                      },
+                      hintText: 'Date',
+                      fillcolor: Colors.white,
+                    ),
+                  ),
                   Expanded(
                     child: DropView(
                       date: 'Filter by project',

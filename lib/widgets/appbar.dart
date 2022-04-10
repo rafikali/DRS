@@ -12,18 +12,19 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
         backgroundColor: const Color(0xFFF3F3F3),
         elevation: 0,
-        title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const Text(
-        'Back',
-        style: TextStyle(fontSize: 20),
-            ),
-            InkWell(
-          onTap: () {
-            const Tooltip(
-              message: ('hi'),
-            );
-          },
-          child: const Icon(CupertinoIcons.question_circle))
-          ]));
+        title:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          const Text(
+            'Back',
+            style: TextStyle(fontSize: 20),
+          ),
+          InkWell(
+              onTap: () {
+                const Tooltip(
+                  message: ('hi'),
+                );
+              },
+              child: const Icon(CupertinoIcons.question_circle))
+        ]));
   }
 }

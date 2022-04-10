@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/pages/hr_policy.dart';
+import 'package:login_page/widgets/appbar.dart';
 
 import '../pages/my_daily_updates.dart';
 import '../pages/my_dashboard.dart';
@@ -62,7 +64,7 @@ class _MySettingsState extends State<MySettings> {
     Contents(
       iconName: CupertinoIcons.control,
       title: 'Hr Policy',
-      routeName: MyDashBoard.routeName,
+      routeName: HRPolicy.routeName,
 
       // navigators: Navigator.pushNamed(context, MyDashBoard.routeName)
     ),
@@ -77,68 +79,70 @@ class _MySettingsState extends State<MySettings> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height * 1,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.2,
-                    vertical: 25),
-                child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        contentPadding: EdgeInsets.symmetric(vertical: 10),
-                        onTap: () async {
-                          Navigator.pushNamed(
-                              context, data[index].routeName.toString());
-                        },
-                        leading: Icon(data[index].iconName),
-                        title: Text(data[index].title.toString()),
-                      );
-                    }),
+    return SafeArea(
+      child: Scaffold(
+        appBar: const NewPassAppbar(),
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height * 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 5),
+                          onTap: () async {
+                            Navigator.pushNamed(
+                                context, data[index].routeName.toString());
+                          },
+                          leading: Icon(data[index].iconName),
+                          title: Text(data[index].title.toString()),
+                        );
+                      }),
+                ),
               ),
-            ),
-            // Column(
-            //   children: [
-            //     InkWell(
-            //       onTap: () {f
-            //         Navigator.pushNamed(context, ChangePassword.routeName);
-            //       },
-            //       child: const ListTile(
-            //         leading: Icon(
-            //           Icons.fingerprint,
-            //           color: Colors.red,
-            //         ),
-            //         title: Text(
-            //           'Change Password',
-            //           style: TextStyle(color: Colors.red),
-            //         ),
-            //       ),
-            //     ),
-            //     InkWell(
-            //       onTap: () {
-            //         Navigator.pushNamed(context, LoginPage.routeName);
-            //       },
-            //       child: const ListTile(
-            //         leading: Icon(
-            //           CupertinoIcons.profile_circled,
-            //           color: Color(0xFF6C63FF),
-            //         ),
-            //         title: Text(
-            //           'Log Out',
-            //           style: TextStyle(color: Color(0xFF6C63FF)),
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // )
-          ],
+              // Column(
+              //   children: [
+              //     InkWell(
+              //       onTap: () {f
+              //         Navigator.pushNamed(context, ChangePassword.routeName);
+              //       },
+              //       child: const ListTile(
+              //         leading: Icon(
+              //           Icons.fingerprint,
+              //           color: Colors.red,
+              //         ),
+              //         title: Text(
+              //           'Change Password',
+              //           style: TextStyle(color: Colors.red),
+              //         ),
+              //       ),
+              //     ),
+              //     InkWell(
+              //       onTap: () {
+              //         Navigator.pushNamed(context, LoginPage.routeName);
+              //       },
+              //       child: const ListTile(
+              //         leading: Icon(
+              //           CupertinoIcons.profile_circled,
+              //           color: Color(0xFF6C63FF),
+              //         ),
+              //         title: Text(
+              //           'Log Out',
+              //           style: TextStyle(color: Color(0xFF6C63FF)),
+              //         ),
+              //       ),
+              //     )
+              //   ],
+              // )
+            ],
+          ),
         ),
       ),
     );

@@ -22,7 +22,8 @@ class CreateNewPass extends StatefulWidget {
 
 class _CreateNewPassState extends State<CreateNewPass> {
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +37,12 @@ class _CreateNewPassState extends State<CreateNewPass> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 const Text(
                   'Create new password',
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 const Text(
@@ -52,34 +52,31 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     color: Color(0xF2727272),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 14,
                 ),
-
-
-                      const Text('Password'),
-                      LoginTextForm(
-                          validator: InputValidator.validatePassword,
-                          hintText: 'New Password',
-                          dataController: _passwordController,
-                          trailingIcon: const Icon(
-                            CupertinoIcons.eye,
-                            color: Colors.black,
-                          )),
-                SizedBox(
+                const Text('Password'),
+                LoginTextForm(
+                    validator: InputValidator.validatePassword,
+                    hintText: 'New Password',
+                    dataController: _passwordController,
+                    trailingIcon: const Icon(
+                      CupertinoIcons.eye,
+                      color: Colors.black,
+                    )),
+                const SizedBox(
                   height: 12,
                 ),
-                      const Text('Confirm Password'),
-                      LoginTextForm(
-                        validator: InputValidator.validatePassword,
-                        hintText: 'Confirm Password',
-                        dataController: _confirmPasswordController,
-                        trailingIcon: const Icon(CupertinoIcons.eye_slash),
-                      ),
-                SizedBox(
+                const Text('Confirm Password'),
+                LoginTextForm(
+                  validator: InputValidator.validatePassword,
+                  hintText: 'Confirm Password',
+                  dataController: _confirmPasswordController,
+                  trailingIcon: const Icon(CupertinoIcons.eye_slash),
+                ),
+                const SizedBox(
                   height: 16,
                 ),
-
                 Button(
                   buttonTitle: 'Reset Password',
                   buttonHeight: 50.0,

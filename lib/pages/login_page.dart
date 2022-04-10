@@ -14,27 +14,23 @@ import 'package:login_page/utils/header.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/utils/snacks.dart';
+import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
 import '../models/models.dart';
 import '../widgets/create_account.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
   final Padding? padding;
-  final TextEditingController? userController;
-  final TextEditingController? passController;
+
   bool? toogleView;
   bool? changeButton;
 
-  LoginPage(
-      {this.passController,
-      this.userController,
-      this.padding,
-      this.changeButton,
-      this.toogleView})
-      : super();
+  LoginPage({Key? key, this.padding, this.changeButton, this.toogleView})
+      : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -45,7 +41,7 @@ Future fetchLogin(
   Response? response = await http.post(
     Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.login),
     body: jsonEncode({"username": username, "password": password}),
-    headers: getHeader(),
+    headers: await getHeader(),
   );
 
   var jsonResponse = jsonDecode(response.body);
@@ -58,28 +54,40 @@ Future fetchLogin(
           .setString(AppConstants.accessToken, loginResponse.data!);
     }
     Snacks.getSnackBar(
-        context, loginResponse.message ?? "Successfully logged in.");
+      context,
+      loginResponse.message ?? "Successfully logged in.",
+    );
     Navigator.pushNamedAndRemoveUntil(
-        context, HomePage.routeName, (route) => true);
+        context, HomePage.routeName, (Route<dynamic> route) => false);
   } else {
     Snacks.getSnackBar(
-        context, loginResponse.message ?? "Invalid credentials.");
+      context,
+      loginResponse.message ?? "Invalid credentials.",
+    );
   }
 }
 
 class _HomePageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  static final TextEditingController _usernameController =
+      TextEditingController();
+  static final TextEditingController _passwordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool changeButton = false;
   bool toogleView = true;
+  bool _rememberPassword = false;
 
   moveToHome() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         changeButton = true;
       });
-
+      if (_rememberPassword) {
+        PrefsServices()
+            .setString(AppConstants.mobileNumber, _usernameController.text);
+        PrefsServices()
+            .setString(AppConstants.password, _passwordController.text);
+      }
       fetchLogin(_usernameController.text, _passwordController.text, context);
     }
   }
@@ -88,6 +96,25 @@ class _HomePageState extends State<LoginPage> {
     setState(() {
       toogleView = !toogleView;
     });
+  }
+
+  fillTextController() async {
+    final String? mobileNumber =
+        await PrefsServices().getString(AppConstants.mobileNumber);
+    final String? savedPassword =
+        await PrefsServices().getString(AppConstants.password);
+    if (mobileNumber != null) {
+      _usernameController.text = mobileNumber;
+    }
+    if (savedPassword != null) {
+      _passwordController.text = savedPassword;
+    }
+  }
+
+  @override
+  void initState() {
+    fillTextController();
+    super.initState();
   }
 
   @override
@@ -118,10 +145,12 @@ class _HomePageState extends State<LoginPage> {
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
                     dataController: _usernameController,
+                    autofillHints: [
+                      _usernameController.text,
+                    ],
                     hintText: 'Enter your Mobile Number',
-                    maxLength: 10,
                     labelText: 'Mobile Number',
-                    validator: InputValidator.validateUsername,
+                    validator: InputValidator.validateMobile,
                     accountIcon: const Icon(
                       CupertinoIcons.profile_circled,
                       color: Color(0xFF6C63FF),
@@ -134,6 +163,7 @@ class _HomePageState extends State<LoginPage> {
                       horizontal: 30.0, vertical: 10),
                   child: LoginTextForm(
                     dataController: _passwordController,
+                    autofillHints: [_passwordController.text],
                     trailingIcon: InkWell(
                       onTap: () {
                         toogle();
@@ -172,6 +202,17 @@ class _HomePageState extends State<LoginPage> {
                   validFunc: () {
                     moveToHome();
                   },
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: MyCheckBox(
+                      checkValue: _rememberPassword,
+                      labelTitle: 'Remember Me?',
+                      onChanged: () {
+                        setState(() {
+                          _rememberPassword = !_rememberPassword;
+                        });
+                      }),
                 ),
 
                 const SizedBox(

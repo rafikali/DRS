@@ -15,11 +15,14 @@ class LoginTextForm extends StatefulWidget {
   dynamic height;
   final int? maxLine;
   dynamic width;
+  final String? username;
+  final String? password;
   final Color? iconColor;
   final Icon? accountIcon;
   final OutlineInputBorder? outlineBorder;
   dynamic requiredMsg;
   final bool readonly;
+  final autofillHints;
   final VoidCallback? onTap;
 
   final TextEditingController? dataController;
@@ -27,6 +30,7 @@ class LoginTextForm extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   LoginTextForm(
       {required this.hintText,
+      this.autofillHints,
       this.contentPadding,
       this.labelText,
       this.validator,
@@ -41,6 +45,8 @@ class LoginTextForm extends StatefulWidget {
       this.width,
       this.outlineBorder,
       this.textalign,
+      this.username,
+      this.password,
       this.typeKeyboard,
       this.maxLine,
       this.readonly = false,
@@ -56,6 +62,8 @@ class _LoginTextFormState extends State<LoginTextForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofillHints: widget.autofillHints,
+      onTap: widget.onTap,
       maxLength: widget.maxLength,
       keyboardType: widget.typeKeyboard,
       obscureText: widget.passView == true,

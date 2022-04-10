@@ -44,9 +44,11 @@ dependencies:
   shared_preferences: ^2.0.13
   page_transition: ^2.0.5
   animated_text_kit: ^4.2.1
+
   cupertino_icons: ^1.0.2
-  curved_navigation_bar: ^1.0.3
+
   flutter_svg: ^1.0.3
+  html: ^0.15.0
 
   http: ^0.13.4
   day_night_switcher:

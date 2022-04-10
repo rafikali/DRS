@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_page/Constants/Images.dart';
@@ -69,20 +71,22 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Text(
-                      "Enter the OTP sent to   +977",
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    // Text(getKey.toString())
-                    Text(
-                      AppConstants.mobileNumber,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Enter the OTP sent to   +977",
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        // Text(getKey.toString())
+                        Text(
+                          AppConstants.mobileNumber,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ]),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 30.0),

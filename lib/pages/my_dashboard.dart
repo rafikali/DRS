@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/dash_board.dart';
 import 'package:login_page/widgets/Card.dart';
 import 'package:login_page/widgets/GridView.dart';
 
@@ -18,14 +17,14 @@ class MyDashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF6C63FF),
+        backgroundColor: const Color(0xFF6C63FF),
         title: const Text(
           'STT NEPAL' + SuperVisior.watcher + SuperVisior.watcherName,
           style: TextStyle(fontSize: 20),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: SingleChildScrollView(
           child: Container(
               height: MediaQuery.of(context).size.height,

@@ -24,8 +24,8 @@ class _OnBoardOneState extends State<OnBoardOne> {
                 ImageConstants.collaboration,
                 height: 220,
               ),
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 30,
               ),
               Container(
                 child: Column(

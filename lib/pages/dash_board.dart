@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/carddata.dart';
 import 'package:login_page/services/dashboard_services.dart';
+import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/GridView.dart';
 
+import '../models/models.dart';
+import '../services/daily_update_services.dart';
 import '../widgets/Card.dart';
 
 class DashBoard extends StatefulWidget {
@@ -17,6 +21,9 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   CardData? dashboardCardData;
+  DailyUpdates? recentUpdates2 = DailyUpdates();
+  // String? dashboardCount;
+
   // var nullCheck = NullCheck.NullChecker();
 
   @override
@@ -24,13 +31,31 @@ class _DashBoardState extends State<DashBoard> {
     // TODO: implement initState
     super.initState();
     fetchCardData();
+    fetchDailyUpdate();
   }
+
+  // Future DashCount() async {
+  //    dashboardCount =
+  //        await PrefsServices().getString(AppConstants.dashBoardCount);
+  //  }
 
   fetchCardData() async {
     final CardData? cardData = await DashBoardServices().fetchCardData();
     if (cardData != null) {
       setState(() {
         dashboardCardData = cardData;
+      });
+      PrefsServices().setString(AppConstants.dashBoardCount,
+          dashboardCardData!.myMissingCheckoutCount.toString());
+    }
+  }
+
+  fetchDailyUpdate() async {
+    final DailyUpdates? updates2 =
+        await DailyUpdateServices().fetchDailyUpdate();
+    if (updates2 != null) {
+      setState(() {
+        recentUpdates2 = updates2;
       });
     }
   }
@@ -45,13 +70,15 @@ class _DashBoardState extends State<DashBoard> {
           Grid(
             children: [
               CardView(
-                dashboardIcon: CupertinoIcons.clock,
-                title: 'My Missing Checkout',
-                color: Colors.lightGreen,
-                count: dashboardCardData?.myMissingCheckoutCount != null
-                    ? dashboardCardData?.myMissingCheckoutCount.toString()
-                    : 'Updating..',
-              ),
+                  dashboardIcon: CupertinoIcons.clock,
+                  title: 'My Missing Checkout',
+                  color: Colors.lightGreen,
+                  // count: dashboardCardData?.myMissingCheckoutCount != null
+                  //     ? dashboardCardData?.myMissingCheckoutCount.toString()
+                  //     : 'Updating..',
+                  count: dashboardCardData?.myMissingCheckoutCount != null
+                      ? dashboardCardData?.myMissingCheckoutCount.toString()
+                      : 'N/A'),
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
                 title: 'My Ghost Count',
@@ -119,66 +146,22 @@ class _DashBoardState extends State<DashBoard> {
                     const Divider(),
                     Expanded(
                       child: ListTile(
-                        leading: const Text('2022-03-21 (Mon)'),
+                        leading: Text(recentUpdates2?.data != null
+                            ? recentUpdates2!.data![0].dailyupdateFor.toString()
+                            : 'N/A'),
                         title: Column(
-                          children: const [
-                            Text('Daily Update [ 2022-03-21 (Mon ) ]'),
-                            Text('1. worked on homepageappbar'),
-                            Text('2.  forgot password completed'),
-                            Text('3. added changes to OTP verification page'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Recent Daily Update:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 48),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Update For',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            'Title',
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Divider(),
-                    Expanded(
-                      child: ListTile(
-                        leading: const Text('2022-03-21 (Mon)'),
-                        title: Column(
-                          children: const [
-                            Text('Daily Update [ 2022-03-21 (Mon ) ]'),
-                            Text('1. worked on homepageappbar'),
-                            Text('2.  forgot password completed'),
-                            Text('3. added changes to OTP verification page'),
+                          children: [
+                            Text(
+                              recentUpdates2?.data != null
+                                  ? recentUpdates2!.data![0].title.toString()
+                                  : 'N/A',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(recentUpdates2?.data != null
+                                ? recentUpdates2!.data![0].description
+                                    .toString()
+                                : "N/A"),
                           ],
                         ),
                       ),

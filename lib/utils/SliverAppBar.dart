@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:login_page/Constants/Images.dart';
-import 'package:login_page/widgets/alertbox..dart';
-import 'package:login_page/widgets/simple_button.dart';
+
+import '../Constants/Images.dart';
+import '../widgets/alertbox..dart';
+import '../widgets/simple_button.dart';
 
 class SliverBar extends StatefulWidget {
   final String? checkIn;

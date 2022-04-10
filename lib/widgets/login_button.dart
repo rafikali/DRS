@@ -39,7 +39,7 @@ class _ButtonState extends State<Button> {
           gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: <Color>[Color(0xFF6C63FF), Color(0xDC000000)]),
+              colors: <Color>[Color(0xFF6C63FF), Color(0xFF3b4043)]),
           borderRadius: BorderRadius.circular(8)),
       child: InkWell(
         // splashColor: Colors.red,

@@ -28,6 +28,7 @@ class _CardViewState extends State<CardView> {
     return InkWell(
       onTap: () {},
       child: Card(
+        shadowColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: Container(

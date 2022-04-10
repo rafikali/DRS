@@ -15,6 +15,7 @@ class ImageConstants {
   static const String biometric = 'assets/Images/biometric.webp';
   static const String profile = 'assets/Images/profile.jpg';
   static const String manageGoal = 'assets/Images/manage_goals.svg';
+  static const String menuIcon = 'assets/Images/menu_icons.png';
   static const String attendance = 'assets/Images/attendance_logo.png';
   static const String projectUpdate = 'assets/Images/project_update.png';
   static const String collaboration = 'assets/Images/collaborating_onboard.svg';

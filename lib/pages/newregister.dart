@@ -40,7 +40,7 @@ class _RegisterState extends State<Register> {
             padding: const EdgeInsets.all(20.0),
             child: Form(
               key: _formKey,
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Wrap(
                   runSpacing: 12,
@@ -150,8 +150,9 @@ class _RegisterState extends State<Register> {
                         ),
                       ],
                     ),
-                    const CheckBox(
+                    MyCheckBox(
                       checkValue: true,
+                      onChanged: () {},
                       labelTitle: 'I accept the terms & conditions',
                     ),
                     Button(

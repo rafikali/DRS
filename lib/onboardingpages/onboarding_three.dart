@@ -27,14 +27,14 @@ class _OnBoardThreeState extends State<OnBoardThree> {
               height: 20,
             ),
             const Text(
-              'Enhance Collaboration',
+              'Research BuildUp',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 15,
             ),
             const Text(
-              'Levels up  your inner capabilities with collaborating environment',
+              'Builds up your research level to be the better version everyday',
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),

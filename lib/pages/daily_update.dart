@@ -8,6 +8,7 @@ import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/table.dart';
 
 import '../models/models.dart';
+import '../services/daily_update_services.dart';
 import '../widgets/alertbox..dart';
 import '../widgets/login_textfield.dart';
 
@@ -24,23 +25,23 @@ class _DailyUpdateState extends State<DailyUpdate> {
   TextEditingController dateInput = TextEditingController();
   DailyUpdates? recentUpdates;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   fetchDailyUpdate();
-  //   dateInput.text = '';
-  // }
-  //
-  // fetchDailyUpdate() async {
-  //   final DailyUpdates? updates =
-  //       await DailyUpdateServices().fetchDailyUpdate();
-  //   if (updates != null) {
-  //     setState(() {
-  //       recentUpdates = updates;
-  //     });
-  //   }
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchDailyUpdate();
+    dateInput.text = '';
+  }
+
+  fetchDailyUpdate() async {
+    final DailyUpdates? updates =
+        await DailyUpdateServices().fetchDailyUpdate();
+    if (updates != null) {
+      setState(() {
+        recentUpdates = updates;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,6 @@ class _DailyUpdateState extends State<DailyUpdate> {
       padding: const EdgeInsets.all(6),
       child: Column(
         children: [
-          Text("Thehe"),
           SizedBox(
             width: double.infinity,
             child: Card(
@@ -64,7 +64,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
                                 return DatePickerDialog(
                                   firstDate: DateTime(2000),
                                   initialDate: selectedDate,
-                                  lastDate: DateTime(2030)
+                                  lastDate: DateTime.now()
                                       .add(const Duration(days: 365)),
                                   initialEntryMode: DatePickerEntryMode.input,
                                 );

@@ -29,21 +29,28 @@ class _OnBoardPageState extends State<OnBoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: isLastPage!
-          ? TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(AppColors.primaryColor),
-                  foregroundColor: MaterialStateProperty.all(Colors.white)),
-              onPressed: () async {
-                Future.delayed(Duration(seconds: 2));
+      bottomSheet: isLastPage!
+          ? Container(
+              color: AppColors.primaryColor,
+              width: double.infinity,
+              child: TextButton(
+                  style: ButtonStyle(
+                      overlayColor:
+                          MaterialStateProperty.all(Color(0xFFD3D3D3)),
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColors.primaryColor),
+                      foregroundColor: MaterialStateProperty.all(Colors.white)),
+                  onPressed: () async {
+                    Future.delayed(Duration(seconds: 2));
 
-                await Navigator.pushNamed(context, LoginPage.routeName);
-              },
-              child: const Text(
-                'Get Started',
-                style: TextStyle(fontSize: 20),
-              ))
+                    await Navigator.pushNamedAndRemoveUntil(context,
+                        LoginPage.routeName, (Route<dynamic> route) => false);
+                  },
+                  child: const Text(
+                    'Get Started',
+                    style: TextStyle(fontSize: 20),
+                  )),
+            )
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -62,10 +69,10 @@ class _OnBoardPageState extends State<OnBoardPage> {
                         style: TextStyle(fontSize: 20, color: Colors.grey),
                       ),
                     ),
-                    const SizedBox(),
                     SmoothPageIndicator(
                         effect: const WormEffect(
-                            spacing: 16,
+                            dotHeight: 10,
+                            dotWidth: 10,
                             dotColor: Colors.grey,
                             activeDotColor: Colors.green),
                         onDotClicked: (index) {

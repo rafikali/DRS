@@ -47,7 +47,7 @@ class InputValidator {
   static String? validateMobile(String? val) {
     if (val!.isEmpty) {
       return '*Number required';
-    } else if (val.isNotEmpty && val.length != 10) {
+    } else if (val.isNotEmpty && val.length < 10) {
       return "Invalid Mobile Number";
     } else {
       return null;

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
-class CheckBox extends StatefulWidget {
+class MyCheckBox extends StatefulWidget {
   final bool checkValue;
-  final labelTitle;
+  final Function() onChanged;
+  final String labelTitle;
 
-  const CheckBox({Key? key, required this.checkValue, required this.labelTitle})
+  const MyCheckBox(
+      {Key? key,
+      required this.onChanged,
+      required this.checkValue,
+      required this.labelTitle})
       : super(key: key);
 
   @override
-  State<CheckBox> createState() => _CheckBoxListTileState();
+  State<MyCheckBox> createState() => _MyCheckBoxListTileState();
 }
 
-class _CheckBoxListTileState extends State<CheckBox> {
-  bool checkedValue = true;
-
+class _MyCheckBoxListTileState extends State<MyCheckBox> {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
       contentPadding: EdgeInsets.zero,
       title: Text(widget.labelTitle),
-      value: checkedValue,
+      value: widget.checkValue,
       onChanged: (newValue) {
-        setState(() {
-          checkedValue = newValue!;
-          print(newValue);
-        });
+        widget.onChanged();
       },
       controlAffinity: ListTileControlAffinity.leading,
     );

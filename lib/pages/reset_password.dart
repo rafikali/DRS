@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/pages/verify_otp.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/appbar.dart';
@@ -59,7 +58,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 buttonHeight: 50.0,
                 validFunc: () async {
                   if (_formKey.currentState!.validate()) {
-                    AppConstants.mobileNumber = controller.text;
                     // PrefsServices().setString('Mobile Num', controller.text);
                     Navigator.pushNamed(context, VerifyOtp.routeName,
                         arguments: controller.text);
