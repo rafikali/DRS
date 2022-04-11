@@ -21,7 +21,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   CardData? dashboardCardData;
-  DailyUpdates? recentUpdates2 = DailyUpdates();
+  DailyUpdatesModel? recentUpdates2 = DailyUpdatesModel();
   // String? dashboardCount;
 
   // var nullCheck = NullCheck.NullChecker();
@@ -42,21 +42,25 @@ class _DashBoardState extends State<DashBoard> {
   fetchCardData() async {
     final CardData? cardData = await DashBoardServices().fetchCardData();
     if (cardData != null) {
-      setState(() {
-        dashboardCardData = cardData;
-      });
-      PrefsServices().setString(AppConstants.dashBoardCount,
-          dashboardCardData!.myMissingCheckoutCount.toString());
+      if (mounted) {
+        setState(() {
+          dashboardCardData = cardData;
+        });
+        PrefsServices().setString(AppConstants.dashBoardCount,
+            dashboardCardData!.myMissingCheckoutCount.toString());
+      }
     }
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdates? updates2 =
+    final DailyUpdatesModel? updates2 =
         await DailyUpdateServices().fetchDailyUpdate();
     if (updates2 != null) {
-      setState(() {
-        recentUpdates2 = updates2;
-      });
+      if (mounted) {
+        setState(() {
+          recentUpdates2 = updates2;
+        });
+      }
     }
   }
 

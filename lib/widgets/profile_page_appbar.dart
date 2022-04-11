@@ -82,6 +82,7 @@ class _ProfileState extends State<Profile> {
                           await SharedPreferences.getInstance();
                       prefs.getString(AppConstants.accessToken);
                       prefs.remove(AppConstants.accessToken);
+
                       Navigator.pushNamedAndRemoveUntil(
                           context, LoginPage.routeName, (route) => false);
                       // .then(

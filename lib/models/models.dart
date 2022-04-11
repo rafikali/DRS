@@ -45,12 +45,12 @@ class Schedule {
   }
 }
 
-class DailyUpdates {
+class DailyUpdatesModel {
   List<Data>? data;
 
-  DailyUpdates({this.data});
+  DailyUpdatesModel({this.data});
 
-  DailyUpdates.fromJson(Map<String, dynamic> json) {
+  DailyUpdatesModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {

@@ -37,6 +37,7 @@ dependencies:
   flutter_otp_text_field: ^1.0.0
   google_fonts: ^2.3.1
   intl: ^0.17.0
+  provider: 
   webview_flutter: ^3.0.1
   nepali_utils: ^3.0.3
   font_awesome_flutter: ^9.2.0
@@ -51,7 +52,7 @@ dependencies:
   html: ^0.15.0
 
   http: ^0.13.4
-  day_night_switcher:
+  
 
 dev_dependencies:
   flutter_test:

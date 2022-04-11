@@ -41,7 +41,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
                           MaterialStateProperty.all(AppColors.primaryColor),
                       foregroundColor: MaterialStateProperty.all(Colors.white)),
                   onPressed: () async {
-                    Future.delayed(Duration(seconds: 2));
+                    Future.delayed(const Duration(seconds: 2));
 
                     await Navigator.pushNamedAndRemoveUntil(context,
                         LoginPage.routeName, (Route<dynamic> route) => false);

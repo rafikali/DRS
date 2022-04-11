@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_page/Constants/app_colors.dart';
 import 'package:login_page/Curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:login_page/pages/attendance.dart';
+import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
-import 'package:login_page/pages/my_daily_updates.dart';
-import 'package:login_page/pages/my_late_arrival.dart';
 import 'package:login_page/pages/my_leaves.dart';
+import 'package:login_page/pages/myleaves_transaction.dart';
+import 'package:provider/provider.dart';
 
 import '../Constants/Images.dart';
 import '../Constants/app_constants.dart';
+import '../main.dart';
 import '../models/models.dart';
 import '../services/schedule_services.dart';
 import '../utils/pref_services.dart';
@@ -29,11 +30,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool changeButton = true;
+
   @override
   void initState() {
     super.initState();
     fetchSchedule();
-
     PrefsServices().getString(AppConstants.accessToken);
     // loadData();
   }
@@ -59,14 +60,16 @@ class _HomePageState extends State<HomePage> {
   int? selectedIndex = 0;
   List<Widget> widgetOptions = [
     const DashBoard(),
-    const MyDailyUpdates(),
+    const DailyUpdate(),
     const Attendances(),
     const MyLeaves(),
-    const MyLateArrival(),
+    const MyLeaveTransaction(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -115,13 +118,22 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       IconButton(
-                        icon: changeButton
-                            ? const Icon(
-                                CupertinoIcons.moon,
-                              )
-                            : const Icon(CupertinoIcons.sun_dust),
+                        icon: Icon(Icons.brightness_low),
                         onPressed: () {
-                          darkMode();
+                          var themeMode = themeChanger.getThemeMode;
+                          if (themeMode == ThemeMode.light) {
+                            themeChanger.setTheme(ThemeMode.dark);
+                          } else {
+                            themeChanger.setTheme(ThemeMode.light);
+                          }
+
+                          // changeTheme(
+                          //     Provider.of<DarkThemeNotifier>(context,
+                          //                 listen: false)
+                          //             .isDarkMode
+                          //         ? false
+                          //         : true,
+                          //     context);
                         },
                         color: Colors.white,
                       ),
@@ -161,8 +173,23 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child:
-                                Image.asset(ImageConstants.profile, height: 80),
+                            child: InkWell(
+                              child: Image.asset(ImageConstants.profile,
+                                  height: 80),
+                              onTap: () {
+                                BottomSheet(
+                                  builder: (context) {
+                                    return Column(children: const [
+                                      ListTile(
+                                        leading: Icon(CupertinoIcons.add),
+                                        title: Text("Upload photo"),
+                                      ),
+                                    ]);
+                                  },
+                                  onClosing: () {},
+                                );
+                              },
+                            ),
                           ),
                           // Container(
                           //   child: Column(children: [
@@ -202,29 +229,36 @@ class _HomePageState extends State<HomePage> {
                 ),
               )),
           body: widgetOptions.elementAt(selectedIndex!),
-          bottomNavigationBar: CurvedNavigationBar(
-            iconColor: Colors.white,
-            iconHeight: 20,
-
-            animationDuration: const Duration(milliseconds: 300),
-            backgroundColor: Colors.transparent,
-            // color: const Color(0xFF6C63FF),
-            index: selectedIndex!,
-            onTap: (int index) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            items: [
-              TabItem(ImageConstants.dashboardLogo, 'dashboard'),
-              TabItem(ImageConstants.dailyUpdateLogo, 'dailyUpdate'),
-              TabItem(ImageConstants.attendance, 'attendance'),
-              TabItem(ImageConstants.leaveLogo, 'Leave'),
-              TabItem(ImageConstants.leaveTransactionLogo, 'Leave Trans')
-            ],
+          bottomNavigationBar: SafeArea(
+            child: CurvedNavigationBar(
+              iconColor: Colors.white,
+              iconHeight: 23,
+              animationDuration: const Duration(milliseconds: 300),
+              backgroundColor: Colors.transparent,
+              // color: const Color(0xFF6C63FF),
+              index: selectedIndex!,
+              onTap: (int index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              items: [
+                TabItem(ImageConstants.dashboardLogo, 'dashboard'),
+                TabItem(ImageConstants.dailyUpdateLogo, 'dailyUpdate'),
+                TabItem(ImageConstants.attendance, 'attendance'),
+                TabItem(ImageConstants.leaveLogo, 'Leave'),
+                TabItem(ImageConstants.leaveTransactionLogo, 'Leave Trans')
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
+// void changeTheme(bool set, BuildContext context) {
+//   ///Call setDarkMode method inside our Settings ChangeNotifier class to
+//   ///Notify all the listeners of the change.
+//   Provider.of<DarkThemeNotifier>(context, listen: false).setDarkMode(set);
+// }
 }

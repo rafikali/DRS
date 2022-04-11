@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //ignore: must_be_immutable
@@ -73,7 +72,9 @@ class _TableDataState extends State<TableData> {
 }
 
 class DataLabels {
+  // ignore: prefer_typing_uninitialized_variables
   final label;
+  // ignore: prefer_typing_uninitialized_variables
   final dataCell;
 
   DataLabels({this.label, this.dataCell});

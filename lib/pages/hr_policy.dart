@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/widgets/Actionchip.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HRPolicy extends StatefulWidget {
   static const String routeName = 'hrPolicy';
@@ -23,30 +24,24 @@ class _HRPolicyState extends State<HRPolicy> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return MyActionChip(
-                  label: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Introduction to the company',
-                        style: TextStyle(color: Colors.white, fontSize: 22),
-                      ),
-                      Icon(
-                        CupertinoIcons.chevron_down,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                  onPress: () {
-                    scrollView();
-                  });
-            }),
+      body: WebView(
+        javascriptMode: JavascriptMode.unrestricted,
+        initialUrl: 'https://app.growteamly.com/company/hr-Policy',
       ),
+
+      // body: Padding(
+      //   padding: const EdgeInsets.all(10),
+      //   child: ListView.builder(
+      //       itemCount: 20,
+      //       itemBuilder: (context, index) {
+      //         // ignore: prefer_const_constructors
+      //         return Container(
+      //           child: Text('Introduction to the company'),
+      //           decoration:
+      //               BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+      //         );
+      //       }),
+      // ),
     );
   }
 }

@@ -17,6 +17,7 @@ import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/models.dart';
 import '../widgets/create_account.dart';
@@ -75,7 +76,7 @@ class _HomePageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool changeButton = false;
   bool toogleView = true;
-  bool _rememberPassword = false;
+  bool _rememberPassword = true;
 
   moveToHome() async {
     if (_formKey.currentState!.validate()) {
@@ -204,15 +205,16 @@ class _HomePageState extends State<LoginPage> {
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20),
                   child: MyCheckBox(
-                      checkValue: _rememberPassword,
-                      labelTitle: 'Remember Me?',
-                      onChanged: () {
-                        setState(() {
-                          _rememberPassword = !_rememberPassword;
-                        });
-                      }),
+                    labelTitle: 'Remember Me?',
+                    onChanged: () {
+                      setState(() {
+                        _rememberPassword = !_rememberPassword;
+                      });
+                    },
+                    checkValue: _rememberPassword,
+                  ),
                 ),
 
                 const SizedBox(

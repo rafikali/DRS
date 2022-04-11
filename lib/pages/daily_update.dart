@@ -23,7 +23,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
   DateTime selectedDate = DateTime.now();
   final DateTime? pickedDate = DateTime(2000);
   TextEditingController dateInput = TextEditingController();
-  DailyUpdates? recentUpdates;
+  DailyUpdatesModel? recentUpdates;
 
   @override
   void initState() {
@@ -34,12 +34,14 @@ class _DailyUpdateState extends State<DailyUpdate> {
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdates? updates =
+    final DailyUpdatesModel? updates =
         await DailyUpdateServices().fetchDailyUpdate();
     if (updates != null) {
-      setState(() {
-        recentUpdates = updates;
-      });
+      if (mounted) {
+        setState(() {
+          recentUpdates = updates;
+        });
+      }
     }
   }
 

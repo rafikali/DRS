@@ -28,12 +28,14 @@ class _CardViewState extends State<CardView> {
     return InkWell(
       onTap: () {},
       child: Card(
-        shadowColor: Colors.white,
+        color: Theme.of(context).cardColor,
+        // shadowColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: Container(
             decoration: BoxDecoration(
               border: widget.border,
+              color: Theme.of(context).cardColor,
             ),
             child: FittedBox(
               child: Column(

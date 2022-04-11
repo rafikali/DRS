@@ -178,6 +178,9 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                             color: widget.iconColor ??
                                 Theme.of(context).primaryColor,
                             height: widget.iconHeight),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Text(
                           item.title,
                           style: const TextStyle(color: Colors.white),

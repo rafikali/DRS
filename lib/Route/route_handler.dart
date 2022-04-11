@@ -9,6 +9,7 @@ import 'package:login_page/pages/my_dashboard.dart';
 import 'package:login_page/pages/my_late_arrival.dart';
 import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/my_missing_checkout.dart';
+import 'package:login_page/pages/myleaves_transaction.dart';
 import 'package:login_page/pages/reset_password.dart';
 import 'package:login_page/pages/verify_otp.dart';
 import 'package:login_page/utils/random_transition.dart';
@@ -22,7 +23,6 @@ import '../widgets/profile_page_appbar.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
     switch (settings.name) {
       case LoginPage.routeName:
         return PageTransition(
@@ -55,6 +55,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const MyLateArrival());
       case MyLeaves.routeName:
         return MaterialPageRoute(builder: (context) => const MyLeaves());
+      case MyLeaveTransaction.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const MyLeaveTransaction());
       case MyMissingCheckout.routeName:
         return MaterialPageRoute(
             builder: (context) => const MyMissingCheckout());

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/models/models.dart';
@@ -19,7 +21,7 @@ class MyDailyUpdates extends StatefulWidget {
 class _MyDailyUpdatesState extends State<MyDailyUpdates> {
   DateTime? selectedDate = DateTime.now();
   TextEditingController dateInput = TextEditingController();
-  DailyUpdates? recentUpdates = DailyUpdates();
+  DailyUpdatesModel? recentUpdates = DailyUpdatesModel();
   @override
   void initState() {
     // ignore: todo
@@ -30,13 +32,15 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdates? updates =
+    final DailyUpdatesModel? updates =
         await DailyUpdateServices().fetchDailyUpdate();
     if (updates != null) {
-      setState(() {
-        recentUpdates = updates;
-        // print(recentUpdates);
-      });
+      if (mounted) {
+        setState(() {
+          recentUpdates = updates;
+          // print(recentUpdates);
+        });
+      }
     }
   }
 
@@ -60,8 +64,7 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
                           context: context,
                           firstDate: DateTime(2000),
                           initialDate: DateTime.now(),
-                          lastDate:
-                              DateTime(2030).add(const Duration(days: 365)),
+                          lastDate: DateTime.now(),
                         );
                         print(pickedDate);
                         if (pickedDate != null && pickedDate != selectedDate) {
