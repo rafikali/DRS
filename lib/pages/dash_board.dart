@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/carddata.dart';
 import 'package:login_page/services/dashboard_services.dart';
@@ -21,7 +22,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   CardData? dashboardCardData;
-  DailyUpdatesModel? recentUpdates2 = DailyUpdatesModel();
+  DailyUpdatesModel? recentUpdates2;
   // String? dashboardCount;
 
   // var nullCheck = NullCheck.NullChecker();
@@ -53,15 +54,13 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdatesModel? updates2 =
-        await DailyUpdateServices().fetchDailyUpdate();
-    if (updates2 != null) {
-      if (mounted) {
+    DailyUpdateServices().fetchDailyUpdate().then((value) {
+      if (value != null && mounted) {
         setState(() {
-          recentUpdates2 = updates2;
+          recentUpdates2 = value;
         });
       }
-    }
+    });
   }
 
   @override
@@ -148,27 +147,42 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                     ),
                     const Divider(),
-                    Expanded(
-                      child: ListTile(
-                        leading: Text(recentUpdates2?.data != null
-                            ? recentUpdates2!.data![0].dailyupdateFor.toString()
-                            : 'N/A'),
-                        title: Column(
-                          children: [
-                            Text(
-                              recentUpdates2?.data != null
-                                  ? recentUpdates2!.data![0].title.toString()
-                                  : 'N/A',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(recentUpdates2?.data != null
-                                ? recentUpdates2!.data![0].description
-                                    .toString()
-                                : "N/A"),
-                          ],
-                        ),
-                      ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: recentUpdates2?.data!.length,
+                      itemBuilder: ((context, index) {
+                        return ListTile(
+                          leading: Text(recentUpdates2?.data != null
+                              ? recentUpdates2!.data![index].dailyupdateFor
+                                  .toString()
+                              : 'N/A'),
+                          title: Column(
+                            children: [
+                              Text(
+                                recentUpdates2?.data != null
+                                    ? recentUpdates2!.data![index].title
+                                        .toString()
+                                    : 'N/A',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              // WebView(
+                              //   initialUrl: UriData.fromString(
+                              //           recentUpdates2!.data![0].description
+                              //               .toString(),
+                              //           encoding: Encoding.getByName('utf-8'),
+                              //           mimeType: 'text/html')
+                              //       .toString(),
+                              // )
+                              // Html(data: recentUpdates2!.data![0].description),
+                              Text(recentUpdates2?.data != null
+                                  ? recentUpdates2!.data![0].description
+                                      .toString()
+                                  : "N/A"),
+                            ],
+                          ),
+                        );
+                      }),
                     ),
                   ],
                 ),

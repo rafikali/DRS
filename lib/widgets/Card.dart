@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CardView extends StatefulWidget {
   Color? color;
   final String? title;
@@ -28,14 +29,12 @@ class _CardViewState extends State<CardView> {
     return InkWell(
       onTap: () {},
       child: Card(
-        color: Theme.of(context).cardColor,
         // shadowColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: Container(
             decoration: BoxDecoration(
               border: widget.border,
-              color: Theme.of(context).cardColor,
             ),
             child: FittedBox(
               child: Column(
@@ -43,22 +42,18 @@ class _CardViewState extends State<CardView> {
                 children: [
                   Icon(
                     widget.dashboardIcon,
-                    color: widget.color,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(
-                    widget.title.toString(),
-                    style: TextStyle(color: widget.color, fontSize: 13),
-                  ),
+                  Text(widget.title.toString(),
+                      style: Theme.of(context).textTheme.bodyText1),
                   const SizedBox(
                     height: 2,
                   ),
-                  Text(
-                    widget.count!,
-                    style: TextStyle(color: widget.color, fontSize: 17),
-                  ),
+                  Text(widget.count!,
+                      style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),
             ),

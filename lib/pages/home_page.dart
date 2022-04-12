@@ -7,6 +7,7 @@ import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
 import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/myleaves_transaction.dart';
+import 'package:login_page/widgets/floating_action_button.dart';
 import 'package:provider/provider.dart';
 
 import '../Constants/Images.dart';
@@ -118,7 +119,9 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.brightness_low),
+                        icon: changeButton
+                            ? const Icon(Icons.brightness_low)
+                            : const Icon(Icons.brightness_high),
                         onPressed: () {
                           var themeMode = themeChanger.getThemeMode;
                           if (themeMode == ThemeMode.light) {
@@ -147,7 +150,7 @@ class _HomePageState extends State<HomePage> {
 
                       // const SizedBox(
                       //   width: 4,ont
-                      // ),
+                      // ),f
                       Builder(builder: (context) {
                         return IconButton(
                             icon: const ImageIcon(
@@ -251,6 +254,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          floatingActionButton: MyFloatingButton.getFloatingActionButton(
+              context, CupertinoIcons.add),
         ),
       ),
     );

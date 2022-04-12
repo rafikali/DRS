@@ -122,7 +122,6 @@ class _HomePageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFFF3F3F3),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,

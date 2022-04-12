@@ -34,15 +34,16 @@ class _DailyUpdateState extends State<DailyUpdate> {
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdatesModel? updates =
-        await DailyUpdateServices().fetchDailyUpdate();
-    if (updates != null) {
-      if (mounted) {
+    DailyUpdateServices().fetchDailyUpdate().then((value) {
+      if (value != null) {
         setState(() {
-          recentUpdates = updates;
+          recentUpdates = value;
         });
       }
-    }
+    });
+    // if (updates != null) {
+    //   if (mounted) {}
+    // }
   }
 
   @override
@@ -155,23 +156,33 @@ class _DailyUpdateState extends State<DailyUpdate> {
                   )
                 ],
 
-                rows: [
-                  DataLabels(dataCell: [
-                    '${recentUpdates?.data![0].dailyupdateFor}',
-                    'N/A',
-                    'Homepage worked, loginpage '
-                  ]),
-                  DataLabels(dataCell: [
-                    '2022-03-30[Tuesday]',
-                    'N/A',
-                    'Homepage worked, loginpage '
-                  ]),
-                  DataLabels(dataCell: [
-                    '2022-03-30[Tuesday]',
-                    'N/A',
-                    'Homepage worked, loginpage '
-                  ]),
-                ],
+                rows: recentUpdates!.data!
+                    .map<DataLabels>(
+                      (e) => DataLabels(dataCell: [
+                        e.dailyupdateFor.toString(),
+                        e.project ?? "N/A",
+                        e.title.toString(),
+                      ]),
+                    )
+                    .toList(),
+
+                // rows: [
+                //   DataLabels(dataCell: [
+                //     '${recentUpdates?.data![0].dailyupdateFor}',
+                //     'N/A',
+                //     'Homepage worked, loginpage '
+                //   ]),
+                //   DataLabels(dataCell: [
+                //     '2022-03-30[Tuesday]',
+                //     'N/A',
+                //     'Homepage worked, loginpage '
+                //   ]),
+                //   DataLabels(dataCell: [
+                //     '2022-03-30[Tuesday]',
+                //     'N/A',
+                //     'Homepage worked, loginpage '
+                //   ]),
+                // ],
 
                 // addAtendence:  Container(
                 //   width: 90,

@@ -7,17 +7,17 @@ class SimpleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 35,
-      width: 130,
-      child: Text(
-        title,
-        softWrap: true,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+    return FittedBox(
+      child: Container(
+        height: 35,
+        width: 130,
+        child: Text(title,
+            softWrap: true, style: Theme.of(context).textTheme.bodyText1),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            color: Theme.of(context).cardColor),
       ),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50.0), color: Colors.white),
     );
   }
 }

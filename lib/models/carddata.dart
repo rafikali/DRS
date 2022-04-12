@@ -22,13 +22,13 @@ class CardData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['my_missing_checkout_count'] = this.myMissingCheckoutCount;
-    data['my_ghost_count'] = this.myGhostCount;
-    data['my_leave_balance_count'] = this.myLeaveBalanceCount;
-    data['my_no_dailyUpdates_count'] = this.myNoDailyUpdatesCount;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['my_missing_checkout_count'] = myMissingCheckoutCount;
+    data['my_ghost_count'] = myGhostCount;
+    data['my_leave_balance_count'] = myLeaveBalanceCount;
+    data['my_no_dailyUpdates_count'] = myNoDailyUpdatesCount;
     data['my_not_acknowledge_dailyUpdates_count'] =
-        this.myNotAcknowledgeDailyUpdatesCount;
+        myNotAcknowledgeDailyUpdatesCount;
     return data;
   }
 }

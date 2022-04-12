@@ -94,15 +94,17 @@ class _MySettingsState extends State<MySettings> {
                   child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 5),
-                          onTap: () async {
-                            Navigator.pushNamed(
-                                context, data[index].routeName.toString());
-                          },
-                          leading: Icon(data[index].iconName),
-                          title: Text(data[index].title.toString()),
+                        return Card(
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            onTap: () async {
+                              Navigator.pushNamed(
+                                  context, data[index].routeName.toString());
+                            },
+                            leading: Icon(data[index].iconName),
+                            title: Text(data[index].title.toString()),
+                          ),
                         );
                       }),
                 ),

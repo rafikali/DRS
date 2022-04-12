@@ -64,9 +64,17 @@ class _OnBoardPageState extends State<OnBoardPage> {
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn);
                       },
-                      child: const Text(
-                        'Skip',
-                        style: TextStyle(fontSize: 20, color: Colors.grey),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              LoginPage.routeName,
+                              (Route<dynamic> route) => false);
+                        },
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                        ),
                       ),
                     ),
                     SmoothPageIndicator(

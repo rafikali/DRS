@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/widgets/Actionchip.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HRPolicy extends StatefulWidget {
@@ -23,7 +21,7 @@ class _HRPolicyState extends State<HRPolicy> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: WebView(
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: 'https://app.growteamly.com/company/hr-Policy',

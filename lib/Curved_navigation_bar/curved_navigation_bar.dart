@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/Constants/app_colors.dart';
-import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/Curved_navigation_bar/nav_button.dart';
 import 'package:login_page/Curved_navigation_bar/nav_custom_painter.dart';
 

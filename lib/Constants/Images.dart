@@ -1,3 +1,4 @@
+// ignore: file_names
 class ImageConstants {
   static const String regis = 'assets/Images/register.svg';
   static const String loginIllustrate = 'assets/Images/login_image.svg';

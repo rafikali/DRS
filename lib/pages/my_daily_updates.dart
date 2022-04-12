@@ -52,6 +52,10 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
         child: Card(
           child: Column(
             children: [
+              Text(
+                'My Daily Update',
+                style: Theme.of(context).textTheme.headline3,
+              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [

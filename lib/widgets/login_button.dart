@@ -32,7 +32,7 @@ class _ButtonState extends State<Button> {
           boxShadow: const [
             BoxShadow(
                 color: Color(0xFFCFCFCF),
-                spreadRadius: 5,
+                spreadRadius: 2,
                 blurRadius: 7,
                 offset: Offset(1, 2)),
           ],

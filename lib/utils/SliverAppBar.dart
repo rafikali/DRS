@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../Constants/Images.dart';
 import '../widgets/alertbox..dart';
 import '../widgets/simple_button.dart';
@@ -192,7 +191,7 @@ class _SliverBarState extends State<SliverBar> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: const TabBar(
               labelColor: Color(0xFF6C63FF),
-              unselectedLabelColor: Colors.black,
+              unselectedLabelColor: Color.fromRGBO(0, 0, 0, 1),
               indicatorColor: Color(0xFF6C63FF),
               tabs: [
                 FittedBox(

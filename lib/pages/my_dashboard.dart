@@ -41,19 +41,19 @@ class MyDashBoard extends StatelessWidget {
                       CardView(
                         dashboardIcon: CupertinoIcons.creditcard,
                         title: 'My Ghost Count',
-                        color: Colors.black,
+                        color: Theme.of(context).cardColor,
                         count: '0',
                       ),
                       CardView(
                         dashboardIcon: CupertinoIcons.creditcard,
                         title: 'My Leave Balance',
-                        color: Colors.black,
+                        color: Theme.of(context).cardColor,
                         count: '0',
                       ),
                       CardView(
                         dashboardIcon: CupertinoIcons.tv,
                         title: 'My NODailyUpdates',
-                        color: Colors.black,
+                        color: Theme.of(context).cardColor,
                         count: '0',
                       ),
                       CardView(

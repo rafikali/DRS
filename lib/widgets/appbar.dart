@@ -10,7 +10,7 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: const Color(0xFFF3F3F3),
+        backgroundColor: const Color(0xFF6C63FF),
         elevation: 0,
         title:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
