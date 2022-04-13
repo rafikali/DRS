@@ -17,7 +17,6 @@ import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/models.dart';
 import '../widgets/create_account.dart';
@@ -230,8 +229,9 @@ class _HomePageState extends State<LoginPage> {
                   children: [
                     SignInButtons(
                         signLogo: SvgPicture.asset(
-                      ImageConstants.googleLogo,
-                    )),
+                            'assets/Images/google_logo.svg',
+                            height: 20,
+                            width: 20)),
                     SignInButtons(
                         signLogo: SvgPicture.asset(
                       ImageConstants.facebookLogo,

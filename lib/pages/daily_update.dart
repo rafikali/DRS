@@ -30,7 +30,6 @@ class _DailyUpdateState extends State<DailyUpdate> {
     // TODO: implement initState
     super.initState();
     fetchDailyUpdate();
-    dateInput.text = '';
   }
 
   fetchDailyUpdate() async {
