@@ -11,12 +11,16 @@ class SimpleButton extends StatelessWidget {
       child: Container(
         height: 35,
         width: 130,
-        child: Text(title,
-            softWrap: true, style: Theme.of(context).textTheme.bodyText1),
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.black),
+          softWrap: true,
+        ),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50.0),
-            color: Theme.of(context).cardColor),
+          borderRadius: BorderRadius.circular(50.0),
+          color: Colors.white,
+        ),
       ),
     );
   }

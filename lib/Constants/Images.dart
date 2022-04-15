@@ -18,6 +18,8 @@ class ImageConstants {
   static const String manageGoal = 'assets/Images/manage_goals.svg';
   static const String menuIcon = 'assets/Images/menu_icons.png';
   static const String attendance = 'assets/Images/attendance_logo.png';
+  static const String progressBar = 'assets/Images/progress_bar.jpg';
+
   static const String projectUpdate = 'assets/Images/project_update.png';
   static const String collaboration = 'assets/Images/collaborating_onboard.svg';
   static const String joyfulEnvironment = 'assets/Images/augmented_reality.svg';

@@ -7,6 +7,7 @@ import 'package:login_page/utils/confirmation_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/change_pass.dart';
+import '../pages/changing_new_passing.dart';
 
 class Profile extends StatefulWidget {
   static const String routeName = 'profile';
@@ -25,7 +26,7 @@ class _ProfileState extends State<Profile> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
               child: Stack(
                 children: [
@@ -34,21 +35,20 @@ class _ProfileState extends State<Profile> {
                     color: Colors.black,
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.width * 0.28,
-                    left: MediaQuery.of(context).size.width * 0.35,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
+                    top: 20,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         CircleAvatar(
                           backgroundColor: Colors.white,
-                          radius: 60,
+                          radius: 50,
                           child: CircleAvatar(
                             // foregroundColor: Colors.white,
-                            radius: 55,
+                            radius: 45,
 
                             backgroundImage: AssetImage(ImageConstants.profile),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   )

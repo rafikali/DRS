@@ -54,6 +54,7 @@ dependencies:
 
   http: ^0.13.4
   flutter_bloc: ^8.0.1
+  device_preview: ^1.0.0
   
 
 dev_dependencies:

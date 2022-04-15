@@ -10,9 +10,10 @@ class ScheduleServices {
     final response = await http.get(
         Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.checkTime),
         headers: await getHeader());
-    var bodyData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
+      var bodyData = jsonDecode(response.body);
+
       Schedule sch = Schedule.fromJson(bodyData);
       return sch;
     } else {

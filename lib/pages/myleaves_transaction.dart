@@ -36,7 +36,7 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'My Leave Transaction',
                 style: TextStyle(fontSize: 24),
               ),
@@ -44,7 +44,7 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
                 onPressed: () {
                   refreshPage();
                 },
-                icon: Icon(
+                icon: const Icon(
                   CupertinoIcons.refresh_circled,
                   color: Colors.blue,
                 ),

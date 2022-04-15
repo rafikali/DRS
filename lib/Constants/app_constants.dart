@@ -4,5 +4,6 @@ class AppConstants {
   static const String isDark = "isDark";
   static const String userName = 'username';
   static const String password = 'password';
-  static const String dashBoardCount = "dash_count";
+  static const String ghostCount = 'ghost_count';
+  static const String missingCheckout = "missing_checkout";
 }

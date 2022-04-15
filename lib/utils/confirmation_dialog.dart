@@ -15,7 +15,7 @@ Future<bool> getDialog(BuildContext context,
             ),
             TextButton(
               child: Text("No"),
-              onPressed: () => Navigator.pop(context, true),
+              onPressed: () => Navigator.pop(context, false),
             ),
           ],
         );

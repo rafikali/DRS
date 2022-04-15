@@ -34,6 +34,10 @@ void main() async {
   ));
 }
 
+class AppSettings {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+}
+
 class MyApp extends StatefulWidget {
   final String? accessToken;
   bool? changeMode = true;
@@ -72,6 +76,7 @@ class _MyAppState extends State<MyApp> {
 
         print(themeChanger.getThemeMode.name);
         return MaterialApp(
+          navigatorKey: AppSettings.navigatorKey,
           debugShowCheckedModeBanner: false,
           themeMode: themeChanger.getThemeMode,
           darkTheme: setDarkTheme,

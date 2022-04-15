@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/Curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:login_page/pages/add_daily_update.dart';
 import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
@@ -11,11 +12,13 @@ import 'package:login_page/widgets/floating_action_button.dart';
 import 'package:provider/provider.dart';
 
 import '../Constants/Images.dart';
-import '../Constants/app_constants.dart';
 import '../main.dart';
+// import 'CssBaseline  from '@mui/material/';
+
 import '../models/models.dart';
 import '../services/schedule_services.dart';
-import '../utils/pref_services.dart';
+import '../utils/daily_update_alertbox.dart';
+import '../widgets/alertbox..dart';
 import '../widgets/profile_page_appbar.dart';
 import '../widgets/setting_page.dart';
 import '../widgets/simple_button.dart';
@@ -36,17 +39,23 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     fetchSchedule();
-    PrefsServices().getString(AppConstants.accessToken);
+    // PrefsServices().getString(AppConstants.accessToken);
     // loadData();
   }
 
-  Schedule? schedule;
+  // @override
+  // void dispose() {
+  //   super.initState();
+  //   _users
+  // }
+
+  Schedule? schedules;
 
   fetchSchedule() async {
-    final Schedule? sch = await ScheduleServices().fetchSchedule();
+    Schedule? sch = await ScheduleServices().fetchSchedule();
     if (sch != null) {
       setState(() {
-        schedule = sch;
+        schedules = sch;
       });
     }
   }
@@ -65,6 +74,10 @@ class _HomePageState extends State<HomePage> {
     const Attendances(),
     const MyLeaves(),
     const MyLeaveTransaction(),
+    // const DailyUpdate(),
+    // const Attendances(),
+    // const MyLeaves(),
+    // const MyLeaveTransaction(),
   ];
 
   @override
@@ -74,190 +87,211 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
-        return false;
+
+        return true;
       },
-      child: SafeArea(
-        child: Scaffold(
-          extendBody: true,
-          // body: NestedScrollView(
-          //   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          //     return <Widget>[
-          //       const SliverBar(),
-          //     ];
-          //   },
-          //   body: TabBarView(children: [
-          //     CustomScrollView(
-          //       slivers: [
-          //       ],
-          //     )
-          //   ]),
-          // ),
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(170.0),
-              child: AppBar(
-                automaticallyImplyLeading: false,
-                elevation: 2,
-                backgroundColor: const Color(0xFF6C63FF),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(200, 30),
-                )),
-                title: const SizedBox(
-                  child: Text(
-                    'Grow-Teamly',
-                    style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                actions: <Widget>[
-                  SizedBox(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        icon: changeButton
-                            ? const Icon(Icons.brightness_low)
-                            : const Icon(Icons.brightness_high),
-                        onPressed: () {
-                          var themeMode = themeChanger.getThemeMode;
-                          if (themeMode == ThemeMode.light) {
-                            themeChanger.setTheme(ThemeMode.dark);
-                          } else {
-                            themeChanger.setTheme(ThemeMode.light);
-                          }
-
-                          // changeTheme(
-                          //     Provider.of<DarkThemeNotifier>(context,
-                          //                 listen: false)
-                          //             .isDarkMode
-                          //         ? false
-                          //         : true,
-                          //     context);
-                        },
-                        color: Colors.white,
+      child: schedules == null
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : SafeArea(
+              child: Scaffold(
+                extendBody: true,
+                // body: NestedScrollView(
+                //   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                //     return <Widget>[
+                //       const SliverBar(),
+                //     ];
+                //   },
+                //   body: TabBarView(children: [
+                //     CustomScrollView(
+                //       slivers: [
+                //       ],
+                //     )
+                //   ]),
+                // ),
+                appBar: PreferredSize(
+                    preferredSize: const Size.fromHeight(170.0),
+                    child: AppBar(
+                      backgroundColor: const Color(0xFF6C63FF),
+                      automaticallyImplyLeading: false,
+                      elevation: 2,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                        bottom: Radius.elliptical(200, 30),
+                      )),
+                      title: const SizedBox(
+                        child: Text(
+                          'Grow-Teamly',
+                          style: TextStyle(color: Colors.white, fontSize: 23),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, Profile.routeName);
-                        },
-                        icon: const Icon(CupertinoIcons.profile_circled,
-                            color: Colors.white),
-                      ),
+                      actions: <Widget>[
+                        SizedBox(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              icon: changeButton
+                                  ? Icon(CupertinoIcons.brightness_solid,
+                                      size: Theme.of(context).iconTheme.size)
+                                  : Icon(
+                                      CupertinoIcons.moon,
+                                      size: Theme.of(context).iconTheme.size,
+                                    ),
+                              onPressed: () {
+                                darkMode();
+                                var themeMode = themeChanger.getThemeMode;
+                                if (themeMode == ThemeMode.light) {
+                                  themeChanger.setTheme(ThemeMode.dark);
+                                } else {
+                                  themeChanger.setTheme(ThemeMode.light);
+                                }
 
-                      // const SizedBox(
-                      //   width: 4,ont
-                      // ),f
-                      Builder(builder: (context) {
-                        return IconButton(
-                            icon: const ImageIcon(
-                              AssetImage(ImageConstants.menuIcon),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, MySettings.routeName);
-                            },
-                            color: Colors.white);
-                      })
-                    ],
-                  ))
-                ],
-                flexibleSpace: Center(
-                  child: Container(
-                    height: 100,
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: InkWell(
-                              child: Image.asset(ImageConstants.profile,
-                                  height: 80),
-                              onTap: () {
-                                BottomSheet(
-                                  builder: (context) {
-                                    return Column(children: const [
-                                      ListTile(
-                                        leading: Icon(CupertinoIcons.add),
-                                        title: Text("Upload photo"),
-                                      ),
-                                    ]);
-                                  },
-                                  onClosing: () {},
-                                );
+                                // changeTheme(
+                                //     Provider.of<DarkThemeNotifier>(context,
+                                //                 listen: false)
+                                //             .isDarkMode
+                                //         ? false
+                                //         : true,
+                                //     context);
                               },
                             ),
-                          ),
-                          // Container(
-                          //   child: Column(children: [
-                          //     Text(
-                          //       'Mobile AppDeveloper',
-                          //       style: TextStyle(
-                          //         color: Colors.white,
-                          //         fontSize: 20,
-                          //       ),
-                          //     ),1
-                          //     Text('Project CPN'),
-                          //   ]),
-                          // ),
-                          //yedi chai hamlai post and detail of the employee in homepage chaiyexa vane chai yo app garda hunxa
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 15,
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, Profile.routeName);
+                              },
+                              icon: Icon(
+                                CupertinoIcons.profile_circled,
+                                size: Theme.of(context).iconTheme.size,
                               ),
-                              SimpleButton(
-                                  title: schedule?.checkIn != null
-                                      ? 'CheckedIn :   ${schedule?.checkIn}'
-                                      : 'CheckedIn: N/A'),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SimpleButton(
-                                  title: schedule?.checkOut != null
-                                      ? 'CheckedOut : ${schedule?.checkOut}'
-                                      : 'CheckedOut: N/A'),
-                            ],
+                            ),
+                            Builder(builder: (context) {
+                              return IconButton(
+                                  icon: ImageIcon(
+                                    const AssetImage(
+                                      ImageConstants.menuIcon,
+                                    ),
+                                    size: Theme.of(context).iconTheme.size,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, MySettings.routeName);
+                                  },
+                                  color: Colors.white);
+                            })
+                          ],
+                        ))
+                      ],
+                      flexibleSpace: Center(
+                        child: Container(
+                          height: 100,
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: InkWell(
+                                    child: Image.asset(ImageConstants.profile,
+                                        height: 80),
+                                    onTap: () {
+                                      BottomSheet(
+                                        builder: (context) {
+                                          return Column(children: const [
+                                            ListTile(
+                                              leading: Icon(CupertinoIcons.add),
+                                              title: Text("Upload photo"),
+                                            ),
+                                          ]);
+                                        },
+                                        onClosing: () {},
+                                      );
+                                    },
+                                  ),
+                                ),
+                                // Container(
+                                //   child: Column(children: [
+                                //     Text(
+                                //       'Mobile AppDeveloper',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontSize: 20,
+                                //       ),
+                                //     ),1
+                                //     Text('Project CPN'),
+                                //   ]),
+                                // ),
+                                //yedi chai hamlai post and detail of the employee in homepage chaiyexa vane chai yo app garda hunxa
+                                Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    SimpleButton(
+                                        title:
+                                            "CheckedIn : ${schedules?.checkIn ?? 'N/A'}"),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    SimpleButton(
+                                        title: schedules?.checkOut != null
+                                            ? 'CheckedOut : ${schedules?.checkOut}'
+                                            : 'CheckedOut: N/A'),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                    )),
+                // body: Center(
+                //   child: Text("data"),
+                // ),
+                body: widgetOptions.elementAt(selectedIndex!),
+                bottomNavigationBar: SafeArea(
+                  child: CurvedNavigationBar(
+                    iconColor: Colors.white,
+                    iconHeight: 23,
+                    animationDuration: const Duration(milliseconds: 300),
+                    backgroundColor: Colors.transparent,
+                    // color: const Color(0xFF6C63FF),
+                    index: selectedIndex!,
+                    onTap: (int index) {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    items: [
+                      TabItem(ImageConstants.dashboardLogo, 'dashboard'),
+                      TabItem(ImageConstants.dailyUpdateLogo, 'dailyUpdate'),
+                      TabItem(ImageConstants.attendance, 'attendance'),
+                      TabItem(ImageConstants.leaveLogo, 'Leave'),
+                      TabItem(
+                          ImageConstants.leaveTransactionLogo, 'Leave Trans')
+                    ],
                   ),
                 ),
-              )),
-          body: widgetOptions.elementAt(selectedIndex!),
-          bottomNavigationBar: SafeArea(
-            child: CurvedNavigationBar(
-              iconColor: Colors.white,
-              iconHeight: 23,
-              animationDuration: const Duration(milliseconds: 300),
-              backgroundColor: Colors.transparent,
-              // color: const Color(0xFF6C63FF),
-              index: selectedIndex!,
-              onTap: (int index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              items: [
-                TabItem(ImageConstants.dashboardLogo, 'dashboard'),
-                TabItem(ImageConstants.dailyUpdateLogo, 'dailyUpdate'),
-                TabItem(ImageConstants.attendance, 'attendance'),
-                TabItem(ImageConstants.leaveLogo, 'Leave'),
-                TabItem(ImageConstants.leaveTransactionLogo, 'Leave Trans')
-              ],
+                floatingActionButton: CustomFloatingActionButton(
+                  backgroundcolor: Colors.green,
+                  onPressed: (() {
+                    Navigator.pushNamed(context, AddDailyUpdae.routeName);
+                    // DialogBox(
+                    //   dialogBoxPadding: const EdgeInsets.all(15),
+                    //   barrierDismissile: false,
+                    //   content: DailyUpdateAlertBox(
+                    //     padding: const EdgeInsets.all(10),
+                    //   ),
+                    // ).getAlertDialogBox(context);
+                  }),
+                ),
+              ),
             ),
-          ),
-          floatingActionButton: MyFloatingButton.getFloatingActionButton(
-              context, CupertinoIcons.add),
-        ),
-      ),
     );
   }
 

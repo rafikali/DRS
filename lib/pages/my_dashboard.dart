@@ -26,7 +26,7 @@ class MyDashBoard extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [

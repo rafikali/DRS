@@ -48,7 +48,6 @@ class _MyAttendancesState extends State<MyAttendances> {
                     initialDate: DateTime.now(),
                     lastDate: DateTime.now(),
                   );
-                  print(pickedDate);
                   if (pickedDate != null && pickedDate != selectedDate) {
                     String formattedDate =
                         DateFormat('yyyy-MM-dd').format(pickedDate);

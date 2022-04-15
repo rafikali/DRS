@@ -4,7 +4,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_page/Auth_Services/change_password.dart';
 import 'package:login_page/pages/home_page.dart';
+import 'package:login_page/pages/login_page.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
@@ -24,6 +26,19 @@ class _CreateNewPassState extends State<CreateNewPass> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  PasswordChanged() {
+    if (_formKey.currentState!.validate()) {
+      Navigator.pushNamed(context, HomePage.routeName);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +96,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
                   buttonTitle: 'Reset Password',
                   buttonHeight: 50.0,
                   validFunc: () {
-                    if (_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, HomePage.routeName);
-                    }
+                    PasswordChanged;
                   },
                 )
               ],

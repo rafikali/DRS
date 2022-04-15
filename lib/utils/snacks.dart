@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Snacks {
@@ -9,11 +8,9 @@ class Snacks {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         message,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-        ),
+        style: Theme.of(context).textTheme.bodyText1,
       ),
+      backgroundColor: Theme.of(context).cardColor,
     ));
   }
 }

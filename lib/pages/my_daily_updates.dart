@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/models/models.dart';
@@ -32,16 +30,14 @@ class _MyDailyUpdatesState extends State<MyDailyUpdates> {
   }
 
   fetchDailyUpdate() async {
-    final DailyUpdatesModel? updates =
-        await DailyUpdateServices().fetchDailyUpdate();
-    if (updates != null) {
-      if (mounted) {
+    DailyUpdateServices().fetchDailyUpdate().then((value) {
+      if (value != null && mounted) {
         setState(() {
-          recentUpdates = updates;
+          recentUpdates = value;
           // print(recentUpdates);
         });
       }
-    }
+    });
   }
 
   @override

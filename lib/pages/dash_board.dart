@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/carddata.dart';
+import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/services/dashboard_services.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/GridView.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/models.dart';
 import '../services/daily_update_services.dart';
 import '../widgets/Card.dart';
 
 class DashBoard extends StatefulWidget {
+  final String? checkDashCount;
   const DashBoard({
     Key? key,
+    this.checkDashCount,
   }) : super(key: key);
 
   @override
@@ -21,8 +25,11 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  String? missingCheckout = '';
+  String? ghostCount = '';
   CardData? dashboardCardData;
   DailyUpdatesModel? recentUpdates2;
+
   // String? dashboardCount;
 
   // var nullCheck = NullCheck.NullChecker();
@@ -33,24 +40,34 @@ class _DashBoardState extends State<DashBoard> {
     super.initState();
     fetchCardData();
     fetchDailyUpdate();
+    DashCountNumber();
   }
 
-  // Future DashCount() async {
-  //    dashboardCount =
-  //        await PrefsServices().getString(AppConstants.dashBoardCount);
-  //  }
+  // ignore: non_constant_identifier_names
+  DashCountNumber() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final getDashCount = prefs.getString(AppConstants.missingCheckout);
+    final getGhostCount = prefs.getString(AppConstants.ghostCount);
+    if (getDashCount != null) {
+      setState(() {
+        missingCheckout = getDashCount;
+        ghostCount = getGhostCount;
+      });
+    }
+  }
 
   fetchCardData() async {
-    final CardData? cardData = await DashBoardServices().fetchCardData();
-    if (cardData != null) {
-      if (mounted) {
+    DashBoardServices().fetchCardData().then((value) {
+      if (value != null && mounted) {
         setState(() {
-          dashboardCardData = cardData;
+          dashboardCardData = value;
         });
-        PrefsServices().setString(AppConstants.dashBoardCount,
+        PrefsServices().setString(AppConstants.missingCheckout,
             dashboardCardData!.myMissingCheckoutCount.toString());
+        PrefsServices().setString(AppConstants.ghostCount,
+            dashboardCardData!.myGhostCount.toString());
       }
-    }
+    });
   }
 
   fetchDailyUpdate() async {
@@ -67,130 +84,136 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: ListView(
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          Grid(
-            children: [
-              CardView(
-                  dashboardIcon: CupertinoIcons.clock,
-                  title: 'My Missing Checkout',
-                  color: Colors.lightGreen,
-                  // count: dashboardCardData?.myMissingCheckoutCount != null
-                  //     ? dashboardCardData?.myMissingCheckoutCount.toString()
-                  //     : 'Updating..',
-                  count: dashboardCardData?.myMissingCheckoutCount != null
-                      ? dashboardCardData?.myMissingCheckoutCount.toString()
-                      : 'N/A'),
-              CardView(
-                dashboardIcon: CupertinoIcons.creditcard,
-                title: 'My Ghost Count',
-                color: Colors.black,
-                count: dashboardCardData?.myGhostCount != null
-                    ? dashboardCardData?.myGhostCount.toString()
-                    : 'Updating..',
-              ),
-              CardView(
-                dashboardIcon: CupertinoIcons.creditcard,
-                title: 'My Leave Balance',
-                color: Colors.black,
-                count: dashboardCardData?.myLeaveBalanceCount != null
-                    ? dashboardCardData?.myLeaveBalanceCount.toString()
-                    : 'Updating..',
-              ),
-              CardView(
-                dashboardIcon: CupertinoIcons.tv,
-                title: 'My NODailyUpdates',
-                color: Colors.black,
-                count: dashboardCardData?.myNoDailyUpdatesCount != null
-                    ? dashboardCardData?.myNoDailyUpdatesCount.toString()
-                    : 'Updating..',
-              ),
-            ],
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+      child: dashboardCardData == null
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView(
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                Grid(
                   children: [
-                    const Text(
-                      'Recent Daily Update:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                    CardView(
+                        dashboardIcon: CupertinoIcons.clock,
+                        title: 'My Missing Checkout',
+                        color:
+                            missingCheckout == '0' ? Colors.green : Colors.red,
+                        // count: dashboardCardData?.myMissingCheckoutCount != null
+                        //     ? dashboardCardData?.myMissingCheckoutCount.toString()
+                        //     : 'Updating..',
+                        count: missingCheckout),
+                    CardView(
+                      dashboardIcon: CupertinoIcons.creditcard,
+                      title: 'My Ghost Count',
+                      color: ghostCount == '0' ? Colors.green : Colors.red,
+                      count: ghostCount,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 48),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Update For',
-                            style: TextStyle(fontSize: 16),
+                    CardView(
+                        dashboardIcon: CupertinoIcons.creditcard,
+                        title: 'My Leave Balance',
+                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        count:
+                            dashboardCardData?.myLeaveBalanceCount.toString() ??
+                                'N/A'),
+                    CardView(
+                        dashboardIcon: CupertinoIcons.tv,
+                        title: 'My NODailyUpdates',
+                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        count: dashboardCardData?.myNoDailyUpdatesCount
+                                .toString() ??
+                            'N/A'),
+                  ],
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: double.infinity,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'Recent Daily Update:',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
-                          Text(
-                            'Title',
-                            style: TextStyle(fontSize: 16),
-                          )
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 4, right: 48),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Update For',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  'Title',
+                                  style: TextStyle(fontSize: 16),
+                                )
+                              ],
+                            ),
+                          ),
+                          const Divider(),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: recentUpdates2?.data!.length,
+                            itemBuilder: ((context, index) {
+                              return recentUpdates2 == null
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
+                                  : ListTile(
+                                      leading: Text(recentUpdates2?.data != null
+                                          ? recentUpdates2!
+                                              .data![index].dailyupdateFor
+                                              .toString()
+                                          : 'N/A'),
+                                      title: Column(
+                                        children: [
+                                          Text(
+                                            recentUpdates2
+                                                    ?.data![index].title ??
+                                                'N/A',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          // WebView(
+                                          //   initialUrl: UriData.fromString(
+                                          //           recentUpdates2!.data![0].description
+                                          //               .toString(),
+                                          //           encoding: Encoding.getByName('utf-8'),
+                                          //           mimeType: 'text/html')
+                                          //       .toString(),
+                                          // )
+                                          // Html(data: recentUpdates2!.data![0].description),
+                                          Text(
+                                            recentUpdates2?.data![index]
+                                                    .description ??
+                                                'N/A',
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                            }),
+                          ),
                         ],
                       ),
                     ),
-                    const Divider(),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: recentUpdates2?.data!.length,
-                      itemBuilder: ((context, index) {
-                        return ListTile(
-                          leading: Text(recentUpdates2?.data != null
-                              ? recentUpdates2!.data![index].dailyupdateFor
-                                  .toString()
-                              : 'N/A'),
-                          title: Column(
-                            children: [
-                              Text(
-                                recentUpdates2?.data != null
-                                    ? recentUpdates2!.data![index].title
-                                        .toString()
-                                    : 'N/A',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              // WebView(
-                              //   initialUrl: UriData.fromString(
-                              //           recentUpdates2!.data![0].description
-                              //               .toString(),
-                              //           encoding: Encoding.getByName('utf-8'),
-                              //           mimeType: 'text/html')
-                              //       .toString(),
-                              // )
-                              // Html(data: recentUpdates2!.data![0].description),
-                              Text(recentUpdates2?.data != null
-                                  ? recentUpdates2!.data![0].description
-                                      .toString()
-                                  : "N/A"),
-                            ],
-                          ),
-                        );
-                      }),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

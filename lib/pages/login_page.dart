@@ -1,4 +1,6 @@
 import 'dart:convert';
+// ignore: unused_import
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ import 'package:login_page/pages/home_page.dart';
 import 'package:login_page/utils/header.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/utils/pref_services.dart';
-import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
@@ -38,32 +39,53 @@ class LoginPage extends StatefulWidget {
 
 Future fetchLogin(
     String username, String password, BuildContext context) async {
-  Response? response = await http.post(
-    Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.login),
-    body: jsonEncode({"username": username, "password": password}),
-    headers: await getHeader(),
-  );
+  try {
+    print("Inside login");
+    Response? response = await http.post(
+      Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.login),
+      body: jsonEncode({"username": username, "password": password}),
+      headers: await getHeader(),
+    );
 
-  var jsonResponse = jsonDecode(response.body);
-  var loginResponse = LoginResponse.fromJson(jsonResponse);
-  if (response.statusCode == 200 ||
-      response.statusCode == 201 ||
-      response.statusCode == 202) {
-    if (loginResponse.data != null) {
-      await PrefsServices()
-          .setString(AppConstants.accessToken, loginResponse.data!);
+    var jsonResponse = jsonDecode(response.body);
+    var loginResponse = LoginResponse.fromJson(jsonResponse);
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 202) {
+      if (loginResponse.data != null) {
+        await PrefsServices()
+            .setString(AppConstants.accessToken, loginResponse.data!);
+      }
+      print(loginResponse.data);
+
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text(loginResponse.message ?? "Successfully logged in.")));
+      // Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+
+      // Navigator.of(context).push(MaterialPageRoute(
+      //     builder: (context) => Scaffold(
+      //           appBar: AppBar(
+      //             title: Text("Demo"),
+      //           ),
+      //           body: Center(
+      //             child: Text("Test Page"),
+      //           ),
+      //         )));
+
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => HomePage()));
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomePage.routeName, (Route<dynamic> route) => false);
+    } else {
+      print("failed");
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text(loginResponse.message ?? "Invalid Credentials.")));
     }
-    Snacks.getSnackBar(
-      context,
-      loginResponse.message ?? "Successfully logged in.",
-    );
-    Navigator.pushNamedAndRemoveUntil(
-        context, HomePage.routeName, (Route<dynamic> route) => false);
-  } else {
-    Snacks.getSnackBar(
-      context,
-      loginResponse.message ?? "Invalid credentials.",
-    );
+  } on Exception catch (e) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(e.toString())));
   }
 }
 
@@ -114,6 +136,7 @@ class _HomePageState extends State<LoginPage> {
   @override
   void initState() {
     fillTextController();
+
     super.initState();
   }
 

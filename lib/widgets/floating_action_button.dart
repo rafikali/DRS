@@ -29,3 +29,27 @@ class MyFloatingButton {
     });
   }
 }
+
+// ignore: must_be_immutable
+class CustomFloatingActionButton extends StatelessWidget {
+  final Color? backgroundcolor;
+
+  CustomFloatingActionButton(
+      {Key? key,
+      this.child = const Icon(Icons.add),
+      this.backgroundcolor,
+      this.onPressed})
+      : super(key: key);
+
+  Widget? child;
+  VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: backgroundcolor,
+      onPressed: onPressed,
+      child: child,
+    );
+  }
+}

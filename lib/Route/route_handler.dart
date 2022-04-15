@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
+import 'package:login_page/pages/add_daily_update.dart';
 import 'package:login_page/pages/change_pass.dart';
+import 'package:login_page/pages/changing_new_passing.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/hr_policy.dart';
 import 'package:login_page/pages/my_attendances.dart';
@@ -30,7 +32,8 @@ class RouteGenerator {
 
       case Register.routeName:
         return MaterialPageRoute(builder: (context) => const Register());
-
+      case OnBoardPage.routeName:
+        return MaterialPageRoute(builder: ((context) => const OnBoardPage()));
       case HomePage.routeName:
         return MaterialPageRoute(
             builder: (context) => const HomePage(), settings: settings);
@@ -69,7 +72,12 @@ class RouteGenerator {
       case MySettings.routeName:
         return PageTransition(
           child: const MySettings(),
-          type: getRandomTransition(),
+          type: PageTransitionType.rightToLeft,
+        );
+      case AddDailyUpdae.routeName:
+        return PageTransition(
+          child: const AddDailyUpdae(),
+          type: PageTransitionType.fade,
         );
 
       case MyDailyUpdates.routeName:
