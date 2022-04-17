@@ -6,4 +6,6 @@ class AppConstants {
   static const String password = 'password';
   static const String ghostCount = 'ghost_count';
   static const String missingCheckout = "missing_checkout";
+  static const String storedtheme = "stored_theme";
+  static const String todayDate = "todayDate";
 }

@@ -136,12 +136,10 @@ class _DashBoardState extends State<DashBoard> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             'Recent Daily Update:',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                           const SizedBox(
                             height: 10,
@@ -150,14 +148,14 @@ class _DashBoardState extends State<DashBoard> {
                             padding: const EdgeInsets.only(left: 4, right: 48),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Update For',
-                                  style: TextStyle(fontSize: 16),
+                                  style: Theme.of(context).textTheme.headline6,
                                 ),
                                 Text(
                                   'Title',
-                                  style: TextStyle(fontSize: 16),
+                                  style: Theme.of(context).textTheme.headline6,
                                 )
                               ],
                             ),

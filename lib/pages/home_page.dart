@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import '../Constants/Images.dart';
 import '../main.dart';
 // import 'CssBaseline  from '@mui/material/';
-
+import 'dart:developer' as devtools show log;
 import '../models/models.dart';
 import '../services/schedule_services.dart';
 import '../utils/daily_update_alertbox.dart';
@@ -113,7 +113,6 @@ class _HomePageState extends State<HomePage> {
                 appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(170.0),
                     child: AppBar(
-                      backgroundColor: const Color(0xFF6C63FF),
                       automaticallyImplyLeading: false,
                       elevation: 2,
                       shape: const RoundedRectangleBorder(
@@ -134,11 +133,11 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             IconButton(
                               icon: changeButton
-                                  ? Icon(CupertinoIcons.brightness_solid,
-                                      size: Theme.of(context).iconTheme.size)
-                                  : Icon(
+                                  ? const Icon(
                                       CupertinoIcons.moon,
-                                      size: Theme.of(context).iconTheme.size,
+                                    )
+                                  : const Icon(
+                                      CupertinoIcons.brightness_solid,
                                     ),
                               onPressed: () {
                                 darkMode();
@@ -169,11 +168,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Builder(builder: (context) {
                               return IconButton(
-                                  icon: ImageIcon(
-                                    const AssetImage(
+                                  icon: const ImageIcon(
+                                    AssetImage(
                                       ImageConstants.menuIcon,
                                     ),
-                                    size: Theme.of(context).iconTheme.size,
+                                    // size: Theme.of(context).iconTheme.size,
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(

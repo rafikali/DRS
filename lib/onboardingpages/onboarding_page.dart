@@ -3,7 +3,7 @@ import 'package:login_page/onboardingpages/onboarding_one.dart';
 import 'package:login_page/pages/login_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../Constants/app_colors.dart';
+import '../theme/app_colors.dart';
 import 'onboarding_three.dart';
 import 'onboarding_two.dart';
 

@@ -4,11 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Class that contains all your app settings
 /// Consists only of Theme setting as of now
 class DarkThemeNotifier extends ChangeNotifier {
-  final SharedPreferences? sharedPreferences;
+  SharedPreferences? sharedPreferences;
 
-  DarkThemeNotifier(this.sharedPreferences);
+  // DarkThemeNotifier(this.sharedPreferences);
 
-  bool get isDarkMode => sharedPreferences?.getBool("isDarkMode") ?? false;
+  Future<bool> getTheme() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    return sharedPreferences?.getBool("isDarkMode") ?? false;
+  }
 
   void setDarkMode(bool val) {
     sharedPreferences?.setBool("isDarkMode", val);

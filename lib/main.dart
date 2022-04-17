@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/Constants/app_constants.dart';
-import 'package:login_page/Constants/theme.dart';
 import 'package:login_page/Route/route_handler.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
 import 'package:login_page/pages/home_page.dart';
+import 'package:login_page/theme/dark_theme.dart';
+import 'package:login_page/theme/light_theme.dart';
+import 'package:login_page/widgets/darkThemeNotifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeChanger with ChangeNotifier {
   var _themeMode = ThemeMode.light;
   ThemeMode get getThemeMode => _themeMode;
-  void setTheme(themeMode) {
-    _themeMode = themeMode;
-    print(themeMode);
+  void setTheme(ThemeMode theme) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (theme == ThemeMode.dark) {
+      prefs.setBool(AppConstants.storedtheme, true);
+    } else {
+      prefs.setBool(AppConstants.storedtheme, false);
+    }
+    _themeMode = theme;
+    notifyListeners();
+  }
+
+  ThemeChanger() {
+    getTheme();
+  }
+
+  getTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(AppConstants.storedtheme) ?? false) {
+      _themeMode = ThemeMode.dark;
+    } else {
+      _themeMode = ThemeMode.light;
+    }
     notifyListeners();
   }
 }
@@ -61,49 +82,57 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    // Provider.of<ThemeChanger>(context, listen: false).getTheme();
   }
 
   setUpPreference() async {
     _preferences = await SharedPreferences.getInstance();
   }
 
+  bool val = true;
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeChanger>(
-      create: (_) => ThemeChanger(),
-      builder: (context, ha) {
-        final themeChanger = Provider.of<ThemeChanger>(context);
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DarkThemeNotifier>(
+            create: (_) => DarkThemeNotifier(),
+          ),
+          ChangeNotifierProvider<ThemeChanger>(
+            create: (_) => ThemeChanger(),
+          ),
+        ],
+        child: Consumer<ThemeChanger>(
+          builder: (context, value, child) {
+            return MaterialApp(
+              navigatorKey: AppSettings.navigatorKey,
+              debugShowCheckedModeBanner: false,
+              // themeMode: themeChanger.getThemeMode,
+              // darkTheme: setDarkTheme,
+              theme: value.getThemeMode != ThemeMode.light
+                  ? darkTheme
+                  : setLightTheme,
 
-        print(themeChanger.getThemeMode.name);
-        return MaterialApp(
-          navigatorKey: AppSettings.navigatorKey,
-          debugShowCheckedModeBanner: false,
-          themeMode: themeChanger.getThemeMode,
-          darkTheme: setDarkTheme,
-          // theme: Provider.of<DarkThemeNotifier>(context).isDarkMode
-          //     ? setDarkTheme
-          //     : setLightTheme,
-          // primaryColor: Colors.black,
+              //   textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
+              // primaryColor: const Color(0xFF343434),
+              //   scaffoldBackgroundColor: const Color(0xFFF3F3F3),
+              //   appBarTheme: const AppBarTheme(
+              //       titleTextStyle: TextStyle(
+              //         color: Colors.black,
+              //       ),
+              //       iconTheme: IconThemeData(color: Colors.black),
+              //       actionsIconTheme: IconThemeData(color: Colors.white)),
+              // darkTheme: setDarkTheme,
 
-          //   textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
-          // primaryColor: const Color(0xFF343434),
-          //   scaffoldBackgroundColor: const Color(0xFFF3F3F3),
-          //   appBarTheme: const AppBarTheme(
-          //       titleTextStyle: TextStyle(
-          //         color: Colors.black,
-          //       ),
-          //       iconTheme: IconThemeData(color: Colors.black),
-          //       actionsIconTheme: IconThemeData(color: Colors.white)),
-          // darkTheme: setDarkTheme,
-
-          title: "drs",
-          initialRoute: widget.accessToken != null
-              ? HomePage.routeName
-              : OnBoardPage.routeName,
-          onGenerateRoute: RouteGenerator.generateRoute,
+              title: "drs",
+              initialRoute: widget.accessToken != null
+                  ? HomePage.routeName
+                  : OnBoardPage.routeName,
+              onGenerateRoute: RouteGenerator.generateRoute,
+            );
+          },
+        )
+        // child:
         );
-      },
-      // child:
-    );
   }
 }

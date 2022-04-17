@@ -14,9 +14,9 @@ class ChangePassApi {
         Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.changePasword),
         headers: await getHeader(),
         body: jsonEncode({
-          "current_password ": currentPassword,
+          "current_password": currentPassword,
           "password": password,
-          "password confimation": confirmPassword
+          "password_confirmation": confirmPassword
         }));
     print(response.statusCode);
     if (response.statusCode == 200 ||

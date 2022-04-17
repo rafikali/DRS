@@ -51,6 +51,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
         : Padding(
             padding: const EdgeInsets.all(6),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   width: double.infinity,
