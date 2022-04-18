@@ -30,9 +30,9 @@ class _MyLeavesState extends State<MyLeaves> {
                   width: 10,
                 ),
                 const Text(''),
-                const Text(
+                Text(
                   'MY Leaves',
-                  style: TextStyle(fontSize: 24),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 Row(
                   children: [
@@ -60,7 +60,7 @@ class _MyLeavesState extends State<MyLeaves> {
                   ],
                 ),
               ]),
-              Container(
+              SizedBox(
                 height: 100,
                 child: Row(
                   children: [

@@ -25,7 +25,7 @@ class ChangePassApi {
       var bodyData = jsonDecode(response.body);
       LoginResponse? updatedPassword = LoginResponse.fromJson(bodyData);
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text('Password changed successful')));
+          const SnackBar(content: Text('Password changed successful')));
       print(updatedPassword);
       return updatedPassword;
     } else {

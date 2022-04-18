@@ -13,9 +13,9 @@ class Attendances extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const Text(
+          Text(
             'My Attendances',
-            style: TextStyle(fontSize: 24),
+            style: Theme.of(context).textTheme.headline6,
           ),
           TableData(
             columns: [

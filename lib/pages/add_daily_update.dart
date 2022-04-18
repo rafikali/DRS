@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/date_picker.dart';
 
+import '../services/daily_update_services.dart';
 import '../utils/input_validators.dart';
 import '../widgets/login_textfield.dart';
 
@@ -19,6 +21,8 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
   final selectedDate = DateTime.now();
   final pickedDate = DateTime.now();
   final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final todayDate = DateTime(DateTime.now().day);
   @override
   void initState() {
     // TODO: implement initState
@@ -27,11 +31,16 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
   }
 
   fillTextController() async {
-    final String? todayDate =
-        await PrefsServices().getString(AppConstants.todayDate);
-    if (todayDate != null) {
-      _dateController.text = todayDate;
-    }
+    // final String? todayDate =
+    //     // await PrefsServices().getString(AppConstants.todayDate);
+    final DateTime? todayDate = DateTime.now();
+    String updateToday = DateFormat('yyyy-MM-dd').format(todayDate!);
+    String formatTitle = DateFormat('yyyy-MM-dd').format(todayDate);
+    String day = todayDate.day.toString();
+    String? title = 'Daily Update [ $formatTitle ($day)]';
+
+    _dateController.text = updateToday;
+    _titleController.text = title;
   }
 
   @override
@@ -42,7 +51,7 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
         // backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 130),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 130),
             child: Center(
               child: Card(
                 elevation: 10,
@@ -74,8 +83,6 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                             );
                             setState(() {
                               _dateController.text = date;
-                              PrefsServices().setString(
-                                  AppConstants.todayDate, _dateController.text);
                             });
 
                             // showDialog(
@@ -97,9 +104,9 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                         ),
                         const SizedBox(height: 5),
                         LoginTextForm(
-                          hintText: 'Daily Update [ 2022-03-26 (Sat) ]',
+                          dataController: _titleController,
+                          hintText: '',
                           labelText: 'Title*',
-                          dataController: ,
                           fillcolor: Colors.white,
                           validator: InputValidator.validateDate,
                         ),
@@ -127,13 +134,13 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              child: Text('Cancel'),
+                              child: const Text('Cancel'),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
                             ),
                             TextButton(
-                              child: Text('Submit'),
+                              child: const Text('Submit'),
                               onPressed: () {},
                             ),
                           ],

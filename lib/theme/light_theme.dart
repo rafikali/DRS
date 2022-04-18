@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 var setLightTheme = ThemeData(
-    primarySwatch: Colors.red,
     primaryColor: Colors.red,
     brightness: Brightness.light,
     visualDensity: const VisualDensity(horizontal: 2.0, vertical: 2.0),
@@ -26,7 +25,7 @@ var setLightTheme = ThemeData(
         iconTheme: IconThemeData(color: Colors.black),
         actionsIconTheme: IconThemeData(color: Colors.white)),
     iconTheme: const IconThemeData(
-      color: Colors.white,
+      color: Colors.black,
       // size: 20.0,
       opacity: 10,
     ));

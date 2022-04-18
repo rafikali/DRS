@@ -3,7 +3,10 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/utils/daily_update_alertbox.dart';
+import 'package:login_page/utils/pref_services.dart';
+import 'package:login_page/widgets/date_picker.dart';
 import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/table.dart';
 
@@ -22,7 +25,7 @@ class DailyUpdate extends StatefulWidget {
 class _DailyUpdateState extends State<DailyUpdate> {
   DateTime selectedDate = DateTime.now();
   final DateTime? pickedDate = DateTime(2000);
-  TextEditingController dateInput = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
   DailyUpdatesModel? recentUpdates;
 
   @override
@@ -36,6 +39,8 @@ class _DailyUpdateState extends State<DailyUpdate> {
       if (value != null) {
         setState(() {
           recentUpdates = value;
+          String? title = recentUpdates?.data![0].title.toString();
+          PrefsServices().setString(AppConstants.title, title.toString());
         });
       }
     });
@@ -51,7 +56,6 @@ class _DailyUpdateState extends State<DailyUpdate> {
         : Padding(
             padding: const EdgeInsets.all(6),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   width: double.infinity,
@@ -61,35 +65,40 @@ class _DailyUpdateState extends State<DailyUpdate> {
                         Flexible(
                           child: GestureDetector(
                             child: LoginTextForm(
+                              fillcolor: Theme.of(context).cardColor,
                               onTap: () async {
-                                DateTime pickedDate = await showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return DatePickerDialog(
-                                        firstDate: DateTime(2000),
-                                        initialDate: selectedDate,
-                                        lastDate: DateTime.now()
-                                            .add(const Duration(days: 365)),
-                                        initialEntryMode:
-                                            DatePickerEntryMode.input,
-                                      );
-                                    });
+                                String? pickedDate = await datePicker(context);
+                                setState(() {
+                                  _dateController.text = pickedDate;
+                                });
 
-                                if (pickedDate != selectedDate) {
-                                  String formattedDate =
-                                      DateFormat('yyyy-MM-dd')
-                                          .format(pickedDate);
-                                  setState(() {
-                                    dateInput.text = formattedDate.toString();
-                                    selectedDate = pickedDate;
-                                  });
-                                }
+                                // DateTime pickedDate = await showDialog(
+                                //     context: context,
+                                //     builder: (context) {
+                                //       return DatePickerDialog(
+                                //         firstDate: DateTime(2000),
+                                //         initialDate: selectedDate,
+                                //         lastDate: DateTime.now()
+                                //             .add(const Duration(days: 365)),
+                                //         initialEntryMode:
+                                //             DatePickerEntryMode.input,
+                                //       );
+                                //     });
+
+                                // if (pickedDate != selectedDate) {
+                                //   String formattedDate =
+                                //       DateFormat('yyyy-MM-dd')
+                                //           .format(pickedDate);
+                                //   setState(() {
+                                //     dateInput.text = formattedDate.toString();
+                                //     selectedDate = pickedDate;
+                                //   });
+                                // }
                               },
-                              dataController: dateInput,
+                              dataController: _dateController,
                               hintText: 'Date',
                               readonly: true,
                               width: 100,
-                              fillcolor: Colors.white,
                               height: 50,
                               trailingIcon: const Icon(CupertinoIcons.calendar),
                             ),

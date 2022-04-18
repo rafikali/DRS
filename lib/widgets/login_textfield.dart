@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+// ignore: must_be_immutable
 class LoginTextForm extends StatefulWidget {
   dynamic trailingIcon;
   final String? labelText;
   final String hintText;
-  final maxLength;
+  final int? maxLength;
   bool? passView;
   final typeKeyboard;
   final validator;
@@ -104,7 +105,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
                     style: BorderStyle.solid, color: Color(0xFF6C63FF))),
         labelStyle: const TextStyle(color: Color(0xFF6C63FF)),
 
-        suffixIcon: widget.trailingIcon,
+        suffixIconColor: Theme.of(context).iconTheme.color,
         labelText: widget.labelText,
         hintText: widget.hintText,
 
