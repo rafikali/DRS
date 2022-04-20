@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
-import 'package:login_page/pages/add_daily_update.dart';
-import 'package:login_page/pages/change_pass.dart';
+import 'package:login_page/pages/new_design_profile.dart';
+import 'package:login_page/pages/update_drs.dart';
 import 'package:login_page/pages/changing_new_passing.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/hr_policy.dart';
@@ -14,14 +14,13 @@ import 'package:login_page/pages/my_missing_checkout.dart';
 import 'package:login_page/pages/myleaves_transaction.dart';
 import 'package:login_page/pages/reset_password.dart';
 import 'package:login_page/pages/verify_otp.dart';
-import 'package:login_page/utils/random_transition.dart';
 import 'package:login_page/widgets/setting_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
 import '../pages/newregister.dart';
-import '../widgets/profile_page_appbar.dart';
+import '../pages/profile_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -74,9 +73,9 @@ class RouteGenerator {
           child: const MySettings(),
           type: PageTransitionType.rightToLeft,
         );
-      case AddDailyUpdae.routeName:
+      case UpdateDrs.routeName:
         return PageTransition(
-          child: const AddDailyUpdae(),
+          child: const UpdateDrs(),
           type: PageTransitionType.fade,
         );
 
@@ -88,6 +87,8 @@ class RouteGenerator {
       case Profile.routeName:
         return PageTransition(
             child: const Profile(), type: PageTransitionType.fade);
+      case ProfilePage.routeName:
+        return MaterialPageRoute(builder: (context) => ProfilePage());
 
       default:
         return MaterialPageRoute(builder: (context) => const OnBoardPage());

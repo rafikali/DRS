@@ -17,6 +17,6 @@ Future<String> datePicker(BuildContext context) async {
     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
     return formattedDate;
   } else {
-    return "";
+    return DateTime.now().toString();
   }
 }

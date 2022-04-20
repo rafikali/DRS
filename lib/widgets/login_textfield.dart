@@ -66,9 +66,11 @@ class _LoginTextFormState extends State<LoginTextForm> {
       autofillHints: widget.autofillHints,
       onTap: widget.onTap,
       maxLength: widget.maxLength,
-      keyboardType: widget.typeKeyboard,
+      
       obscureText: widget.passView == true,
+      keyboardType: widget.typeKeyboard,
       controller: widget.dataController,
+      
       maxLines: widget.maxLine ?? 1,
       // enabled: widget.enabled,
       readOnly: widget.readonly,
@@ -91,7 +93,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
                   topRight: Radius.circular(8),
                   topLeft: Radius.circular(8),
                   bottomLeft: Radius.circular(4),
-                  bottomRight: const Radius.circular(4)),
+                  bottomRight:  Radius.circular(4)),
               borderSide: BorderSide(
                 style: BorderStyle.solid,
                 color: Colors.red,

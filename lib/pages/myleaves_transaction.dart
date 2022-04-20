@@ -32,47 +32,49 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
       margin: const EdgeInsets.all(10),
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'My Leave Transaction',
-                style: TextStyle(fontSize: 24),
-              ),
-              IconButton(
-                onPressed: () {
-                  refreshPage();
-                },
-                icon: const Icon(
-                  CupertinoIcons.refresh_circled,
-                  color: Colors.blue,
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'My Leave Transaction',
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-              ),
-            ],
-          ),
-          TableData(columns: [
-            DataLabels(label: const Text('#')),
-            DataLabels(label: const Text('Narration')),
-            DataLabels(label: const Text('Days')),
-            DataLabels(label: const Text('Type')),
-            DataLabels(label: const Text('Remaining Days')),
-            DataLabels(label: const Text('Calender year')),
-            DataLabels(label: const Text('Created At')),
-          ], rows: [
-            DataLabels(
-              dataCell: [
-                '1',
-                'Annual Leave (10 days) - 2078/79',
-                '3.52',
-                'CR',
-                '3.52',
-                '2078/79',
-                '2022-03-14 15:33:38'
+                IconButton(
+                  onPressed: () {
+                    refreshPage();
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.refresh_circled,
+                    color: Colors.blue,
+                  ),
+                ),
               ],
             ),
-          ])
-        ]),
+            TableData(columns: [
+              DataLabels(label: const Text('#')),
+              DataLabels(label: const Text('Narration')),
+              DataLabels(label: const Text('Days')),
+              DataLabels(label: const Text('Type')),
+              DataLabels(label: const Text('Remaining Days')),
+              DataLabels(label: const Text('Calender year')),
+              DataLabels(label: const Text('Created At')),
+            ], rows: [
+              DataLabels(
+                dataCell: [
+                  '1',
+                  'Annual Leave (10 days) - 2078/79',
+                  '3.52',
+                  'CR',
+                  '3.52',
+                  '2078/79',
+                  '2022-03-14 15:33:38'
+                ],
+              ),
+            ])
+          ]),
+        ),
       ),
     );
   }

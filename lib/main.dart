@@ -68,7 +68,7 @@ class MyApp extends StatefulWidget {
   MyApp(
       {Key? key,
       this.changeMode,
-      this.systemNavigationColor,
+      this.systemNavigationColor, 
       this.accessToken,
       this.userCredentials})
       : super(key: key);
@@ -78,16 +78,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  SharedPreferences? _preferences;
+
   @override
   void initState() {
     super.initState();
     // Provider.of<ThemeChanger>(context, listen: false).getTheme();
   }
 
-  setUpPreference() async {
-    _preferences = await SharedPreferences.getInstance();
-  }
 
   bool val = true;
 
@@ -95,9 +92,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<DarkThemeNotifier>(
-            create: (_) => DarkThemeNotifier(),
-          ),
+          // ChangeNotifierProvider<DarkThemeNotifier>(
+          //   create: (_) => DarkThemeNotifier(),
+          // ),
           ChangeNotifierProvider<ThemeChanger>(
             create: (_) => ThemeChanger(),
           ),

@@ -2,42 +2,67 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_page/Constants/app_constants.dart';
+import 'package:login_page/models/update_message.dart';
+import 'package:login_page/services/add_daily_update.dart';
 import 'package:login_page/utils/pref_services.dart';
+import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/date_picker.dart';
 
 import '../services/daily_update_services.dart';
 import '../utils/input_validators.dart';
 import '../widgets/login_textfield.dart';
 
-class AddDailyUpdae extends StatefulWidget {
+class UpdateDrs extends StatefulWidget {
   static const String routeName = '/adddailyupdate';
-  const AddDailyUpdae({Key? key}) : super(key: key);
+  const UpdateDrs({Key? key}) : super(key: key);
 
   @override
-  State<AddDailyUpdae> createState() => AddDailyUpdaeState();
+  State<UpdateDrs> createState() => UpdateDrsState();
 }
 
-class AddDailyUpdaeState extends State<AddDailyUpdae> {
-  final selectedDate = DateTime.now();
-  final pickedDate = DateTime.now();
+class UpdateDrsState extends State<UpdateDrs> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
-  final todayDate = DateTime(DateTime.now().day);
+  final TextEditingController _dataController = TextEditingController();
+  Message msg = Message();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fillTextController();
+    fillTextController(DateTime.now());
+    // fetchAddUpdate();
   }
 
-  fillTextController() async {
+  validationCheck() async {
+    if (_formKey.currentState!.validate()) {
+      fetchAddUpdate();
+    } else {
+      return "required*";
+    }
+  }
+
+  fetchAddUpdate() async {
+    await AddDailyUpdate()
+        .fetchAddUpdate(_dateController.text, _titleController.text,
+            _dataController.text, context)
+        .then((value) {
+      if (value != null) {
+        setState(() {
+          msg = value;
+        });
+      }
+    });
+  }
+
+  fillTextController(DateTime dateTime) async {
     // final String? todayDate =
     //     // await PrefsServices().getString(AppConstants.todayDate);
-    final DateTime? todayDate = DateTime.now();
+    final DateTime? todayDate = dateTime;
     String updateToday = DateFormat('yyyy-MM-dd').format(todayDate!);
-    String formatTitle = DateFormat('yyyy-MM-dd').format(todayDate);
-    String day = todayDate.day.toString();
-    String? title = 'Daily Update [ $formatTitle ($day)]';
+    String day = DateFormat('EEE', 'en_US').format(todayDate);
+    String? title = 'Daily Update [ $updateToday ($day)]';
 
     _dateController.text = updateToday;
     _titleController.text = title;
@@ -47,6 +72,7 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         // backgroundColor: Colors.black,
         body: SingleChildScrollView(
@@ -54,6 +80,7 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 130),
             child: Center(
               child: Card(
+                // color: Theme.of(context).dialogBackgroundColor,
                 elevation: 10,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
@@ -63,26 +90,26 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                   padding: const EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height * 0.6,
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
-                        const Text(
-                          'Add Daily Update',
-                          style: TextStyle(fontSize: 25),
-                        ),
+                        Text('Add Daily Update',
+                            style: Theme.of(context).textTheme.headline6),
                         const Divider(
                           color: Colors.black,
                         ),
                         LoginTextForm(
                           readonly: true,
                           hintText: '2022-03-26',
-                          labelText: 'Update for',
+                          labelText: 'Update for*',
                           dataController: _dateController,
                           onTap: () async {
-                            String date = await datePicker(
+                            String? date = await datePicker(
                               context,
                             );
                             setState(() {
                               _dateController.text = date;
+                              fillTextController(DateTime.parse(date));
                             });
 
                             // showDialog(
@@ -111,15 +138,17 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                           validator: InputValidator.validateDate,
                         ),
                         const SizedBox(height: 14),
-                        const Text(
-                          'Mention your Productivity (Work done) of the Day *',
-                          style: TextStyle(fontSize: 15),
+                        Text(
+                          'Mention your Productivity (Work done) of the Day*',
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                         const SizedBox(height: 18),
                         LoginTextForm(
                           maxLine: 6,
                           hintText: 'Enter something',
                           fillcolor: Colors.white,
+                          dataController: _dataController,
+                          validator: InputValidator.validateDate,
                           outlineBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               style: BorderStyle.solid,
@@ -130,18 +159,31 @@ class AddDailyUpdaeState extends State<AddDailyUpdae> {
                           // contentPadding: const EdgeInsets.symmetric(
                           //     horizontal: 5, vertical: 80),
                         ),
+                        Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              child: const Text('Cancel'),
+                              child: const Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
                             ),
                             TextButton(
-                              child: const Text('Submit'),
-                              onPressed: () {},
+                              child: const Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                ),
+                              ),
+                              onPressed: () {
+                                validationCheck();
+                              },
                             ),
                           ],
                         )

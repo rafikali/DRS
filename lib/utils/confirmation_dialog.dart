@@ -10,12 +10,12 @@ Future<bool> getDialog(BuildContext context,
           content: content,
           actions: [
             TextButton(
-              child: Text("Yes"),
-              onPressed: () => Navigator.pop(context, true),
-            ),
-            TextButton(
               child: Text("No"),
               onPressed: () => Navigator.pop(context, false),
+            ),
+            TextButton(
+              child: Text("Yes"),
+              onPressed: () => Navigator.pop(context, true),
             ),
           ],
         );

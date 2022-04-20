@@ -2,24 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/Curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:login_page/pages/add_daily_update.dart';
+import 'package:login_page/pages/new_design_profile.dart';
+import 'package:login_page/pages/update_drs.dart';
 import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dash_board.dart';
 import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/myleaves_transaction.dart';
+import 'package:login_page/utils/confirmation_dialog.dart';
 import 'package:login_page/widgets/floating_action_button.dart';
 import 'package:provider/provider.dart';
 
 import '../Constants/Images.dart';
 import '../main.dart';
 // import 'CssBaseline  from '@mui/material/';
-import 'dart:developer' as devtools show log;
 import '../models/models.dart';
 import '../services/schedule_services.dart';
-import '../utils/daily_update_alertbox.dart';
-import '../widgets/alertbox..dart';
-import '../widgets/profile_page_appbar.dart';
+import 'profile_page.dart';
 import '../widgets/setting_page.dart';
 import '../widgets/simple_button.dart';
 
@@ -83,12 +82,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
-
+    // Future<bool> value = false;
     return WillPopScope(
       onWillPop: () async {
-        SystemNavigator.pop();
+        bool? value = await getDialog(context,
+                title: const Text('Confirm'),
+                content: const Text('Do you want to exit?'))
+            .then((value) {
+          if (value == true) {
+            SystemNavigator.pop();
+          } else {
+            return null;
+          }
+          return null;
+        });
 
-        return true;
+        return false;
       },
       child: schedules == null
           ? const Center(
@@ -97,19 +106,6 @@ class _HomePageState extends State<HomePage> {
           : SafeArea(
               child: Scaffold(
                 extendBody: true,
-                // body: NestedScrollView(
-                //   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                //     return <Widget>[
-                //       const SliverBar(),
-                //     ];
-                //   },
-                //   body: TabBarView(children: [
-                //     CustomScrollView(
-                //       slivers: [
-                //       ],
-                //     )
-                //   ]),
-                // ),
                 appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(170.0),
                     child: AppBar(
@@ -159,7 +155,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IconButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, Profile.routeName);
+                                Navigator.pushNamed(
+                                    context, ProfilePage.routeName);
                               },
                               icon: Icon(
                                 CupertinoIcons.profile_circled,
@@ -199,16 +196,38 @@ class _HomePageState extends State<HomePage> {
                                     child: Image.asset(ImageConstants.profile,
                                         height: 80),
                                     onTap: () {
-                                      BottomSheet(
+                                      showModalBottomSheet(
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(20),
+                                        )),
                                         builder: (context) {
-                                          return Column(children: const [
-                                            ListTile(
-                                              leading: Icon(CupertinoIcons.add),
-                                              title: Text("Upload photo"),
-                                            ),
-                                          ]);
+                                          return Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: const [
+                                                ListTile(
+                                                  leading: CircleAvatar(
+                                                      child: Icon(CupertinoIcons
+                                                          .camera)),
+                                                  title: Text("Take photo"),
+                                                ),
+                                                ListTile(
+                                                  leading: CircleAvatar(
+                                                      child: Icon(CupertinoIcons
+                                                          .folder)),
+                                                  title: Text("Upload photo"),
+                                                ),
+                                                ListTile(
+                                                  leading: CircleAvatar(
+                                                    child: Icon(
+                                                        CupertinoIcons.person),
+                                                  ),
+                                                  title: Text("View profile"),
+                                                ),
+                                              ]);
                                         },
-                                        onClosing: () {},
+                                        // onClosing: null,
+                                        context: context,
                                       );
                                     },
                                   ),
@@ -253,12 +272,33 @@ class _HomePageState extends State<HomePage> {
                 //   child: Text("data"),
                 // ),
                 body: widgetOptions.elementAt(selectedIndex!),
+                floatingActionButton: CustomFloatingActionButton(
+                  backgroundcolor: Colors.green,
+                  onPressed: (() {
+                    Navigator.pushNamed(context, UpdateDrs.routeName);
+                    // DialogBox(
+                    //   dialogBoxPadding: const EdgeInsets.all(15),
+                    //   barrierDismissile: false,
+                    //   content: DailyUpdateAlertBox(
+                    //     padding: const EdgeInsets.all(10),
+                    //   ),
+                    // ).getAlertDialogBox(context);
+                  }),
+                ),
                 bottomNavigationBar: SafeArea(
                   child: CurvedNavigationBar(
+                    buttonBackgroundColor: Theme.of(context)
+                        .bottomNavigationBarTheme
+                        .selectedItemColor,
                     iconColor: Colors.white,
-                    iconHeight: 23,
+
+                    //
+                    // iconHeight: 23,
                     animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.transparent,
+                    foregroundColor: Theme.of(context)
+                        .bottomNavigationBarTheme
+                        .backgroundColor,
                     // color: const Color(0xFF6C63FF),
                     index: selectedIndex!,
                     onTap: (int index) {
@@ -275,19 +315,6 @@ class _HomePageState extends State<HomePage> {
                           ImageConstants.leaveTransactionLogo, 'Leave Trans')
                     ],
                   ),
-                ),
-                floatingActionButton: CustomFloatingActionButton(
-                  backgroundcolor: Colors.green,
-                  onPressed: (() {
-                    Navigator.pushNamed(context, AddDailyUpdae.routeName);
-                    // DialogBox(
-                    //   dialogBoxPadding: const EdgeInsets.all(15),
-                    //   barrierDismissile: false,
-                    //   content: DailyUpdateAlertBox(
-                    //     padding: const EdgeInsets.all(10),
-                    //   ),
-                    // ).getAlertDialogBox(context);
-                  }),
                 ),
               ),
             ),

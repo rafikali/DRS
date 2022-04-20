@@ -19,88 +19,90 @@ class _MyLeavesState extends State<MyLeaves> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(6),
-        child: Card(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+        child: SingleChildScrollView(
+          child: Card(
+            child: Column(
+              children: [
                 const SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
-                const Text(''),
-                Text(
-                  'MY Leaves',
-                  style: Theme.of(context).textTheme.headline6,
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(''),
+                  Text(
+                    'MY Leaves',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.color_filter,
+                        ),
+                        color: Colors.red,
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.add_circled_solid,
+                          color: Colors.green,
+                        ),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.refresh,
+                          color: Colors.blue,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ]),
+                SizedBox(
+                  height: 100,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: LoginTextForm(
+                          readonly: true,
+                          fillcolor: Theme.of(context).cardColor,
+                          hintText: 'Date',
+                          trailingIcon: const Icon(CupertinoIcons.calendar),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: DropView(
+                          dropdownItems: const [
+                            'APPROVED',
+                            'APPLIED',
+                            'EDITED',
+                            'REJECTED'
+                          ],
+                          date: 'Filter by Status',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        CupertinoIcons.color_filter,
-                      ),
-                      color: Colors.red,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        CupertinoIcons.add_circled_solid,
-                        color: Colors.green,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        CupertinoIcons.refresh,
-                        color: Colors.blue,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ]),
-              SizedBox(
-                height: 100,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: LoginTextForm(
-                        readonly: true,
-                        fillcolor: Colors.white,
-                        hintText: 'Date',
-                        trailingIcon: const Icon(CupertinoIcons.calendar),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: DropView(
-                        dropdownItems: const [
-                          'APPROVED',
-                          'APPLIED',
-                          'EDITED',
-                          'REJECTED'
-                        ],
-                        date: 'Filter by Status',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              TableData(columns: [
-                DataLabels(label: const Text('#')),
-                DataLabels(label: const Text('Start Date')),
-                DataLabels(label: const Text('No. of Days')),
-                DataLabels(label: const Text('Reason')),
-                DataLabels(label: const Text('Status')),
-                DataLabels(label: const Text('Created at')),
-                DataLabels(label: const Text('Actions')),
-              ], rows: [
-                DataLabels(
-                    dataCell: ['No Data available', '', '', '', '', '', '']),
-              ])
-            ],
+                TableData(columns: [
+                  DataLabels(label: const Text('#')),
+                  DataLabels(label: const Text('Start Date')),
+                  DataLabels(label: const Text('No. of Days')),
+                  DataLabels(label: const Text('Reason')),
+                  DataLabels(label: const Text('Status')),
+                  DataLabels(label: const Text('Created at')),
+                  DataLabels(label: const Text('Actions')),
+                ], rows: [
+                  DataLabels(
+                      dataCell: ['No Data available', '', '', '', '', '', '']),
+                ])
+              ],
+            ),
           ),
         ),
       ),

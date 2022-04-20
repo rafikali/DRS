@@ -5,7 +5,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_page/Auth_Services/change_password.dart';
-import 'package:login_page/pages/home_page.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
@@ -66,11 +65,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Create new password',
-                      style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                    ),
+                    Text('Create new password',
+                        style: Theme.of(context).textTheme.headline4),
                     const SizedBox(
                       height: 10,
                     ),

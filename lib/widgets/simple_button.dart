@@ -13,7 +13,9 @@ class SimpleButton extends StatelessWidget {
         width: 130,
         child: Text(
           title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Colors.black,
+          ),
           softWrap: true,
         ),
         alignment: Alignment.center,

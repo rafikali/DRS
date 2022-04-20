@@ -79,9 +79,9 @@ Future fetchLogin(
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.routeName, (Route<dynamic> route) => false);
     } else {
-      print("failed");
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //     content: Text(loginResponse.message ?? "Invalid Credentials.")));
+      // print("failed");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(loginResponse.message ?? "Invalid Credentials.")));
     }
   } on Exception catch (e) {
     ScaffoldMessenger.of(context)

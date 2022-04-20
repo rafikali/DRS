@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/carddata.dart';
-import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/services/dashboard_services.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/GridView.dart';
@@ -91,7 +90,6 @@ class _DashBoardState extends State<DashBoard> {
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
               child: ListView(
                 shrinkWrap: true,
                 // mainAxisSize: MainAxisSize.min,
@@ -140,7 +138,6 @@ class _DashBoardState extends State<DashBoard> {
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Column(
-                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
                               'Recent Daily Update:',
@@ -172,7 +169,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             const Divider(),
                             ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: recentUpdates2?.data!.length,
                               itemBuilder: ((context, index) {
@@ -198,7 +195,7 @@ class _DashBoardState extends State<DashBoard> {
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 5,
                                             ),
                                             // WebView(
