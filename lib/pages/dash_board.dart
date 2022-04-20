@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/carddata.dart';
+import 'package:login_page/pages/my_missing_checkout.dart';
+import 'package:login_page/pages/myleaves_transaction.dart';
 import 'package:login_page/services/dashboard_services.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/GridView.dart';
@@ -98,6 +100,8 @@ class _DashBoardState extends State<DashBoard> {
                     shrinkWrap: true,
                     children: [
                       CardView(
+                          onTap: (() => Navigator.pushNamed(
+                              context, MyMissingCheckout.routeName)),
                           dashboardIcon: CupertinoIcons.clock,
                           title: 'My Missing Checkout',
                           color: missingCheckout == '0'
@@ -109,12 +113,16 @@ class _DashBoardState extends State<DashBoard> {
                           count: missingCheckout),
                       CardView(
                         dashboardIcon: CupertinoIcons.creditcard,
+                        // onTap:(() =>  Navigator.pushNamed(context, Mygo.routeName)),
+
                         title: 'My Ghost Count',
                         color: ghostCount == '0' ? Colors.green : Colors.red,
                         count: ghostCount,
                       ),
                       CardView(
                           dashboardIcon: CupertinoIcons.creditcard,
+                          onTap: (() => Navigator.pushNamed(
+                              context, MyLeaveTransaction.routeName)),
                           title: 'My Leave Balance',
                           color: Theme.of(context).textTheme.bodyText1!.color,
                           count: dashboardCardData?.myLeaveBalanceCount
@@ -123,6 +131,8 @@ class _DashBoardState extends State<DashBoard> {
                       CardView(
                           dashboardIcon: CupertinoIcons.tv,
                           title: 'My NODailyUpdates',
+                          // onTap:(() =>  Navigator.pushNamed(context, Myndai.routeName)),
+
                           color: Theme.of(context).textTheme.bodyText1!.color,
                           count: dashboardCardData?.myNoDailyUpdatesCount
                                   .toString() ??

@@ -6,6 +6,7 @@ class CardView extends StatefulWidget {
   final String? title;
   final String? count;
   Color? backgroundColor;
+  final Function()? onTap;
   final dashboardIcon;
   Border? border;
 
@@ -15,6 +16,7 @@ class CardView extends StatefulWidget {
       this.count,
       this.border,
       this.color,
+      this.onTap,
       this.backgroundColor,
       this.dashboardIcon})
       : super(key: key);
@@ -27,7 +29,7 @@ class _CardViewState extends State<CardView> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: widget.onTap,
       child: Card(
         // shadowColor: Colors.white,
         child: Padding(

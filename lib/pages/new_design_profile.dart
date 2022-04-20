@@ -16,49 +16,46 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height * 1,
+          // color: Colors.blue,
           child: Column(
             // mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              ListTile(
+                title: Text(
+                  'Rafik Ali',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                subtitle: const Text('Flutter developer'),
+                trailing: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(ImageConstants.profile))),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: LoginTextForm(
+                  hintText: 'Search',
+                  fillcolor: Colors.white,
+                  trailingIcon: const Icon(
+                    CupertinoIcons.search,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  // color: Colors.blue,
-                  height: MediaQuery.of(context).size.height * 0.60,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 8,
-                      ),
-                      ListTile(
-                        title: Text(
-                          'Rafik Ali',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        subtitle: const Text('Flutter developer'),
-                        trailing: Container(
-                          height: 100,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(ImageConstants.profile))),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      LoginTextForm(
-                        hintText: 'Search',
-                        trailingIcon: const Icon(
-                          CupertinoIcons.search,
-                          size: 20,
-                          color: Colors.black,
-                        ),
-                      ),
                       const Text(
                         'My Task',
                         textAlign: TextAlign.start,
@@ -80,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ListTile(
                         leading: Container(
                           height: 40,
-                          color: Theme.of(context).backgroundColor,
+                          color: Color(0xFF6C63FF),
                           width: 40,
                           child: const Icon(
                             CupertinoIcons.calendar,
@@ -103,39 +100,42 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: const Text('Done'),
                         trailing: const Text('25 task'),
                       ),
-                    ],
-                  )),
+                    ]),
+              ),
               Card(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20))),
                 child: Column(children: [
-                  const ListTile(
-                    leading: const Text("Recently Assigned"),
+                  ListTile(
+                    leading: Text(
+                      "Recently Assigned",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
                     trailing: const Text("All Tasks"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20))),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         elevation: 15,
                         child: Column(
-                          children: [
-                            const ListTile(
-                              leading: const Text(
+                          children: const [
+                            ListTile(
+                              leading: Text(
                                 'Mobile App',
-                                style: const TextStyle(fontSize: 23),
+                                style: TextStyle(fontSize: 23),
                               ),
-                              trailing: const Text('High Priority'),
+                              trailing: Text('High Priority'),
                             ),
-                            const Text(
+                            Text(
                                 'mksdflkdjsflkdjaflkjsdfljsdflakjdsf;lakjsdfa'),
-                            const Divider(),
-                            const ListTile(
-                              leading: const Icon(CupertinoIcons.clock),
-                              title: const Text('12 oct 2022'),
+                            Divider(),
+                            ListTile(
+                              leading: Icon(CupertinoIcons.clock),
+                              title: Text('12 oct 2022'),
                             )
                           ],
                         )),

@@ -9,7 +9,7 @@ var setLightTheme = ThemeData(
     // dividerColor: Colors.white54,
     scaffoldBackgroundColor: const Color(0xFFF3F3F3),
     cardColor: Colors.white,
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       headline4: TextStyle(
         color: Colors.black,
       ),
