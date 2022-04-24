@@ -22,7 +22,6 @@ class CardDailyUpdate extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-
               Text(
                 title,
                 textAlign: TextAlign.start,

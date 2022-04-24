@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: LoginTextForm(
                   hintText: 'Search',
                   fillcolor: Colors.white,
@@ -52,14 +52,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'My Task',
                         textAlign: TextAlign.start,
-                        style: const TextStyle(fontSize: 28),
+                        style: TextStyle(fontSize: 28),
                       ),
                       ListTile(
                         leading: Container(
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ListTile(
                         leading: Container(
                           height: 40,
-                          color: Color(0xFF6C63FF),
+                          color: const Color(0xFF6C63FF),
                           width: 40,
                           child: const Icon(
                             CupertinoIcons.calendar,

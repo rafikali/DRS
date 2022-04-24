@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final darkTheme = ThemeData(
   primaryColor: Colors.black,
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     headline4: TextStyle(
       color: Colors.black,
     ),
@@ -10,6 +10,7 @@ final darkTheme = ThemeData(
 
     bodyText1: TextStyle(color: Colors.white, fontSize: 15),
     // bodyMedium: const TextStyle(color: Colors.white, fontSize: 25),
+    // displaySmall: TextStyle(color: Colors.white),
     bodyText2: TextStyle(color: Colors.white, fontSize: 15),
   ),
   brightness: Brightness.dark,
@@ -32,6 +33,7 @@ final darkTheme = ThemeData(
 
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.green, foregroundColor: Colors.white),
+
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.black,
     selectedItemColor: Colors.green,

@@ -42,9 +42,7 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 IconButton(
-                  onPressed: () {
-                    refreshPage();
-                  },
+                  onPressed: () {},
                   icon: const Icon(
                     CupertinoIcons.refresh_circled,
                     color: Colors.blue,

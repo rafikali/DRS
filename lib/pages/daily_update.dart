@@ -36,7 +36,7 @@ class _DailyUpdateState extends State<DailyUpdate> {
 
   fetchDailyUpdate() async {
     DailyUpdateServices().fetchDailyUpdate().then((value) {
-      if (value != null) {
+      if (value != null && mounted) {
         setState(() {
           recentUpdates = value;
           String? title = recentUpdates?.data![0].title.toString();
@@ -55,173 +55,154 @@ class _DailyUpdateState extends State<DailyUpdate> {
         ? const Center(child: CircularProgressIndicator())
         : Padding(
             padding: const EdgeInsets.all(6),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Card(
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: GestureDetector(
-                            child: LoginTextForm(
-                              fillcolor: Theme.of(context).cardColor,
-                              onTap: () async {
-                                String? pickedDate = await datePicker(context);
-                                setState(() {
-                                  _dateController.text = pickedDate;
-                                });
-
-                                // DateTime pickedDate = await showDialog(
-                                //     context: context,
-                                //     builder: (context) {
-                                //       return DatePickerDialog(
-                                //         firstDate: DateTime(2000),
-                                //         initialDate: selectedDate,
-                                //         lastDate: DateTime.now()
-                                //             .add(const Duration(days: 365)),
-                                //         initialEntryMode:
-                                //             DatePickerEntryMode.input,
-                                //       );
-                                //     });
-
-                                // if (pickedDate != selectedDate) {
-                                //   String formattedDate =
-                                //       DateFormat('yyyy-MM-dd')
-                                //           .format(pickedDate);
-                                //   setState(() {
-                                //     dateInput.text = formattedDate.toString();
-                                //     selectedDate = pickedDate;
-                                //   });
-                                // }
-                              },
-                              dataController: _dateController,
-                              hintText: 'Date',
-                              readonly: true,
-                              width: 100,
-                              height: 50,
-                              trailingIcon: const Icon(CupertinoIcons.calendar),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Card(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: GestureDetector(
+                              child: LoginTextForm(
+                                fillcolor: Theme.of(context).cardColor,
+                                onTap: () async {
+                                  String? pickedDate =
+                                      await datePicker(context);
+                                  setState(() {
+                                    _dateController.text = pickedDate;
+                                  });
+                                },
+                                dataController: _dateController,
+                                hintText: 'Date',
+                                readonly: true,
+                                width: 100,
+                                height: 50,
+                                trailingIcon:
+                                    const Icon(CupertinoIcons.calendar),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: DropView(
-                            dropdownheight: 200.0,
-                            date: 'Filter By Project',
-                            dropdownItems: const [
-                              'Newskark',
-                              'Bagmati VRS',
-                              'CPN UML',
-                              'NOC',
-                              'Nepal ',
-                              'Aayojak',
-                              'hamrosms247',
-                              'Ambition Guru'
-                            ],
-                            width: double.infinity,
-                            height: 50.0,
+                          Expanded(
+                            child: DropView(
+                              dropdownheight: 200.0,
+                              date: 'Filter By Project',
+                              dropdownItems: const [
+                                'Newskark',
+                                'Bagmati VRS',
+                                'CPN UML',
+                                'NOC',
+                                'Nepal ',
+                                'Aayojak',
+                                'hamrosms247',
+                                'Ambition Guru'
+                              ],
+                              width: double.infinity,
+                              height: 50.0,
+                            ),
                           ),
-                        ),
-                        // DropView(
-                        //   height: 50.0,
-                        //   dropdownItems: ['hello','hi'],
-                        //   date: 'jk',
-                        //   labelText: 'hi',
-                        //   width: 60.0,
-                        //   hintText: 'Filter by project',
-                        // )
-                      ],
+                          // DropView(
+                          //   height: 50.0,
+                          //   dropdownItems: ['hello','hi'],
+                          //   date: 'jk',
+                          //   labelText: 'hi',
+                          //   width: 60.0,
+                          //   hintText: 'Filter by project',
+                          // )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Card(
-                    child: TableData(
-                      columns: [
-                        DataLabels(label: const Text('Update')),
-                        DataLabels(label: const Text("Project")),
-                        DataLabels(
-                          label: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Title'),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    DialogBox(
-                                      dialogBoxPadding:
-                                          const EdgeInsets.all(15),
-                                      barrierDismissile: false,
-                                      content: DailyUpdateAlertBox(
-                                        padding: const EdgeInsets.all(10),
-                                      ),
-                                    ).getAlertDialogBox(context);
-                                  },
-                                  child: const Icon(
-                                    CupertinoIcons.add_circled_solid,
-                                    color: Colors.green,
-                                  )),
-                            ],
-                          ),
-                        )
-                      ],
-
-                      rows: recentUpdates!.data!
-                          .map<DataLabels>(
-                            (e) => DataLabels(dataCell: [
-                              e.dailyupdateFor.toString(),
-                              e.project ?? "N/A",
-                              e.title.toString(),
-                            ]),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Card(
+                      child: TableData(
+                        columns: [
+                          DataLabels(label: const Text('Update')),
+                          DataLabels(label: const Text("Project")),
+                          DataLabels(
+                            label: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Title'),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                    onTap: () {
+                                      DialogBox(
+                                        dialogBoxPadding:
+                                            const EdgeInsets.all(15),
+                                        barrierDismissile: false,
+                                        content: DailyUpdateAlertBox(
+                                          padding: const EdgeInsets.all(10),
+                                        ),
+                                      ).getAlertDialogBox(context);
+                                    },
+                                    child: const Icon(
+                                      CupertinoIcons.add_circled_solid,
+                                      color: Colors.green,
+                                    )),
+                              ],
+                            ),
                           )
-                          .toList(),
+                        ],
 
-                      // rows: [
-                      //   DataLabels(dataCell: [
-                      //     '${recentUpdates?.data![0].dailyupdateFor}',
-                      //     'N/A',
-                      //     'Homepage worked, loginpage '
-                      //   ]),
-                      //   DataLabels(dataCell: [
-                      //     '2022-03-30[Tuesday]',
-                      //     'N/A',
-                      //     'Homepage worked, loginpage '
-                      //   ]),
-                      //   DataLabels(dataCell: [
-                      //     '2022-03-30[Tuesday]',
-                      //     'N/A',
-                      //     'Homepage worked, loginpage '
-                      //   ]),
-                      // ],
+                        rows: recentUpdates!.data!
+                            .map<DataLabels>(
+                              (e) => DataLabels(dataCell: [
+                                e.dailyupdateFor.toString(),
+                                e.project ?? "N/A",
+                                e.title.toString(),
+                              ]),
+                            )
+                            .toList(),
 
-                      // addAtendence:  Container(
-                      //   width: 90,
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     mainAxisSize: MainAxisSize.max,
-                      //     children: [
-                      //       Text(
-                      //           'Title'
-                      //       ),
-                      //       InkWell(
-                      //           onTap: () {
-                      //             DialogBox(
-                      //                 width: MediaQuery.of(context).size.width * 1,
-                      //                 height: MediaQuery.of(context).size.height * 0.8,
-                      //                 padding: EdgeInset s.all(14)
-                      //             ).getAlertDialogBox(context);
-                      //           },
-                      //           child: Icon(CupertinoIcons.add_circled_solid, color: Colors.green,)),
-                      //     ],
-                      //   ),
-                      // ),
+                        // rows: [
+                        //   DataLabels(dataCell: [
+                        //     '${recentUpdates?.data![0].dailyupdateFor}',
+                        //     'N/A',
+                        //     'Homepage worked, loginpage '
+                        //   ]),
+                        //   DataLabels(dataCell: [
+                        //     '2022-03-30[Tuesday]',
+                        //     'N/A',
+                        //     'Homepage worked, loginpage '
+                        //   ]),
+                        //   DataLabels(dataCell: [
+                        //     '2022-03-30[Tuesday]',
+                        //     'N/A',
+                        //     'Homepage worked, loginpage '
+                        //   ]),
+                        // ],
+
+                        // addAtendence:  Container(
+                        //   width: 90,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     mainAxisSize: MainAxisSize.max,
+                        //     children: [
+                        //       Text(
+                        //           'Title'
+                        //       ),
+                        //       InkWell(
+                        //           onTap: () {
+                        //             DialogBox(
+                        //                 width: MediaQuery.of(context).size.width * 1,
+                        //                 height: MediaQuery.of(context).size.height * 0.8,
+                        //                 padding: EdgeInset s.all(14)
+                        //             ).getAlertDialogBox(context);
+                        //           },
+                        //           child: Icon(CupertinoIcons.add_circled_solid, color: Colors.green,)),
+                        //     ],
+                        //   ),
+                        // ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }

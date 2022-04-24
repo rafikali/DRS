@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
 import 'package:login_page/pages/new_design_profile.dart';
 import 'package:login_page/pages/update_drs.dart';
-import 'package:login_page/pages/changing_new_passing.dart';
+import 'package:login_page/pages/changing_new_password.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/pages/hr_policy.dart';
 import 'package:login_page/pages/my_attendances.dart';
@@ -13,7 +13,7 @@ import 'package:login_page/pages/my_leaves.dart';
 import 'package:login_page/pages/my_missing_checkout.dart';
 import 'package:login_page/pages/myleaves_transaction.dart';
 import 'package:login_page/pages/reset_password.dart';
-import 'package:login_page/pages/verify_otp.dart';
+import 'package:login_page/pages/otp_verfication_page.dart';
 import 'package:login_page/widgets/setting_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -43,8 +43,8 @@ class RouteGenerator {
       case CreateNewPass.routeName:
         return MaterialPageRoute(builder: (context) => const CreateNewPass());
 
-      case VerifyOtp.routeName:
-        return MaterialPageRoute(builder: (context) => VerifyOtp());
+      case OtpVerification.routeName:
+        return MaterialPageRoute(builder: (context) => OtpVerification());
 
       case MyDashBoard.routeName:
         return MaterialPageRoute(
@@ -64,7 +64,10 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => const MyMissingCheckout());
       case ChangePassword.routeName:
-        return MaterialPageRoute(builder: (context) => const ChangePassword());
+        return PageTransition(
+          child: const ChangePassword(),
+          type: PageTransitionType.fade,
+        );
       case HRPolicy.routeName:
         return MaterialPageRoute(builder: (context) => const HRPolicy());
 

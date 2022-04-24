@@ -7,7 +7,7 @@ import 'package:login_page/utils/confirmation_dialog.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'changing_new_passing.dart';
+import 'changing_new_password.dart';
 
 class Profile extends StatefulWidget {
   static const String routeName = 'profile';
@@ -87,7 +87,7 @@ class _ProfileState extends State<Profile> {
                             animationDuration: 1200,
                             progressColor: Colors.green,
                             radius: 50,
-                            center: Text(
+                            center: const Text(
                               "Dedication",
                               style: TextStyle(color: Colors.white),
                             ),
@@ -128,39 +128,17 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () async {
-                    final bool value = await getDialog(context,
-                        title: const Text("Confirm"),
-                        content: const Text("Do you want to logout ?"));
-                    if (value == true) {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.getString(AppConstants.accessToken);
-                      prefs.remove(AppConstants.accessToken);
 
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, LoginPage.routeName, (route) => false);
-                      // .then(
-                      //       (value) => Navigator.pushNamedAndRemoveUntil(
-                      //         context,
-                      //         LoginPage.routeName,
-                      //         (route) => false,
-                      //       ),
-                      //     );
-                    }
-                  },
-                  child: const ListTile(
-                    leading: Icon(
-                      CupertinoIcons.profile_circled,
-                      color: Color(0xFF6C63FF),
-                    ),
-                    title: Text(
-                      'Log Out',
-                      style: TextStyle(color: Color(0xFF6C63FF)),
-                    ),
+                const ListTile(
+                  leading: Icon(
+                    CupertinoIcons.profile_circled,
+                    color: Color(0xFF6C63FF),
                   ),
-                )
+                  title: Text(
+                    'Log Out',
+                    style: TextStyle(color: Color(0xFF6C63FF)),
+                  ),
+                ),
               ],
             ),
           ],

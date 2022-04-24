@@ -182,7 +182,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                         ),
                         Text(
                           item.title,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 13),
                         ),
                       ],
                     ),

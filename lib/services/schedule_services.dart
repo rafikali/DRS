@@ -7,16 +7,20 @@ import 'package:login_page/utils/header.dart';
 
 class ScheduleServices {
   Future<Schedule?> fetchSchedule() async {
-    final response = await http.get(
-        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.checkTime),
-        headers: await getHeader());
-
-    if (response.statusCode == 200) {
-      var bodyData = jsonDecode(response.body);
-
-      Schedule sch = Schedule.fromJson(bodyData);
-      return sch;
-    } else {
+    var header = await getHeader();
+    try {
+      http.Response? response = await http.get(
+          Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.schedule),
+          headers: header);
+      if (response.statusCode == 200) {
+        var bodyData = jsonDecode(response.body);
+        Schedule sch = Schedule.fromJson(bodyData);
+        return sch;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
       return null;
     }
   }

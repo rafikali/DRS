@@ -17,6 +17,7 @@ class MyAttendances extends StatefulWidget {
 class _MyAttendancesState extends State<MyAttendances> {
   DateTime? selectedDate = DateTime.now();
   TextEditingController dateInput = TextEditingController();
+
   DailyUpdatesModel? recentUpdates = DailyUpdatesModel();
   @override
   void initState() {

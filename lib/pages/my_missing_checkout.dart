@@ -14,13 +14,13 @@ class MyMissingCheckout extends StatelessWidget {
         child: Card(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Row(children: [
-              Text('My Missing Checkout'),
-              LoginTextForm(hintText: 'Date')
+              const Text('My Missing Checkout'),
             ]),
             TableData(
               columns: [
-                DataLabels(label: Text('hi')),
-                DataLabels(label: Text('hi')),
+                // DataLabels(label: 'hi'),
+                DataLabels(label: const Text('hi')),
+                DataLabels(label: const Text('hi')),
               ],
               rows: [
                 DataLabels(dataCell: ['sdlfkd', 'sdfk'])

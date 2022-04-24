@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/verify_otp.dart';
+import 'package:login_page/pages/otp_verfication_page.dart';
 import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
@@ -59,9 +59,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 validFunc: () async {
                   if (_formKey.currentState!.validate()) {
                     // PrefsServices().setString('Mobile Num', controller.text);
-                    Navigator.pushNamed(context, VerifyOtp.routeName,
+                    Navigator.pushNamed(context, OtpVerification.routeName,
                         arguments: controller.text);
-                  } else {
+                  } else {  
                     return null;
                   }
                 },

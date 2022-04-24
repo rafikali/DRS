@@ -68,7 +68,7 @@ class MyApp extends StatefulWidget {
   MyApp(
       {Key? key,
       this.changeMode,
-      this.systemNavigationColor, 
+      this.systemNavigationColor,
       this.accessToken,
       this.userCredentials})
       : super(key: key);
@@ -78,13 +78,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
     // Provider.of<ThemeChanger>(context, listen: false).getTheme();
   }
-
 
   bool val = true;
 

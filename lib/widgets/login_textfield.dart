@@ -23,7 +23,7 @@ class LoginTextForm extends StatefulWidget {
   final OutlineInputBorder? outlineBorder;
   dynamic requiredMsg;
   final bool readonly;
-  final autofillHints;
+  final Iterable<String>? autofillHints;
   final VoidCallback? onTap;
 
   final TextEditingController? dataController;
@@ -65,17 +65,16 @@ class _LoginTextFormState extends State<LoginTextForm> {
     return TextFormField(
       autofillHints: widget.autofillHints,
       onTap: widget.onTap,
+      style: const TextStyle(color: Colors.black),
       maxLength: widget.maxLength,
-      
       obscureText: widget.passView == true,
       keyboardType: widget.typeKeyboard,
       controller: widget.dataController,
-      
+
       maxLines: widget.maxLine ?? 1,
       // enabled: widget.enabled,
       readOnly: widget.readonly,
       validator: widget.validator,
-      // onTap: widget.onTap,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
         iconColor: const Color(0xFF6C63FF),
@@ -87,13 +86,15 @@ class _LoginTextFormState extends State<LoginTextForm> {
 
         filled: true,
         fillColor: widget.fillcolor ?? Colors.grey[200],
+        // fillColor: Theme.of(context).cardColor,
+
         border: widget.outlineBorder ??
             const UnderlineInputBorder(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(8),
                   topLeft: Radius.circular(8),
                   bottomLeft: Radius.circular(4),
-                  bottomRight:  Radius.circular(4)),
+                  bottomRight: Radius.circular(4)),
               borderSide: BorderSide(
                 style: BorderStyle.solid,
                 color: Colors.red,
@@ -106,10 +107,11 @@ class _LoginTextFormState extends State<LoginTextForm> {
                 borderSide: BorderSide(
                     style: BorderStyle.solid, color: Color(0xFF6C63FF))),
         labelStyle: const TextStyle(color: Color(0xFF6C63FF)),
-
+        suffixIcon: widget.trailingIcon,
         suffixIconColor: Theme.of(context).iconTheme.color,
         labelText: widget.labelText,
         hintText: widget.hintText,
+        hintStyle: TextStyle(color: Colors.white),
 
         // labelStyle: TextStyle(
         //   color: Color(0xFF6C63FF),

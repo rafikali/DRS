@@ -28,14 +28,15 @@ class _ButtonState extends State<Button> {
     return Ink(
       decoration: BoxDecoration(
           // border: Border.all(color: Colors(widget)widget.buttonColor),
+          border: Border.all(color: Colors.white, width: 2),
 
-          boxShadow: const [
-            BoxShadow(
-                color: Color(0xFFCFCFCF),
-                spreadRadius: 2,
-                blurRadius: 7,
-                offset: Offset(1, 2)),
-          ],
+          // boxShadow: const [
+          //   BoxShadow(
+          //       color: Color(0xFFCFCFCF),
+          //       spreadRadius: 2,
+          //       blurRadius: 7,
+          //       offset: Offset(1, 2)),
+          // ],
           gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

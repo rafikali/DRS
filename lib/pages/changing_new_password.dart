@@ -27,6 +27,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  String Msg = '';
+
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     // ignore: todo
@@ -34,32 +37,33 @@ class _ChangePasswordState extends State<ChangePassword> {
     super.initState();
   }
 
-  PasswordChanged() async {
+  validationCheck() async {
+    if (_formKey.currentState!.validate()) {
+      passwordChanged();
+      print('valid');
+    } else {
+      return "required*";
+    }
+  }
+
+  passwordChanged() async {
     await ChangePassApi()
-        .fetchPassword(_currentPasswordController.text,
+        .changePassword(_currentPasswordController.text,
             _passwordController.text, _confirmPasswordController.text, context)
-        .then((value) => {
-              if (value != null)
-                {print('we succeed')}
-              else
-                {
-                  print('we failed'),
-                }
-            });
+        .then((value) {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: const NewPassAppbar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: _formKey,
-            child: SizedBox(
-              child: SingleChildScrollView(
+          child: SizedBox(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -82,6 +86,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                     const Text('Current Password'),
                     LoginTextForm(
+                        autofillHints: [AutofillHints.password],
                         validator: InputValidator.validatePassword,
                         hintText: 'New Password',
                         dataController: _currentPasswordController,
@@ -117,7 +122,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       buttonTitle: 'Reset Password',
                       buttonHeight: 50.0,
                       validFunc: () {
-                        PasswordChanged();
+                        validationCheck();
                       },
                     )
                   ],

@@ -82,8 +82,8 @@ class _MySettingsState extends State<MySettings> {
     return SafeArea(
       child: Scaffold(
         appBar: const NewPassAppbar(),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height * 1,
+        body: Padding(
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,

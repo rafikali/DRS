@@ -10,6 +10,8 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+
+        // iconTheme: Theme.of(context).iconTheme,
         elevation: 0,
         title:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -23,7 +25,9 @@ class NewPassAppbar extends StatelessWidget with PreferredSizeWidget {
                   message: ('hi'),
                 );
               },
-              child: const Icon(CupertinoIcons.question_circle))
+              child: const Icon(
+                CupertinoIcons.question_circle,
+              ))
         ]));
   }
 }

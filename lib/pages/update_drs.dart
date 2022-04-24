@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
-import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/models/update_message.dart';
 import 'package:login_page/services/add_daily_update.dart';
-import 'package:login_page/utils/pref_services.dart';
-import 'package:login_page/utils/snacks.dart';
 import 'package:login_page/widgets/date_picker.dart';
 
-import '../services/daily_update_services.dart';
 import '../utils/input_validators.dart';
 import '../widgets/login_textfield.dart';
 
@@ -25,11 +22,12 @@ class UpdateDrsState extends State<UpdateDrs> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _dataController = TextEditingController();
+  // final HtmlEditorController _htmlEditorController = HtmlEditorController();
+
   Message msg = Message();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fillTextController(DateTime.now());
     // fetchAddUpdate();
@@ -37,15 +35,15 @@ class UpdateDrsState extends State<UpdateDrs> {
 
   validationCheck() async {
     if (_formKey.currentState!.validate()) {
-      fetchAddUpdate();
+      postUpdate();
     } else {
       return "required*";
     }
   }
 
-  fetchAddUpdate() async {
-    await AddDailyUpdate()
-        .fetchAddUpdate(_dateController.text, _titleController.text,
+  postUpdate() async {
+    await AddDrs()
+        .postUpdate(_dateController.text, _titleController.text,
             _dataController.text, context)
         .then((value) {
       if (value != null) {
@@ -63,7 +61,6 @@ class UpdateDrsState extends State<UpdateDrs> {
     String updateToday = DateFormat('yyyy-MM-dd').format(todayDate!);
     String day = DateFormat('EEE', 'en_US').format(todayDate);
     String? title = 'Daily Update [ $updateToday ($day)]';
-
     _dateController.text = updateToday;
     _titleController.text = title;
   }
@@ -98,36 +95,39 @@ class UpdateDrsState extends State<UpdateDrs> {
                         const Divider(
                           color: Colors.black,
                         ),
-                        LoginTextForm(
-                          readonly: true,
-                          hintText: '2022-03-26',
-                          labelText: 'Update for*',
-                          dataController: _dateController,
-                          onTap: () async {
-                            String? date = await datePicker(
-                              context,
-                            );
-                            setState(() {
-                              _dateController.text = date;
-                              fillTextController(DateTime.parse(date));
-                            });
 
-                            // showDialog(
-                            //     context: context,
-                            //     builder: (context) {
-                            //       return DatePickerDialog(
-                            //         firstDate: DateTime(2000),
-                            //         initialDate: DateTime.now(),
-                            //         lastDate: DateTime(2030)
-                            //             .add(const Duration(days: 365)),
-                            //       );
-                            //     });
-                          },
-                          validator: InputValidator.validateDate,
-                          trailingIcon: const Icon(
-                            CupertinoIcons.calendar,
+                        Expanded(
+                          child: LoginTextForm(
+                            readonly: true,
+                            hintText: '2022-03-26',
+                            labelText: 'Update for*',
+                            dataController: _dateController,
+                            onTap: () async {
+                              String? date = await datePicker(
+                                context,
+                              );
+                              setState(() {
+                                _dateController.text = date;
+                                fillTextController(DateTime.parse(date));
+                              });
+
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (context) {
+                              //       return DatePickerDialog(
+                              //         firstDate: DateTime(2000),
+                              //         initialDate: DateTime.now(),
+                              //         lastDate: DateTime(2030)
+                              //             .add(const Duration(days: 365)),
+                              //       );
+                              //     });
+                            },
+                            validator: InputValidator.validateDate,
+                            trailingIcon: const Icon(
+                              CupertinoIcons.calendar,
+                            ),
+                            fillcolor: Colors.white,
                           ),
-                          fillcolor: Colors.white,
                         ),
                         const SizedBox(height: 5),
                         LoginTextForm(
@@ -143,6 +143,19 @@ class UpdateDrsState extends State<UpdateDrs> {
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         const SizedBox(height: 18),
+                        // Expanded(
+                        //   child: HtmlEditor(
+                        //     controller: _htmlEditorController,
+                        //     htmlEditorOptions: const HtmlEditorOptions(
+                        //       hint: "Your text here...",
+
+                        //       //initalText: "text content initial, if any",
+                        //     ),
+                        //     otherOptions: const OtherOptions(
+                        //       height: 100,
+                        //     ),
+                        //   ),
+                        // ),
                         LoginTextForm(
                           maxLine: 6,
                           hintText: 'Enter something',

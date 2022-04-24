@@ -42,7 +42,7 @@ Future fetchLogin(
   try {
     print("Inside login");
     Response? response = await http.post(
-      Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.login),
+      Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.login),
       body: jsonEncode({"username": username, "password": password}),
       headers: await getHeader(),
     );
@@ -136,6 +136,7 @@ class _HomePageState extends State<LoginPage> {
   @override
   void initState() {
     fillTextController();
+    // fetchLogin(_usernameController.text, _passwordController.text, context);
 
     super.initState();
   }
