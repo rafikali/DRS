@@ -8,9 +8,8 @@ import 'package:login_page/utils/header.dart';
 class DashBoardServices {
   Future<CardData?> fetchCardData() async {
     print("Inside haha");
-
     final response = await http.get(
-        Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.cardData),
+        Uri.parse(ApiEndpoints.devBaseUrl + ApiEndpoints.cardData),
         headers: await getHeader());
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||

@@ -1,13 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_page/Curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:login_page/pages/changing_new_password.dart';
 import 'package:login_page/pages/new_design_profile.dart';
-import 'package:login_page/pages/profile_page.dart';
 import 'package:login_page/pages/update_drs.dart';
 import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
@@ -18,17 +15,12 @@ import 'package:login_page/utils/bottomsheet.dart';
 import 'package:login_page/utils/confirmation_dialog.dart';
 import 'package:login_page/widgets/floating_action_button.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../Constants/Images.dart';
-import '../Constants/app_constants.dart';
 import '../main.dart';
-// import 'CssBaseline  from '@mui/material/';
 import '../models/models.dart';
 import '../services/schedule_services.dart';
 import '../widgets/setting_page.dart';
 import '../widgets/simple_button.dart';
-import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -41,8 +33,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   File? selectedImage;
-
   bool changeButton = true;
+
   Future pickImage(ImageSource source) async {
     final ImagePicker _imagePicker = ImagePicker();
     //pick an image
@@ -86,14 +78,10 @@ class _HomePageState extends State<HomePage> {
 
   int? selectedIndex = 0;
   List<Widget> widgetOptions = [
-    // const DashBoard(),
-    const DailyUpdate(),
-    const DailyUpdate(),
-    // const Attendances(),
-    // const Attendances(),
-    const Attendances(),
     const DashBoard(),
-    // const MyLeaves(),
+    const DailyUpdate(),
+    const Attendances(),
+    const MyLeaves(),
     const MyLeaveTransaction(),
   ];
 
@@ -187,10 +175,10 @@ class _HomePageState extends State<HomePage> {
                           size: Theme.of(context).iconTheme.size,
                         ),
                       ),
-                      Builder(builder: (context) {
-                        return IconButton(
-                            icon: const ImageIcon(
-                              AssetImage(
+                        Builder(builder: (context) {
+                           return IconButton(
+                             icon: const ImageIcon(
+                               AssetImage(
                                 ImageConstants.menuIcon,
                               ),
                               // size: Theme.of(context).iconTheme.size,
@@ -344,8 +332,6 @@ class _HomePageState extends State<HomePage> {
               buttonBackgroundColor:
                   Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
               iconColor: Colors.white,
-
-              //
               // iconHeight: 23,
               animationDuration: const Duration(milliseconds: 300),
               backgroundColor: Colors.transparent,

@@ -17,10 +17,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
-          height: MediaQuery.of(context).size.height * 1,
+          // height: MediaQuery.of(context).size.height * 1,
           // color: Colors.blue,
           child: Column(
-            // mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min,
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -39,6 +39,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           image: AssetImage(ImageConstants.profile))),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: LoginTextForm(
@@ -51,15 +54,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 25,
+              ),
               Container(
-                margin: const EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 15),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'My Task',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 28),
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                       ListTile(
                         leading: Container(
@@ -110,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ListTile(
                     leading: Text(
                       "Recently Assigned",
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                     trailing: const Text("All Tasks"),
                   ),
@@ -120,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        elevation: 15,
+                        elevation: 1,
                         child: Column(
                           children: const [
                             ListTile(

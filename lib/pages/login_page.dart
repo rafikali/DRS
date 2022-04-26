@@ -42,7 +42,7 @@ Future fetchLogin(
   try {
     print("Inside login");
     Response? response = await http.post(
-      Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.login),
+      Uri.parse(ApiEndpoints.devBaseUrl + ApiEndpoints.login),
       body: jsonEncode({"username": username, "password": password}),
       headers: await getHeader(),
     );

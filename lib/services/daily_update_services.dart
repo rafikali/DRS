@@ -9,7 +9,7 @@ class DailyUpdateServices {
   Future<DailyUpdatesModel?> fetchDailyUpdate() async {
     var headers = await getHeader();
     final response = await http.get(
-        Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.dailyUpdate),
+        Uri.parse(ApiEndpoints.devBaseUrl + ApiEndpoints.dailyUpdate),
         headers: headers);
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||

@@ -75,88 +75,86 @@ class UpdateDrsState extends State<UpdateDrs> {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 130),
-            child: Center(
-              child: Card(
-                // color: Theme.of(context).dialogBackgroundColor,
-                elevation: 10,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(50))),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Text('Add Daily Update',
-                            style: Theme.of(context).textTheme.headline6),
-                        const Divider(
-                          color: Colors.black,
-                        ),
+            child: Card(
+              // color: Theme.of(context).dialogBackgroundColor,
+              elevation: 10,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                      bottomLeft: Radius.circular(50))),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Text('Add Daily Update',
+                          style: Theme.of(context).textTheme.headline6),
+                      const Divider(
+                        color: Colors.black,
+                      ),
 
-                        Expanded(
-                          child: LoginTextForm(
-                            readonly: true,
-                            hintText: '2022-03-26',
-                            labelText: 'Update for*',
-                            dataController: _dateController,
-                            onTap: () async {
-                              String? date = await datePicker(
-                                context,
-                              );
-                              setState(() {
-                                _dateController.text = date;
-                                fillTextController(DateTime.parse(date));
-                              });
+                      LoginTextForm(
+                        readonly: true,
+                        hintText: '2022-03-26',
+                        labelText: 'Update for*',
+                        dataController: _dateController,
+                        onTap: () async {
+                          String? date = await datePicker(
+                            context,
+                          );
+                          setState(() {
+                            _dateController.text = date;
+                            fillTextController(DateTime.parse(date));
+                          });
 
-                              // showDialog(
-                              //     context: context,
-                              //     builder: (context) {
-                              //       return DatePickerDialog(
-                              //         firstDate: DateTime(2000),
-                              //         initialDate: DateTime.now(),
-                              //         lastDate: DateTime(2030)
-                              //             .add(const Duration(days: 365)),
-                              //       );
-                              //     });
-                            },
-                            validator: InputValidator.validateDate,
-                            trailingIcon: const Icon(
-                              CupertinoIcons.calendar,
-                            ),
-                            fillcolor: Colors.white,
-                          ),
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return DatePickerDialog(
+                          //         firstDate: DateTime(2000),
+                          //         initialDate: DateTime.now(),
+                          //         lastDate: DateTime(2030)
+                          //             .add(const Duration(days: 365)),
+                          //       );
+                          //     });
+                        },
+                        validator: InputValidator.validateDate,
+                        trailingIcon: const Icon(
+                          CupertinoIcons.calendar,
                         ),
-                        const SizedBox(height: 5),
-                        LoginTextForm(
-                          dataController: _titleController,
-                          hintText: '',
-                          labelText: 'Title*',
-                          fillcolor: Colors.white,
-                          validator: InputValidator.validateDate,
-                        ),
-                        const SizedBox(height: 14),
-                        Text(
-                          'Mention your Productivity (Work done) of the Day*',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const SizedBox(height: 18),
-                        // Expanded(
-                        //   child: HtmlEditor(
-                        //     controller: _htmlEditorController,
-                        //     htmlEditorOptions: const HtmlEditorOptions(
-                        //       hint: "Your text here...",
+                        fillcolor: Colors.white,
+                      ),
+                      const SizedBox(height: 5),
+                      LoginTextForm(
+                        dataController: _titleController,
+                        hintText: '',
+                        labelText: 'Title*',
+                        fillcolor: Colors.white,
+                        validator: InputValidator.validateDate,
+                      ),
+                      const SizedBox(height: 14),
+                      Text(
+                        'Mention your Productivity (Work done) of the Day*',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      const SizedBox(height: 18),
+                      // Expanded(
+                      //   child: HtmlEditor(
+                      //     controller: _htmlEditorController,
+                      //     htmlEditorOptions: const HtmlEditorOptions(
+                      //       hint: "Your text here...",
 
-                        //       //initalText: "text content initial, if any",
-                        //     ),
-                        //     otherOptions: const OtherOptions(
-                        //       height: 100,
-                        //     ),
-                        //   ),
-                        // ),
-                        LoginTextForm(
+                      //       //initalText: "text content initial, if any",
+                      //     ),
+                      //     otherOptions: const OtherOptions(
+                      //       height: 100,
+                      //     ),
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: LoginTextForm(
                           maxLine: 6,
                           hintText: 'Enter something',
                           fillcolor: Colors.white,
@@ -172,36 +170,36 @@ class UpdateDrsState extends State<UpdateDrs> {
                           // contentPadding: const EdgeInsets.symmetric(
                           //     horizontal: 5, vertical: 80),
                         ),
-                        Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              child: const Text(
-                                'Cancel',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                ),
+                      ),
+                      Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                color: Colors.red,
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
                             ),
-                            TextButton(
-                              child: const Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(
+                                color: Colors.green,
                               ),
-                              onPressed: () {
-                                validationCheck();
-                              },
                             ),
-                          ],
-                        )
-                      ],
-                    ),
+                            onPressed: () {
+                              validationCheck();
+                            },
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),

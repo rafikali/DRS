@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                   ? darkTheme
                   : setLightTheme,
 
-              //   textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
+              // textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
               // primaryColor: const Color(0xFF343434),
               //   scaffoldBackgroundColor: const Color(0xFFF3F3F3),
               //   appBarTheme: const AppBarTheme(

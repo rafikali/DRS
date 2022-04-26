@@ -68,6 +68,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
       style: const TextStyle(color: Colors.black),
       maxLength: widget.maxLength,
       obscureText: widget.passView == true,
+
       keyboardType: widget.typeKeyboard,
       controller: widget.dataController,
 
@@ -111,7 +112,7 @@ class _LoginTextFormState extends State<LoginTextForm> {
         suffixIconColor: Theme.of(context).iconTheme.color,
         labelText: widget.labelText,
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: Theme.of(context).textTheme.bodyText2,
 
         // labelStyle: TextStyle(
         //   color: Color(0xFF6C63FF),

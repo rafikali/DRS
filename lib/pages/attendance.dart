@@ -16,7 +16,7 @@ class Attendances extends StatelessWidget {
             ),
             Text(
               'My Attendances',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline4,
             ),
             TableData(
               columns: [

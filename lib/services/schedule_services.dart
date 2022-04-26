@@ -10,7 +10,7 @@ class ScheduleServices {
     var header = await getHeader();
     try {
       http.Response? response = await http.get(
-          Uri.parse(ApiEndpoints.liveBaseUrl + ApiEndpoints.schedule),
+          Uri.parse(ApiEndpoints.devBaseUrl + ApiEndpoints.schedule),
           headers: header);
       if (response.statusCode == 200) {
         var bodyData = jsonDecode(response.body);

@@ -25,6 +25,7 @@ class _ProfileState extends State<Profile> {
       child: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //  mainAxisAlignment: MainAxisAlignment,
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,

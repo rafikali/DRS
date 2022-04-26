@@ -31,6 +31,7 @@ class _CardViewState extends State<CardView> {
     return InkWell(
       onTap: widget.onTap,
       child: Card(
+        elevation: 0.3,
         // shadowColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(6),
@@ -51,7 +52,7 @@ class _CardViewState extends State<CardView> {
                   ),
                   Text(
                     widget.title.toString(),
-                    style: TextStyle(color: widget.color),
+                    style: TextStyle(color: widget.color, fontSize: 13),
                   ),
                   const SizedBox(
                     height: 2,

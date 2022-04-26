@@ -28,52 +28,47 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(10),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'My Leave Transaction',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.refresh_circled,
-                    color: Colors.blue,
-                  ),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'My Leave Transaction',
+              style: Theme.of(context).textTheme.headline6,
             ),
-            TableData(columns: [
-              DataLabels(label: const Text('#')),
-              DataLabels(label: const Text('Narration')),
-              DataLabels(label: const Text('Days')),
-              DataLabels(label: const Text('Type')),
-              DataLabels(label: const Text('Remaining Days')),
-              DataLabels(label: const Text('Calender year')),
-              DataLabels(label: const Text('Created At')),
-            ], rows: [
-              DataLabels(
-                dataCell: [
-                  '1',
-                  'Annual Leave (10 days) - 2078/79',
-                  '3.52',
-                  'CR',
-                  '3.52',
-                  '2078/79',
-                  '2022-03-14 15:33:38'
-                ],
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.refresh_circled,
+                color: Colors.blue,
               ),
-            ])
-          ]),
+            ),
+          ],
         ),
-      ),
+        TableData(columns: [
+          DataLabels(label: const Text('#')),
+          DataLabels(label: const Text('Narration')),
+          DataLabels(label: const Text('Days')),
+          DataLabels(label: const Text('Type')),
+          DataLabels(label: const Text('Remaining Days')),
+          DataLabels(label: const Text('Calender year')),
+          DataLabels(label: const Text('Created At')),
+        ], rows: [
+          DataLabels(
+            dataCell: [
+              '1',
+              'Annual Leave (10 days) - 2078/79',
+              '3.52',
+              'CR',
+              '3.52',
+              '2078/79',
+              '2022-03-14 15:33:38'
+            ],
+          ),
+        ])
+      ]),
     );
   }
 }

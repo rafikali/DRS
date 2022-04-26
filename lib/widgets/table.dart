@@ -47,7 +47,8 @@ class _TableDataState extends State<TableData> {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         // columnSpacing: 10,
-        dataTextStyle: Theme.of(context).textTheme.bodyText1,
+        dataTextStyle: Theme.of(context).textTheme.subtitle2,
+        headingTextStyle: Theme.of(context).textTheme.headline6,
         columns: widget.columns
             .map<DataColumn>((e) => DataColumn(label: e.label))
             .toList(),
