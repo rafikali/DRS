@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:login_page/models/models.dart';
+
 import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 import 'package:login_page/widgets/table.dart';
 
-import '../services/daily_update_services.dart';
+import '../repository/models/daily_update.dart';
+import '../repository/services/daily_update_services.dart';
 
 class MyDailyUpdates extends StatefulWidget {
   static const String routeName = '/myDailyUpdate';

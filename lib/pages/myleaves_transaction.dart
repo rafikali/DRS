@@ -15,7 +15,6 @@ class _MyLeaveTransactionState extends State<MyLeaveTransaction> {
   bool refreshButton = true;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     refreshPage();
   }

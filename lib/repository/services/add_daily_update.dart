@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:login_page/Constants/api_endpoints.dart';
-import 'package:login_page/models/update_message.dart';
+
 import 'package:login_page/pages/home_page.dart';
+import 'package:login_page/repository/models/update_message.dart';
 import 'package:login_page/utils/header.dart';
 import 'package:login_page/utils/loading_dialog.dart';
 

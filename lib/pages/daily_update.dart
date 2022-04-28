@@ -2,16 +2,15 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:login_page/Constants/app_constants.dart';
+import 'package:login_page/repository/services/daily_update_services.dart';
 import 'package:login_page/utils/daily_update_alertbox.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/date_picker.dart';
 import 'package:login_page/widgets/dropView.dart';
 import 'package:login_page/widgets/table.dart';
 
-import '../models/models.dart';
-import '../services/daily_update_services.dart';
+import '../repository/models/daily_update.dart';
 import '../widgets/alertbox..dart';
 import '../widgets/login_textfield.dart';
 
@@ -25,7 +24,7 @@ class DailyUpdate extends StatefulWidget {
 class _DailyUpdateState extends State<DailyUpdate> {
   DateTime selectedDate = DateTime.now();
   final DateTime? pickedDate = DateTime(2000);
-  TextEditingController _dateController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
   DailyUpdatesModel? recentUpdates;
 
   @override

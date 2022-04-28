@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
-import 'package:login_page/models/update_message.dart';
-import 'package:login_page/services/add_daily_update.dart';
+import 'package:login_page/repository/models/update_message.dart';
 import 'package:login_page/widgets/date_picker.dart';
 
+import '../repository/services/add_daily_update.dart';
 import '../utils/input_validators.dart';
 import '../widgets/login_textfield.dart';
 

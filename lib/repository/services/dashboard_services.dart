@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:login_page/Constants/api_endpoints.dart';
-import 'package:login_page/models/carddata.dart';
+
+import 'package:login_page/repository/models/carddata.dart';
 import 'package:login_page/utils/header.dart';
 
 class DashBoardServices {

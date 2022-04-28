@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_page/Constants/api_endpoints.dart';
 import 'package:login_page/pages/home_page.dart';
+import 'package:login_page/repository/models/login_response.dart';
 import 'package:login_page/utils/loading_dialog.dart';
-
-import '../models/models.dart';
 import '../utils/header.dart';
 
 class ChangePassApi {

@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/pages/my_missing_checkout.dart';
 import 'package:login_page/pages/myleaves_transaction.dart';
-import 'package:login_page/services/daily_update_services.dart';
-import 'package:login_page/services/dashboard_services.dart';
 import 'package:login_page/utils/pref_services.dart';
 import 'package:login_page/widgets/Card.dart';
 import 'package:login_page/widgets/GridView.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/carddata.dart';
-import '../models/models.dart';
+import '../repository/models/carddata.dart';
+import '../repository/models/daily_update.dart';
+import '../repository/services/daily_update_services.dart';
+import '../repository/services/dashboard_services.dart';
 
 class DashBoard extends StatefulWidget {
   // final String? checkDashCount;
@@ -132,6 +131,22 @@ class _DashBoardState extends State<DashBoard> {
                   color: Theme.of(context).textTheme.bodyText1!.color,
                   count: dashboardCardData?.myNoDailyUpdatesCount.toString() ??
                       'N/A'),
+              CardView(
+                  dashboardIcon: CupertinoIcons.tv,
+                  title: 'My NotAcknowledge',
+                  // onTap:(() =>  Navigator.pushNamed(context, Myndai.routeName)),
+
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  count: dashboardCardData?.myNoDailyUpdatesCount.toString() ??
+                      'N/A'),
+              CardView(
+                  dashboardIcon: CupertinoIcons.tv,
+                  title: 'My Attendances',
+                  // onTap:(() =>  Navigator.pushNamed(context, Myndai.routeName)),
+
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  count: dashboardCardData?.myNoDailyUpdatesCount.toString() ??
+                      'N/A'),
             ],
           ),
           SizedBox(
@@ -189,7 +204,7 @@ class _DashBoardState extends State<DashBoard> {
                                   Text(recentUpdates2?.data![0].title ?? 'N/A',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline6),
+                                          .bodyText2),
                                   SizedBox(
                                     height: 5,
                                   ),

@@ -46,18 +46,20 @@ class _CardViewState extends State<CardView> {
                   Icon(
                     widget.dashboardIcon,
                     color: widget.color,
+                    size: 18,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
                     widget.title.toString(),
-                    style: TextStyle(color: widget.color, fontSize: 13),
+                    style: TextStyle(color: widget.color, fontSize: 10),
                   ),
                   const SizedBox(
                     height: 2,
                   ),
-                  Text(widget.count!, style: TextStyle(color: widget.color)),
+                  Text(widget.count!,
+                      style: TextStyle(color: widget.color, fontSize: 12)),
                 ],
               ),
             ),

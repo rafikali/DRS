@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:login_page/widgets/login_textfield.dart';
 import 'package:login_page/widgets/table.dart';
 
@@ -13,8 +14,8 @@ class MyMissingCheckout extends StatelessWidget {
       body: Center(
         child: Card(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Row(children: [
-              const Text('My Missing Checkout'),
+            Row(children: const [
+              Text('My Missing Checkout'),
             ]),
             TableData(
               columns: [

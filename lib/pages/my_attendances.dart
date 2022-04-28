@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:login_page/models/models.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 import 'package:login_page/widgets/table.dart';
 
+import '../repository/models/daily_update.dart';
 import '../widgets/dropView.dart';
 
 class MyAttendances extends StatefulWidget {

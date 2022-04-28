@@ -1,7 +1,7 @@
+// ignore: file_names
 class ImageConstants {
   static const String regis = 'assets/Images/register.svg';
   static const String loginIllustrate = 'assets/Images/login_image.svg';
-
   static const String googleLogo = 'assets/Images/google_logo.svg';
   static const String linkedinLogo = 'assets/Images/linkedin_logo.svg';
   static const String facebookLogo = 'assets/Images/facebook_logo.svg';
@@ -22,6 +22,6 @@ class ImageConstants {
   static const String projectUpdate = 'assets/Images/project_update.png';
   static const String collaboration = 'assets/Images/collaborating_onboard.svg';
   static const String joyfulEnvironment = 'assets/Images/augmented_reality.svg';
-
   static const String mutualWork = 'assets/Images/mutual_working_onboard.svg';
+  static const String profileLogo = 'assets/Images/profile.png';
 }

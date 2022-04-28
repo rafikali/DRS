@@ -10,15 +10,14 @@ import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dashboard.dart';
 import 'package:login_page/pages/my_leaves.dart';
-import 'package:login_page/pages/myleaves_transaction.dart';
 import 'package:login_page/utils/bottomsheet.dart';
 import 'package:login_page/utils/confirmation_dialog.dart';
 import 'package:login_page/widgets/floating_action_button.dart';
 import 'package:provider/provider.dart';
 import '../Constants/Images.dart';
 import '../main.dart';
-import '../models/models.dart';
-import '../services/schedule_services.dart';
+import '../repository/models/schedule.dart';
+import '../repository/services/schedule_services.dart';
 import '../widgets/setting_page.dart';
 import '../widgets/simple_button.dart';
 
@@ -82,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     const DailyUpdate(),
     const Attendances(),
     const MyLeaves(),
-    const MyLeaveTransaction(),
+    const ProfilePage(),
   ];
 
   // List<ListTile> data = [];
@@ -175,10 +174,10 @@ class _HomePageState extends State<HomePage> {
                           size: Theme.of(context).iconTheme.size,
                         ),
                       ),
-                        Builder(builder: (context) {
-                           return IconButton(
-                             icon: const ImageIcon(
-                               AssetImage(
+                      Builder(builder: (context) {
+                        return IconButton(
+                            icon: const ImageIcon(
+                              AssetImage(
                                 ImageConstants.menuIcon,
                               ),
                               // size: Theme.of(context).iconTheme.size,
@@ -237,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                                   CupertinoIcons.camera,
                                                   color: Colors.white,
                                                 )),
-                                            title: Text("Take photo"),
+                                            title: const Text("Take photo"),
                                           ),
                                           ListTile(
                                             onTap: () =>
@@ -259,7 +258,8 @@ class _HomePageState extends State<HomePage> {
                                             leading: CircleAvatar(
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
-                                              child: Icon(CupertinoIcons.person,
+                                              child: const Icon(
+                                                  CupertinoIcons.person,
                                                   color: Colors.white),
                                             ),
                                             title: const Text("View profile"),
@@ -345,11 +345,11 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               items: [
-                TabItem(ImageConstants.dashboardLogo, 'Dashboard'),
+                TabItem(ImageConstants.dashboardLogo, 'Home'),
                 TabItem(ImageConstants.dailyUpdateLogo, 'DailyUpdate'),
                 TabItem(ImageConstants.attendance, 'Attendance'),
                 TabItem(ImageConstants.leaveLogo, 'Leave'),
-                TabItem(ImageConstants.leaveTransactionLogo, 'Leave Trans')
+                TabItem(ImageConstants.profileLogo, 'Profile')
               ],
             ),
           ),

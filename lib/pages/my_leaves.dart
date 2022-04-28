@@ -15,7 +15,7 @@ class MyLeaves extends StatefulWidget {
 
 class _MyLeavesState extends State<MyLeaves> {
   Future refreshData() async {
-    var hello = 'hi';
+    // var hello = 'hi';
   }
 
   @override

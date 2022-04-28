@@ -19,7 +19,7 @@ import 'package:login_page/widgets/checkbox_listtile.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/login_textfield.dart';
 
-import '../models/models.dart';
+import '../repository/models/login_response.dart';
 import '../widgets/create_account.dart';
 
 // ignore: must_be_immutable

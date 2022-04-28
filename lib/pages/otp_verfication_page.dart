@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_page/Constants/Images.dart';
-import 'package:login_page/Constants/app_constants.dart';
 import 'package:login_page/pages/create_new_password.dart';
 import 'package:login_page/widgets/login_button.dart';
 import 'package:login_page/widgets/otp_verification_textfield.dart';
@@ -67,7 +66,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 height: 10,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
+                const Text(
                   "Enter the OTP sent to +977",
                   style: TextStyle(
                     fontSize: 15,
