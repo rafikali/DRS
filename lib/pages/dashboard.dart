@@ -107,8 +107,6 @@ class _DashBoardState extends State<DashBoard> {
               ),
               CardView(
                 dashboardIcon: CupertinoIcons.creditcard,
-                // onTap:(() =>  Navigator.pushNamed(context, Mygo.routeName)),
-
                 title: 'My Ghost Count',
                 color: dashboardCardData?.myGhostCount.toString() == '0'
                     ? Colors.green
@@ -117,8 +115,8 @@ class _DashBoardState extends State<DashBoard> {
               ),
               CardView(
                   dashboardIcon: CupertinoIcons.creditcard,
-                  onTap: (() => Navigator.pushNamed(
-                      context, MyLeaveTransaction.routeName)),
+                  // onTap: (() => Navigator.pushNamed(
+                  //     context, MyLeaveTransaction.routeName)),
                   title: 'My Leave Balance',
                   color: Theme.of(context).textTheme.bodyText1!.color,
                   count: dashboardCardData?.myLeaveBalanceCount.toString() ??

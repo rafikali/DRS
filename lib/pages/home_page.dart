@@ -10,16 +10,11 @@ import 'package:login_page/pages/attendance.dart';
 import 'package:login_page/pages/daily_update.dart';
 import 'package:login_page/pages/dashboard.dart';
 import 'package:login_page/pages/my_leaves.dart';
-import 'package:login_page/utils/bottomsheet.dart';
 import 'package:login_page/utils/confirmation_dialog.dart';
+import 'package:login_page/utils/myappbar.dart';
 import 'package:login_page/widgets/floating_action_button.dart';
-import 'package:provider/provider.dart';
 import '../Constants/Images.dart';
-import '../main.dart';
 import '../repository/models/schedule.dart';
-import '../repository/services/schedule_services.dart';
-import '../widgets/setting_page.dart';
-import '../widgets/simple_button.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -33,6 +28,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? selectedImage;
   bool changeButton = true;
+  Schedule? schedules;
+  int? selectedIndex = 0;
+
+  List<Widget> widgetOptions = [
+    const DashBoard(),
+    const DailyUpdate(),
+    const Attendances(),
+    const MyLeaves(),
+    const ProfilePage(),
+  ];
+
+  void darkMode() {
+    setState(() {
+      changeButton = !changeButton;
+    });
+  }
 
   Future pickImage(ImageSource source) async {
     final ImagePicker _imagePicker = ImagePicker();
@@ -44,52 +55,13 @@ class _HomePageState extends State<HomePage> {
       selectedImage = imageTemporary;
     });
   }
-
   //   //capture a photo
   //   final XFile? photo =
   //       await _imagePicker.pickImage(source: ImageSource.camera);
   //   final List<XFile>? images = await _imagePicker.pickMultiImage();
-  Schedule? schedules;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchSchedule();
-    // PrefsServices().getString(AppConstants.accessToken);
-    // loadData();
-  }
-
-  fetchSchedule() async {
-    Schedule? sch = await ScheduleServices().fetchSchedule();
-    if (sch != null && mounted) {
-      setState(() {
-        schedules = sch;
-      });
-    }
-  }
-
-  // ignore: non_constant_identifier_names
-  void darkMode() {
-    setState(() {
-      changeButton = !changeButton;
-    });
-  }
-
-  int? selectedIndex = 0;
-  List<Widget> widgetOptions = [
-    const DashBoard(),
-    const DailyUpdate(),
-    const Attendances(),
-    const MyLeaves(),
-    const ProfilePage(),
-  ];
-
-  // List<ListTile> data = [];
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    // Future<bool> value = false;
     return WillPopScope(
       onWillPop: () async {
         await getDialog(context,
@@ -105,212 +77,16 @@ class _HomePageState extends State<HomePage> {
           } else {
             return null;
           }
-          // return null;
         });
-
         return false;
       },
-      // schedules == null
-      //     ? const Center(
-      //         child: CircularProgressIndicator(),
-      //       )
-      //     :
       child: SafeArea(
         child: Scaffold(
           extendBody: true,
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(170.0),
-              child: AppBar(
-                automaticallyImplyLeading: false,
-                elevation: 2,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(200, 30),
-                )),
-                title: const SizedBox(
-                  child: Text(
-                    'Grow-Teamly',
-                    style: TextStyle(color: Colors.white, fontSize: 23),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                actions: <Widget>[
-                  SizedBox(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        icon: changeButton
-                            ? const Icon(
-                                CupertinoIcons.moon,
-                              )
-                            : const Icon(
-                                CupertinoIcons.brightness_solid,
-                              ),
-                        onPressed: () {
-                          darkMode();
-                          var themeMode = themeChanger.getThemeMode;
-                          if (themeMode == ThemeMode.light) {
-                            themeChanger.setTheme(ThemeMode.dark);
-                          } else {
-                            themeChanger.setTheme(ThemeMode.light);
-                          }
-
-                          // changeTheme(
-                          //     Provider.of<DarkThemeNotifier>(context,
-                          //                 listen: false)
-                          //             .isDarkMode
-                          //         ? false
-                          //         : true,
-                          //     context);
-                        },
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          MyBottomSheet().getBottomSheet(context);
-                        },
-                        icon: Icon(
-                          CupertinoIcons.profile_circled,
-                          size: Theme.of(context).iconTheme.size,
-                        ),
-                      ),
-                      Builder(builder: (context) {
-                        return IconButton(
-                            icon: const ImageIcon(
-                              AssetImage(
-                                ImageConstants.menuIcon,
-                              ),
-                              // size: Theme.of(context).iconTheme.size,
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, MySettings.routeName);
-                            },
-                            color: Colors.white);
-                      })
-                    ],
-                  ))
-                ],
-                flexibleSpace: Center(
-                  child: Container(
-                    height: 100,
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: InkWell(
-                              child: selectedImage != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.file(
-                                        selectedImage!,
-                                        height: 80,
-                                      ),
-                                    )
-                                  : Image.asset(
-                                      ImageConstants.profile,
-                                      height: 80,
-                                    ),
-                              onTap: () {
-                                showModalBottomSheet(
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  )),
-                                  builder: (context) {
-                                    return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ListTile(
-                                            onTap: (() =>
-                                                pickImage(ImageSource.camera)),
-                                            leading: CircleAvatar(
-                                                backgroundColor:
-                                                    Theme.of(context)
-                                                        .backgroundColor,
-                                                child: const Icon(
-                                                  CupertinoIcons.camera,
-                                                  color: Colors.white,
-                                                )),
-                                            title: const Text("Take photo"),
-                                          ),
-                                          ListTile(
-                                            onTap: () =>
-                                                pickImage(ImageSource.gallery),
-                                            leading: CircleAvatar(
-                                                backgroundColor:
-                                                    Theme.of(context)
-                                                        .backgroundColor,
-                                                child: const Icon(
-                                                    CupertinoIcons.folder,
-                                                    color: Colors.white)),
-                                            title: const Text("Upload photo"),
-                                          ),
-                                          ListTile(
-                                            onTap: () {
-                                              Navigator.pushNamed(context,
-                                                  ProfilePage.routeName);
-                                            },
-                                            leading: CircleAvatar(
-                                              backgroundColor: Theme.of(context)
-                                                  .backgroundColor,
-                                              child: const Icon(
-                                                  CupertinoIcons.person,
-                                                  color: Colors.white),
-                                            ),
-                                            title: const Text("View profile"),
-                                          ),
-                                        ]);
-                                  },
-                                  // onClosing: null,
-                                  context: context,
-                                );
-                              },
-                            ),
-                          ),
-                          // Container(
-                          //   child: Column(children: [
-                          //     Text(
-                          //       'Mobile AppDeveloper',
-                          //       style: TextStyle(
-                          //         color: Colors.white,
-                          //         fontSize: 20,
-                          //       ),
-                          //     ),1
-                          //     Text('Project CPN'),
-                          //   ]),
-                          // ),
-                          //yedi chai hamlai post and detail of the employee in page chaiyexa vane chai yo app garda hunxa
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              SimpleButton(
-                                  title:
-                                      "CheckedIn : ${schedules?.checkIn ?? 'N/A'}"),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SimpleButton(
-                                  title: schedules?.checkOut != null
-                                      ? 'CheckedOut : ${schedules?.checkOut}'
-                                      : 'CheckedOut: N/A'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )),
-          // body: Center(
-          //   child: Text("data"),
-          // ),
+          appBar: selectedIndex == 0
+              ? const PreferredSize(
+                  preferredSize: Size.fromHeight(170.0), child: MyAppBar())
+              : null,
           body: widgetOptions.elementAt(selectedIndex!),
           floatingActionButton: selectedIndex == 1
               ? CustomFloatingActionButton(
@@ -357,10 +133,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-// void changeTheme(bool set, BuildContext context) {
-//   ///Call setDarkMode method inside our Settings ChangeNotifier class to
-//   ///Notify all the listeners of the change.
-//   Provider.of<DarkThemeNotifier>(context, listen: false).setDarkMode(set);
-// }
 }
