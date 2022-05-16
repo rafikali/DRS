@@ -10,9 +10,10 @@ part 'auth_bloc_state.dart';
 
 class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final GtRepository gtRepository;
-  AuthBlocBloc({required this.gtRepository}) : super(gtRepository) {
+  AuthBlocBloc({required this.gtRepository}) : super() {
     on<AuthBlocEvent>((event, emit) {
       // TODO: implement event handler
     });
   }
+  //edited
 }

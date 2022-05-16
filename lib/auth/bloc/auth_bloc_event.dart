@@ -14,7 +14,6 @@ class AppStarted extends AuthBlocEvent {
 
 class LoggedIn extends AuthBlocEvent {
   final String? accessToken;
-
   const LoggedIn({@required this.accessToken}) : super();
 
   @override

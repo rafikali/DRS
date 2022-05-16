@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../app/Constants/Images.dart';
 import '../app/theme/theme_changer.dart';
-import '../auth/view/changing_new_password.dart';
+import '../app/changing_new_password.dart';
 import '../auth/widgets/confirmaton_dialog.dart';
 import '../repo/models/schedule.dart';
 import '../repo/services/schedule_services.dart';

@@ -8,9 +8,8 @@ import 'package:login_page/utils/input_validators.dart';
 import 'package:login_page/widgets/appbar.dart';
 import 'package:login_page/widgets/login_button.dart';
 
-import '../../widgets/my_textfield.dart';
-import '../change_password.dart';
-
+import '../widgets/my_textfield.dart';
+import '../auth/change_password.dart';
 
 class ChangePassword extends StatefulWidget {
   static const String routeName = '/createpass';

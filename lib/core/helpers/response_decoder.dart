@@ -1,24 +1,24 @@
 import 'dart:convert';
-
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart';
-
-import 'failure.dart';
+import 'package:login_page/core/helpers/failure.dart';
 
 Either<Map<String, dynamic>, Failure> getResponseData(Response? response) {
-  List<int> successStatusCode = [200, 201, 202];
+  List<int> successStatusCode = [200, 201];
   //if no response
   if (response == null) {
-    return Right(Failure(message: "Network"));
+    return Right(Failure(message: "Network error."));
   } else {
     //if success status code
     if (successStatusCode.contains(response.statusCode)) {
       final jsonResponse = decodeJson(response);
-      return jsonResponse.fold((l) => Left(l), (r) => Right(Failure(message: r.message)));
+      return jsonResponse.fold(
+          (l) => Left(l), (r) => Right(Failure(message: r.message)));
     } else {
       //if failure statuscode, implementing try catch to check if json is obtained as response
       final jsonResponse = decodeJson(response);
-      return jsonResponse.fold(l) => Right(Failure(message: "fetch Failed ")),
-
+      return jsonResponse.fold((l) => Right(Failure(message: "Fetch Failed")),
+          (r) => Right(Failure(message: r.message)));
     }
   }
 }

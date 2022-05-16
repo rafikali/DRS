@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/auth/view/changing_new_password.dart';
+import 'package:login_page/app/changing_new_password.dart';
 import 'package:login_page/auth/view/create_new_password.dart';
 import 'package:login_page/auth/view/otp_verfication_page.dart';
 import 'package:login_page/auth/view/reset_password.dart';
@@ -20,7 +20,6 @@ import '../../screens/myleaves_transaction.dart';
 import '../../screens/new_design_profile.dart';
 import '../../screens/profile_page.dart';
 import '../../screens/update_drs.dart';
-
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

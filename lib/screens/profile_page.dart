@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../app/Constants/Images.dart';
-import '../auth/view/changing_new_password.dart';
+import '../app/changing_new_password.dart';
 
 class Profile extends StatefulWidget {
   static const String routeName = 'profile';
@@ -50,7 +50,6 @@ class _ProfileState extends State<Profile> {
                             width: 100,
                           ),
 
-                   
                           CircularPercentIndicator(
                             animationDuration: 1200,
                             lineWidth: 8.0,

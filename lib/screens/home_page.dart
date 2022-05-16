@@ -4,9 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_page/Curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:login_page/screens/update_drs.dart';
-
 import 'package:login_page/utils/confirmation_dialog.dart';
-import 'package:login_page/utils/home_appbar.dart';
 import 'package:login_page/widgets/floating_action_button.dart';
 import '../app/Constants/Images.dart';
 import '../repo/models/schedule.dart';
