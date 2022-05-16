@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/reset_password.dart';
-import 'package:login_page/pages/newregister.dart';
+import '../auth/view/reset_password.dart';
+import '../screens/newregister.dart';
 
 class CreateAcc extends StatelessWidget {
   const CreateAcc({Key? key}) : super(key: key);

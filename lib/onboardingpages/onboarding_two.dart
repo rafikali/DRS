@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login_page/Constants/Images.dart';
+
+import '../app/Constants/Images.dart';
 
 class OnBoardTwo extends StatefulWidget {
   static const String routeName = 'onBoardTwo';

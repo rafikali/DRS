@@ -1,46 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_page/Constants/app_constants.dart';
-import 'package:login_page/Route/route_handler.dart';
+import 'package:login_page/app/theme/light_theme.dart';
+import 'package:login_page/injector.dart';
 import 'package:login_page/onboardingpages/onboarding_page.dart';
-import 'package:login_page/pages/home_page.dart';
-import 'package:login_page/theme/dark_theme.dart';
-import 'package:login_page/theme/light_theme.dart';
-import 'package:login_page/widgets/darkThemeNotifier.dart';
+import 'package:login_page/screens/home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class ThemeChanger with ChangeNotifier {
-  var _themeMode = ThemeMode.light;
-  ThemeMode get getThemeMode => _themeMode;
-  void setTheme(ThemeMode theme) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (theme == ThemeMode.dark) {
-      prefs.setBool(AppConstants.storedtheme, true);
-    } else {
-      prefs.setBool(AppConstants.storedtheme, false);
-    }
-    _themeMode = theme;
-    notifyListeners();
-  }
-
-  ThemeChanger() {
-    getTheme();
-  }
-
-  getTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool(AppConstants.storedtheme) ?? false) {
-      _themeMode = ThemeMode.dark;
-    } else {
-      _themeMode = ThemeMode.light;
-    }
-    notifyListeners();
-  }
-}
+import 'app/Constants/app_constants.dart';
+import 'app/helpers/route_handler.dart';
+import 'app/theme/dark_theme.dart';
+import 'app/theme/theme_changer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? accessToken = prefs.getString(AppConstants.accessToken);
 
@@ -107,17 +80,6 @@ class _MyAppState extends State<MyApp> {
               theme: value.getThemeMode != ThemeMode.light
                   ? darkTheme
                   : setLightTheme,
-
-              // textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
-              // primaryColor: const Color(0xFF343434),
-              //   scaffoldBackgroundColor: const Color(0xFFF3F3F3),
-              //   appBarTheme: const AppBarTheme(
-              //       titleTextStyle: TextStyle(
-              //         color: Colors.black,
-              //       ),
-              //       iconTheme: IconThemeData(color: Colors.black),
-              //       actionsIconTheme: IconThemeData(color: Colors.white)),
-              // darkTheme: setDarkTheme,
 
               title: "drs",
               initialRoute: widget.accessToken != null

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/hr_policy.dart';
 import 'package:login_page/widgets/appbar.dart';
 
-import '../pages/my_daily_updates.dart';
-import '../pages/my_dashboard.dart';
+import '../screens/hr_policy.dart';
+import '../screens/my_daily_updates.dart';
+import '../screens/my_dashboard.dart';
 
 class MySettings extends StatefulWidget {
   static const String routeName = '/settings';

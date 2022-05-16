@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login_page/Constants/Images.dart';
+
+import '../app/Constants/Images.dart';
 
 class OnBoardOne extends StatefulWidget {
   static const String routeName = 'onBoardOne';

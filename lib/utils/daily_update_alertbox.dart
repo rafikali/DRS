@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/login_textfield.dart';
+import '../widgets/my_textfield.dart';
 import 'input_validators.dart';
 class DailyUpdateAlertBox extends StatefulWidget {
   final double? height;

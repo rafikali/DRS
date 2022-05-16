@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/home_page.dart';
+
+import '../screens/home_page.dart';
 
 class InputValidator {
   final String namedValidate;

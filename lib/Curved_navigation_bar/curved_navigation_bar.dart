@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/theme/app_colors.dart';
 import 'package:login_page/Curved_navigation_bar/nav_button.dart';
 import 'package:login_page/Curved_navigation_bar/nav_custom_painter.dart';
+
+import '../app/theme/app_colors.dart';
 
 typedef _LetIndexPage = bool Function(int value);
 
